@@ -1,0 +1,85 @@
+<!DOCTYPE resources [<!ENTITY server "172.21.4.63:3000/">]>
+
+<resources>
+    <string name="app_name">ClickClean</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Intro Slider -->>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">FREE Pick-up and Delivery</string>
+    <string name="slide_1_desc">Pick-up and delivery are always FREE. We can even arrange to come by while you’re out.</string>
+
+    <string name="slide_2_title">Hand Care</string>
+    <string name="slide_2_desc">We wash clothes by hand as we understand the value of your clothes!</string>
+
+    <string name="slide_3_title">Easy Ordering</string>
+    <string name="slide_3_desc">Create an account online and doing the laundry will be as easy as ordering a pizza.</string>
+
+    <string name="slide_4_title">Fast Turnaround</string>
+    <string name="slide_4_desc">Same-day, next-day and two-day delivery options so your clothes are delivered when you need them.</string>
+
+    <string name="slide_5_title">Quality Clean</string>
+    <string name="slide_5_desc">From sorting to washing, drying to folding - our laundry pros know how to give your clothes an optimal clean.</string>
+
+    <string name="slide_6_title">365 Support</string>
+    <string name="slide_6_desc">Our support agents are on standby to ensure you are laundry needs are met, 7 days a week - 365 days a year.</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+    <string name="title_activity_login">Sign in</string>
+
+
+    <!--Navigation Drawer items-->
+    <string name="profile">Profile</string>
+    <string name="orders">Your Orders</string>
+    <string name="logout">Logout</string>
+    <string name="schedule_pickup">Schedule Pickup</string>
+    <string name="feedback">Feedback</string>
+    <string name="share">Share</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="communicate">Communicate</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="reg_email_hint">Email</string>
+    <string name="reg_name_hint">Name</string>
+    <string name="reg_department_hint">Department</string>
+    <string name="reg_contact_hint">Contact</string>
+    <string name="reg_password_hint">Password</string>
+    <string name="reg_confirm_password_hint">Confirm password</string>
+    <string name="reg_success">Registered Successfully!</string>
+
+
+    <!-- TODO: Removing Hardcoded Strings -->
+    <string name="Edit">Edit</string>
+    <string name="Delete">Delete</string>
+    <string name="sure">Are you sure?</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="proceed">Proceed</string>
+    <string name="error">Sorry there was an error!"</string>
+
+
+    <!--   #################### URL ####################-->
+
+    <string name="login">http://&server;service/authenticate/login</string>
+    <string name="register">http://&server;service/authenticate/register</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
+
+</resources>
