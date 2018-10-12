@@ -26,16 +26,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:id="@+id/email"
+        android:id="@+id/nav_header_name"
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/nav_header_email"
         android:layout_above="@+id/header_email"
         android:layout_centerHorizontal="true"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+
         android:text="@string/nav_header_subtitle" />
 
 </LinearLayout>

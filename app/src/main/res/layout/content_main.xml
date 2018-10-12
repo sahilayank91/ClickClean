@@ -7,59 +7,59 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Views.MainActivity"
     tools:showIn="@layout/app_bar_main">
-    <ViewFlipper
-        android:id="@+id/view_flipper"
-        android:layout_width="fill_parent"
+    <!--<ViewFlipper-->
+        <!--android:id="@+id/view_flipper"-->
+        <!--android:layout_width="fill_parent"-->
 
-        android:layout_height="195dp">
+        <!--android:layout_height="195dp">-->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent">-->
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:src="@drawable/naviagtionheader_back"
-                android:background="@android:color/black"
-                android:scaleType="centerCrop" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:src="@drawable/naviagtionheader_back"
-
-                android:background="@android:color/darker_gray"
-                android:scaleType="centerCrop" />
+            <!--<ImageView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:src="@drawable/naviagtionheader_back"-->
+                <!--android:background="@android:color/black"-->
+                <!--android:scaleType="centerCrop" />-->
 
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent">-->
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:src="@drawable/naviagtionheader_back"
-                android:background="@android:color/holo_green_light"
-                android:scaleType="centerCrop" />
-        </RelativeLayout>
-    </ViewFlipper>
+            <!--<ImageView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:src="@drawable/naviagtionheader_back"-->
+
+                <!--android:background="@android:color/darker_gray"-->
+                <!--android:scaleType="centerCrop" />-->
+
+
+        <!--</RelativeLayout>-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:src="@drawable/naviagtionheader_back"-->
+                <!--android:background="@android:color/holo_green_light"-->
+                <!--android:scaleType="centerCrop" />-->
+        <!--</RelativeLayout>-->
+    <!--</ViewFlipper>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/washing-machine" />
+                android:src="@drawable/washingmachine" />
 
         </android.support.v7.widget.CardView>
 

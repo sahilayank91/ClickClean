@@ -1,5 +1,7 @@
 package sahil.clickclean.model;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,13 +18,21 @@ public class User {
     private String phone;
     private Long secondary_mobileno;
     private Long dob;
+    private String email;
+    private Date created_at;
 
-    public User(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.has("_id"))this._id=jsonObject.getString("_id");
-        if(jsonObject.has("name"))this.firstname=jsonObject.getString("firstname");
-        if(jsonObject.has("phone"))this.phone=jsonObject.getString("phone");
-        if(jsonObject.has("email"))this.email=jsonObject.getString("email");
-        if(jsonObject.has("address"))this.address=jsonObject.getString("address");
+    public User(JSONObject data) throws JSONException {
+        Log.e("data",data.toString());
+//        JSONObject data = jsonObject.getJSONObject("data");
+        if(data.has("_id"))this._id=data.getString("_id");
+        if(data.has("firstname"))this.firstname=data.getString("firstname");
+        if(data.has("phone"))this.phone=data.getString("phone");
+        if(data.has("email"))this.email=data.getString("email");
+        if(data.has("address"))this.address=data.getString("address");
+        if(data.has("lastname"))this.address=data.getString("lastname");
+
+
+        System.out.println(this._id + this.firstname + this.lastname + this.phone );
     }
 
     public User() {
@@ -52,9 +62,6 @@ public class User {
         this.created_at = created_at;
     }
 
-    private String email;
-
-    private Date created_at;
 
     public String getFirstname() {
         return firstname;

@@ -1,4 +1,4 @@
-package in.ac.iiitkota.cairn.csr.android.utilities;
+package sahil.clickclean.utilities;
 
 /**
  * Created by joey on 21/3/17.

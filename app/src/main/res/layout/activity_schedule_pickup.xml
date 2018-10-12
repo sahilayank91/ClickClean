@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.SchedulePickup">
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/step1"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+
+
+    <Spinner
+        android:id="@+id/service_spinner"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="235dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="215dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="260dp"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/select_service"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="202dp"
+        android:text="NEXT ->" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/step2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="Uppers (Shirt and T-shirts )" />
+
+            <ImageButton
+                android:id="@+id/add_upper"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="23dp"
+                android:layout_marginRight="23dp"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_upper"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="101dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/uppers"
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/add_upper"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/bottoms" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/bottom"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/bottom"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/imageButton3"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tcd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/woollens" />
+
+            <ImageButton
+                android:id="@+id/add_woollen"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/woollen"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_woollen"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/woollen"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/min_woollen"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tdc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/jackets" />
+
+            <ImageButton
+                android:id="@+id/add_jacket"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/jacket"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_jacket"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/jacket"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/min_jacket"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tsc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/blankets_single" />
+
+            <ImageButton
+                android:id="@+id/add_blanket_single"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/blanket_single"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_blanket_single"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/blanket_single"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/min_blanket_single"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tscd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/blankets_double" />
+
+            <ImageButton
+                android:id="@+id/add_blanket_double"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/blanket_double"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_blanket_double"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/blanket_double"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/min_blanket_double"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tdsscdds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/bedsheet_single" />
+
+            <ImageButton
+                android:id="@+id/add_bedsheet_single"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/bedsheet_single"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_bedsheet_single"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/bedsheet_single"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/min_bedsheet_single"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:visibility="visible"
+            tools:ignore="RtlCompat">
+
+            <TextView
+
+                android:id="@+id/tdsscd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/bedsheet_double" />
+
+            <ImageButton
+                android:id="@+id/add_bedsheet_double"
+                android:layout_width="38dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/bedsheet_double"
+                app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/min_bedsheet_double"
+                android:layout_width="34dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="97dp"
+                app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+
+            <TextView
+                android:id="@+id/bedsheet_double"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-102dp"
+                android:layout_toEndOf="@+id/min_bedsheet_double"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/addPickupAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD PICKUP ADDRESS ->" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/address_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="86dp"
+                android:ems="10"
+                android:inputType="textPostalAddress" />
+
+            <TextView
+                android:layout_width="156dp"
+                android:layout_height="33dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="39dp"
+                android:text="Your Current Address" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

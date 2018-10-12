@@ -16,7 +16,6 @@
     <dimen name="desc_padding">40dp</dimen>
 
 
-
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="tile_padding">8dp</dimen>
     <dimen name="tile_height">160dp</dimen>

@@ -1,4 +1,4 @@
-package in.ac.iiitkota.cairn.csr.android.utilities;
+package sahil.clickclean.utilities;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;

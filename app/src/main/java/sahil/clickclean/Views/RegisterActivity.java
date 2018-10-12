@@ -1,5 +1,6 @@
 package sahil.clickclean.Views;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.service.autofill.UserData;
@@ -12,17 +13,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
-import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-import sahil.clickclean.DatabaseConnection.DBconfig;
+
 import sahil.clickclean.R;
 import sahil.clickclean.model.User;
 import sahil.clickclean.utilities.Server;
@@ -64,11 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setEmail(useremail);
                 user.setLastname(lastname);
                 user.setPhone(userphone);
-
-
                 new RegisterUser().execute();
-
-
             }
         });
 
@@ -79,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
     class RegisterUser extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();
+        private ProgressDialog progress;
 
         @Override
         protected void onPreExecute() {
@@ -89,11 +84,18 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("password", password);
             params.put("phone",userphone);
             params.put("email",useremail);
+            progress=new ProgressDialog(RegisterActivity.this);
+            progress.setMessage("Registering..");
+//            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.setProgress(0);
+            progress.show();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            progress.dismiss();
             if (success) {
                 Toast.makeText(getApplicationContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

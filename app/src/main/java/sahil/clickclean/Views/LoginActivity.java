@@ -3,6 +3,7 @@ package sahil.clickclean.Views;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
@@ -21,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -81,6 +83,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        try {
+            if (UserData.getInstance(getApplicationContext()).getUserData(this)) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -306,6 +321,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      */
      class UserLoginTask extends AsyncTask<String, String, String> {
 
+        private ProgressDialog progress;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(LoginActivity.this);
+            progress.setMessage("Loging In User..");
+//            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.setProgress(0);
+            progress.show();
+
+        }
+
         private final String mEmail;
         private final String mPassword;
         HashMap<String,String> map = new HashMap<>();
@@ -329,7 +357,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 System.out.println(json);
                 result = Server.post(getResources().getString(R.string.login),json);
                 success = true;
-
+                Log.e("result",result);
                 UserData.getInstance(getApplicationContext()).initUserData(new User(new JSONObject(result)), getApplicationContext());
                 return result;
 
@@ -346,11 +374,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected void onPostExecute(String s) {
+            progress.dismiss();
             mAuthTask = null;
             showProgress(false);
             super.onPostExecute(s);
             if (success) {
-                Toast.makeText(getApplicationContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.login_success, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -359,6 +388,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
             }
         }
+
 
         @Override
         protected void onCancelled() {

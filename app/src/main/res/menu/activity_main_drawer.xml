@@ -26,7 +26,7 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/share"
                 app:showAsAction="ifRoom"
-                app:actionProviderClass="android.widget.ShareActionProvider" />
+                />
             <item
                 android:id="@+id/nav_feedback"
                 android:icon="@drawable/ic_feedback_black_24dp"
@@ -39,7 +39,6 @@
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="@string/logout" />
-
         </menu>
     </item>
 

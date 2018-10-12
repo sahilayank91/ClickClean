@@ -54,14 +54,13 @@ public class UserData {
     public void initUserData(User user,Context context)  {
         this.context = context;
 
-
+        Log.e("User",user.toString()) ;
         setUser_id(user.get_id());
         setFirstname(user.getFirstname());
         setLastname(user.getLastname());
         setEmail(user.getEmail());
         setPhone(user.getPhone());
         setAddress(user.getAddress());
-
     }
 
     public boolean getUserData(Context context) {
@@ -74,13 +73,15 @@ public class UserData {
             this.email = SharedPreferenceSingleton.getInstance(context).getString("email");
             this.lastname=SharedPreferenceSingleton.getInstance(context).getString("lastname");
             this.address=SharedPreferenceSingleton.getInstance(context).getString("address");
-
+            Log.e("id:",this._id);
+            Log.e("firstanae:",this.firstname);
 
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        if(this._id.length()==0)return false;
+//        if(this._id.length()==0)return false;
+//        return true;
         return true;
     }
 
@@ -157,9 +158,4 @@ public class UserData {
     public void set_id(String _id) {
         this._id = _id;
     }
-
-
-
-
-
 }
