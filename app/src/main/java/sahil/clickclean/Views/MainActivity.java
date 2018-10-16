@@ -150,6 +150,8 @@ private TextView navNameView;
 
         } else if (id == R.id.nav_schedule_pickup) {
 
+            Intent intent = new Intent(MainActivity.this,SchedulePickup.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
             getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));

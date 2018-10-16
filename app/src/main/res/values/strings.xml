@@ -76,7 +76,6 @@
     <string name="select_service">Select Service</string>
 
 
-
     <!--   #################### URL ####################-->
 
     <string name="login">http://&server;service/authenticate/login</string>
@@ -85,9 +84,10 @@
     <string name="login_success">Logged In Successfully</string>
     <string name="profilephoto">ProfilePhoto</string>
     <string name="title_activity_schedule_pickup">SchedulePickup</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_select_service">Select Service</string>
+    <string name="title_create_order">Create Order</string>
+    <string name="title_add_address">Add Address</string>
+    <string name="title_finish_order">Checkout</string>
     <string name="blankets_single">Blankets (Single Bed)</string>
     <string name="blankets_double">Blankets (Double Bed)</string>
     <string name="bedsheet_single">Bedsheet (Single Bed)</string>
@@ -95,6 +95,7 @@
     <string name="jackets">Jackets</string>
     <string name="woollens">Woollens</string>
     <string name="bottoms">Bottoms</string>
+    <string name="create_order">Create Order</string>
 
     <string-array name="services">
         <item>Steam Ironing</item>
@@ -103,6 +104,7 @@
         <item>Wash and Iron</item>
         <item>Dry Cleaning</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

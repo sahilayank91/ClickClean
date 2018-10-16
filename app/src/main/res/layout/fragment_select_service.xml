@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/step1"
+        android:visibility="visible"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/service_spinner"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="235dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="215dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="260dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="102dp"
+            android:gravity="center"
+            android:text="@string/select_service"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="161dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="320dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="NEXT ->" />
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

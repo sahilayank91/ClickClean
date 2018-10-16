@@ -385,6 +385,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 startActivity(intent);
                 finish();
             } else {
+
+
+
+
+                //REMOVE THIS AS TESTING IS OVER
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
                 Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
             }
         }
