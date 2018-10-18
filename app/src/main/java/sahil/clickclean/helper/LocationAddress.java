@@ -27,15 +27,20 @@ public class LocationAddress {
                     List<Address> addressList = geocoder.getFromLocation(
                             latitude, longitude, 1);
                     if (addressList != null && addressList.size() > 0) {
+                        Log.e("location:",addressList.toString());
                         Address address = addressList.get(0);
+
+
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                             sb.append(address.getAddressLine(i)).append("\n");
                         }
-                        sb.append(address.getLocality()).append("\n");
-                        sb.append(address.getPostalCode()).append("\n");
-                        sb.append(address.getCountryName());
+                        sb.append(address.getAddressLine(0)).append("\n");
+//                        sb.append(address.getLocality()).append("\n");
+//                        sb.append(address.getPostalCode()).append("\n");
+//                        sb.append(address.getCountryName());
                         result = sb.toString();
+                        Log.e("result of location",result);
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "Unable connect to Geocoder", e);
@@ -45,8 +50,7 @@ public class LocationAddress {
                     if (result != null) {
                         message.what = 1;
                         Bundle bundle = new Bundle();
-                        result = "Latitude: " + latitude + " Longitude: " + longitude +
-                                "\n\nAddress:\n" + result;
+                        result =  result;
                         bundle.putString("address", result);
                         message.setData(bundle);
                     } else {

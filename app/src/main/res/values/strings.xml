@@ -80,6 +80,20 @@
 
     <string name="login">http://&server;service/authenticate/login</string>
     <string name="register">http://&server;service/authenticate/register</string>
+    <string name="getOrder">http://&server;service/orders/getOrdeList/</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="login_success">Logged In Successfully</string>
     <string name="profilephoto">ProfilePhoto</string>
@@ -105,6 +119,11 @@
         <item>Dry Cleaning</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_your_orders">YourOrders</string>
+    <string name="order_date">Order Date :</string>
+    <string name="order_id">Order Id:</string>
+    <string name="pickup_date">Pickup Date:</string>
+    <string name="status">Status:</string>
 
 
 </resources>

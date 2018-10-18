@@ -18,8 +18,6 @@ public class AppLocationService extends Service implements LocationListener {
     protected LocationManager locationManager;
     Location location;
 
-    static public final int REQUEST_LOCATION = 1;
-
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
 
@@ -30,17 +28,6 @@ public class AppLocationService extends Service implements LocationListener {
 
     public Location getLocation(String provider) {
         if (locationManager.isProviderEnabled(provider)) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-
-                ActivityCompat.requestPermissions((Activity) getApplicationContext(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
-            }
             locationManager.requestLocationUpdates(provider,
                     MIN_TIME_FOR_UPDATE, MIN_DISTANCE_FOR_UPDATE, this);
             if (locationManager != null) {
@@ -49,6 +36,7 @@ public class AppLocationService extends Service implements LocationListener {
             }
         }
         return null;
+
     }
 
 

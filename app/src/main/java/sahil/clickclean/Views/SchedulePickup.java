@@ -34,6 +34,7 @@ import java.util.Objects;
 
 import sahil.clickclean.R;
 import sahil.clickclean.Views.fragment.AddAddressFragment;
+import sahil.clickclean.Views.fragment.CheckoutFragment;
 import sahil.clickclean.Views.fragment.CreateOrderFragment;
 import sahil.clickclean.Views.fragment.SelectServiceFragment;
 import sahil.clickclean.helper.AppLocationService;
@@ -51,7 +52,7 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
     private AddAddressFragment addAddressFragment;
     FragmentManager fragmentManager;
     private EditText addressContainer;
-
+    private CheckoutFragment checkoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
                         getSupportActionBar().setTitle(R.string.title_add_address);
                         replaceFragment(addAddressFragment);
                         break;
+
                 }
                 return true;
             }
