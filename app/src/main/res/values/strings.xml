@@ -47,8 +47,8 @@
     <string name="contact_us">Contact Us</string>
     <string name="communicate">Communicate</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_email"> Email</string>
+    <string name="prompt_password"> Password (optional)</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -117,6 +117,8 @@
 
 
         <string name="api_key">AIzaSyBT7r6sG8_M_b7qJeRdWujK4S8x0B2uGZ0</string>
+    <string name="agent_corner">Agent Corner</string>
+    <string name="add_washerman">Add Washerman</string>
 
 
 </resources>

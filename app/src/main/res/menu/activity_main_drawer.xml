@@ -42,4 +42,14 @@
         </menu>
     </item>
 
+    <item android:title="@string/agent_corner">
+        <menu>
+            <item
+                android:id="@+id/nav_register_washerman"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="@string/add_washerman"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+
 </menu>
