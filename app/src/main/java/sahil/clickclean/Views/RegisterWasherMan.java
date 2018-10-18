@@ -19,7 +19,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.model.LatLng;
 
 import sahil.clickclean.R;
 
@@ -31,7 +30,6 @@ public class RegisterWasherMan extends AppCompatActivity {
     Button getPlaceButton;
     private final static int MY_PERMISSION_FINE_LOCATION = 101;
     private final static int PLACE_PICKER_REQUEST = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

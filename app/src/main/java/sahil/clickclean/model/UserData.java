@@ -8,7 +8,7 @@ import org.json.JSONException;
 import sahil.clickclean.SharedPreferenceSingleton;
 
 /**
- * Created by joey on 2/12/16.
+ * Created by Sahil.
  */
 public class UserData {
     private static UserData ourInstance = new UserData();

@@ -29,6 +29,7 @@ public class SelectServiceFragment extends Fragment implements View.OnClickListe
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) view = inflater.inflate(R.layout.fragment_select_service, container, false);
         else return view;
+
         List<String> services = Arrays.asList(getResources().getStringArray(R.array.services));
         Spinner spinner = view.findViewById(R.id.service_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, services);
