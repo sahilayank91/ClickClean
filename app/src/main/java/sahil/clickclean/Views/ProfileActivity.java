@@ -22,7 +22,6 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.activity_profile);
         name = findViewById(R.id.user_profile_name);
         email = findViewById(R.id.user_profile_email);
-//        address = findViewById()
         profilePhoto = findViewById(R.id.user_profile_photo);
 
         name.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("firstname","Name not Available") +

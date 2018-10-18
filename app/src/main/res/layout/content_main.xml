@@ -186,13 +186,13 @@ android:layout_margin="@dimen/activity_horizontal_margin"
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_schedule_pickup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="0dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:text="Schedule A Pickup"
         android:layout_alignParentRight="true"
         android:layout_marginRight="0dp" />

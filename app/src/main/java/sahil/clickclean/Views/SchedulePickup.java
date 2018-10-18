@@ -72,40 +72,10 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
             selectServiceFragment = new SelectServiceFragment();
         replaceFragment(selectServiceFragment);
         getSupportActionBar().setTitle("Select Service");
-
-//
-//        mAddPickupAddress = (Button) findViewById(R.id.addPickupAddress);
-//        mAddPickupAddress.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//
-//                Location location = appLocationService
-//                        .getLocation(LocationManager.GPS_PROVIDER);
-//
-//                //you can hard-code the lat & long if you have issues with getting it
-//                //remove the below if-condition and use the following couple of lines
-//                //double latitude = 37.422005;
-//                //double longitude = -122.084095
-//
-//                if (location != null) {
-//                    double latitude = location.getLatitude();
-//                    double longitude = location.getLongitude();
-//                    LocationAddress locationAddress = new LocationAddress();
-//                    locationAddress.getAddressFromLocation(latitude, longitude,
-//                            getApplicationContext(), new GeocoderHandler());
-//                } else {
-//                    showSettingsAlert();
-//                }
-//
-//            }
-//        });
-
-
     }
 
     private void setUpBottomBar(){
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

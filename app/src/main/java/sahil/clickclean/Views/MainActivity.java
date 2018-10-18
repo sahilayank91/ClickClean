@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -33,8 +34,9 @@ public class MainActivity extends AppCompatActivity
     private Context mContext;
     private float initialX;
     private ImageView navImageView;
-private TextView navEmailView;
-private TextView navNameView;
+    private TextView navEmailView;
+    private TextView navNameView;
+    private Button buttonschedulepickup;
     @Override
     protected void onStart() {
         super.onStart();
@@ -86,6 +88,9 @@ private TextView navNameView;
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+        buttonschedulepickup = findViewById(R.id.button_schedule_pickup);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -102,6 +107,14 @@ private TextView navNameView;
 //        mViewFlipper.setAutoStart(true);
 //        mViewFlipper.setFlipInterval(1000);
 //        mViewFlipper.startFlipping();
+        buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SchedulePickup.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -148,6 +161,7 @@ private TextView navNameView;
             startActivity(intent);
         } else if (id == R.id.nav_order) {
 
+
         } else if (id == R.id.nav_schedule_pickup) {
 
             Intent intent = new Intent(MainActivity.this,SchedulePickup.class);
@@ -168,6 +182,8 @@ private TextView navNameView;
 
         } else if (id == R.id.nav_feedback) {
 
+            Intent intent = new Intent(MainActivity.this,RegisterWasherMan.class);
+            startActivity(intent);
         }
 
 

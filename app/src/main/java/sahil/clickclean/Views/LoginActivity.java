@@ -326,7 +326,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected void onPreExecute() {
             super.onPreExecute();
             progress=new ProgressDialog(LoginActivity.this);
-            progress.setMessage("Loging In User..");
+            progress.setMessage("Logging In User..");
 //            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progress.setIndeterminate(true);
             progress.setProgress(0);

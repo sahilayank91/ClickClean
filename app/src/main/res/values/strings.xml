@@ -83,17 +83,6 @@
     <string name="getOrder">http://&server;service/orders/getOrdeList/</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="login_success">Logged In Successfully</string>
     <string name="profilephoto">ProfilePhoto</string>
@@ -124,6 +113,10 @@
     <string name="order_id">Order Id:</string>
     <string name="pickup_date">Pickup Date:</string>
     <string name="status">Status:</string>
+    <string name="title_activity_register_washer_man">RegisterWasherMan</string>
+
+
+        <string name="api_key">AIzaSyBT7r6sG8_M_b7qJeRdWujK4S8x0B2uGZ0</string>
 
 
 </resources>
