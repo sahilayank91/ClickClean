@@ -30,7 +30,6 @@ import sahil.clickclean.SharedPreferenceSingleton;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private ViewFlipper mViewFlipper;
     private Context mContext;
     private float initialX;
     private ImageView navImageView;
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContext = this;
-//        mViewFlipper = (ViewFlipper) this.findViewById(R.id.view_flipper);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -71,10 +69,7 @@ public class MainActivity extends AppCompatActivity
         navEmailView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("email",""));
         navNameView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("firstname","") +
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastname",""));
-//
-//        mViewFlipper.setAutoStart(true);
-//        mViewFlipper.setFlipInterval(1000);
-//        mViewFlipper.startFlipping();
+
         buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
