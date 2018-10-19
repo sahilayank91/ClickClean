@@ -56,8 +56,6 @@ public class RegisterWasherMan extends AppCompatActivity {
         mUserFlat = findViewById(R.id.flataddress);
         mSecondaryPhone = findViewById(R.id.secondary_phone);
         registerWasherman= findViewById(R.id.register_washerman);
-        placeNameText = (TextView) findViewById(R.id.tvPlaceName);
-        placeAddressText = (TextView) findViewById(R.id.tvPlaceAddress);
         attributionText = (WebView) findViewById(R.id.wvAttribution);
         mAddress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +118,6 @@ public class RegisterWasherMan extends AppCompatActivity {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(RegisterWasherMan.this, data);
-//                placeNameText.setText(place.getName());
                 mAddress.setText(place.getAddress());
                 if (place.getAttributions() == null) {
                     attributionText.loadData("no attribution", "text/html; charset=utf-8", "UFT-8");

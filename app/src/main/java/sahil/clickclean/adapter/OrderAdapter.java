@@ -51,11 +51,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.NewsFeedView
     @Override
     public void onBindViewHolder(final NewsFeedViewHolder holder, int position) {
         final Order current = listOrders.get(position);
-        holder.orderid.setText(current.getOrderid());
+        holder.orderid.setText(current.get_id());
         holder.orderstatus.setText(current.getOrderstatus());
         holder.orderpickupdate.setText(current.getOrderpickupdate());
         holder.orderdate.setText(current.getOrderdate());
-
     }
 
     @Override

@@ -3,6 +3,8 @@ package sahil.clickclean.Views.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
@@ -22,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,9 +48,11 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
 
+import java.util.Calendar;
+
 import static android.app.Activity.RESULT_OK;
 
-public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
+public class AddAddressFragment extends Fragment implements OnMapReadyCallback,View.OnClickListener{
 
     View view;
     private static final int MY_LOCATION_REQUEST_CODE = 1;
@@ -55,13 +60,14 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
     private final static int PLACE_PICKER_REQUEST = 1;
     MapView mMapView;
     GoogleMap mGoogleMap;
-
     private TextView rateCardView;
     public EditText addressContainer;
     Double latitude,longitude;
     Button getPlaceButton;
-
+    private EditText orderPickupDate;
     public LocationAddress locationAddress;
+    Button btnDatePicker, btnTimePicker;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     public AddAddressFragment() {
         // Required empty public constructor
@@ -69,7 +75,6 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
     public void showRateCard() {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.rate_card, null);
-        final String[] items = {"Apple", "Banana", "Orange", "Grapes"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(alertLayout);
         builder.setTitle("Our Rate Card");
@@ -85,10 +90,16 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
         if (view == null) view = inflater.inflate(R.layout.fragment_add_address, container, false);
         else return view;
         addressContainer = view.findViewById(R.id.address_container);
+        
+        btnDatePicker=(Button)view.findViewById(R.id.btn_date);
+        btnDatePicker.setOnClickListener(this);
 
         locationAddress = new LocationAddress();
+
         requestPermission();
+
         rateCardView = view.findViewById(R.id.rateCard);
+
         rateCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,11 +107,13 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
             }
         });
 
+        orderPickupDate = view.findViewById(R.id.in_date);
+
         getPlaceButton = (Button) view.findViewById(R.id.changeAddress);
+
         getPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                 try {
                     Intent intent = builder.build(getActivity());
@@ -113,11 +126,9 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
 
             }
         });
-
-
-
         return view;
     }
+
 
     private void requestPermission() {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -193,6 +204,31 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback{
             }
         }
     }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == btnDatePicker) {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+    }
+
     @SuppressLint("HandlerLeak")
     private class GeocoderHandler extends Handler {
         @Override
