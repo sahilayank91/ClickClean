@@ -207,29 +207,29 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
             }
         });
 
-
-        setAddress = view.findViewById(R.id.addPickupAddress);
-        setAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HashMap<String,Integer> order = new HashMap<>();
-                order.put("upper",Integer.parseInt(mupper.getText().toString()));
-                order.put("bottom",Integer.parseInt(mbottom.getText().toString()));
-                order.put("woollen",Integer.parseInt(mwoollen.getText().toString()));
-                order.put("jacket",Integer.parseInt(mjacket.getText().toString()));
-                order.put("blanket_single",Integer.parseInt(mblanketsingle.getText().toString()));
-                order.put("blanket_double",Integer.parseInt(mblanketdouble.getText().toString()));
-                order.put("bedsheet_single",Integer.parseInt(mbedsheetsingle.getText().toString()));
-                order.put("bedsheet_double",Integer.parseInt(mbedsheetdouble.getText().toString()));
-
-                Gson gson = new Gson();
-                String hashMapString = gson.toJson(order);
-
-                SharedPreferences prefs = getContext().getSharedPreferences("order", MODE_PRIVATE);
-                prefs.edit().putString("order", hashMapString).apply();
-
-            }
-        });
+//
+//        setAddress = view.findViewById(R.id.addPickupAddress);
+//        setAddress.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                HashMap<String,Integer> order = new HashMap<>();
+//                order.put("upper",Integer.parseInt(mupper.getText().toString()));
+//                order.put("bottom",Integer.parseInt(mbottom.getText().toString()));
+//                order.put("woollen",Integer.parseInt(mwoollen.getText().toString()));
+//                order.put("jacket",Integer.parseInt(mjacket.getText().toString()));
+//                order.put("blanket_single",Integer.parseInt(mblanketsingle.getText().toString()));
+//                order.put("blanket_double",Integer.parseInt(mblanketdouble.getText().toString()));
+//                order.put("bedsheet_single",Integer.parseInt(mbedsheetsingle.getText().toString()));
+//                order.put("bedsheet_double",Integer.parseInt(mbedsheetdouble.getText().toString()));
+//
+//                Gson gson = new Gson();
+//                String hashMapString = gson.toJson(order);
+//
+//                SharedPreferences prefs = getContext().getSharedPreferences("order", MODE_PRIVATE);
+//                prefs.edit().putString("order", hashMapString).apply();
+//
+//            }
+//        });
 
         return view;
     }

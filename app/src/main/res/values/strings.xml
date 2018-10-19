@@ -116,9 +116,15 @@
     <string name="title_activity_register_washer_man">RegisterWasherMan</string>
 
 
-        <string name="api_key">AIzaSyBT7r6sG8_M_b7qJeRdWujK4S8x0B2uGZ0</string>
+    <string name="api_key">AIzaSyBT7r6sG8_M_b7qJeRdWujK4S8x0B2uGZ0</string>
     <string name="agent_corner">Agent Corner</string>
     <string name="add_washerman">Add Washerman</string>
+    <string name="title_activity_pickup">PickupActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="action_example">Example action</string>
 
 
 </resources>

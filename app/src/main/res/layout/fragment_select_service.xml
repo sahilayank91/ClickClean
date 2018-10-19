@@ -40,17 +40,16 @@
         <android.support.v7.widget.CardView
             android:id="@+id/a"
             android:layout_width="333dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_height="77dp"
-
-            android:layout_alignParentTop="true"
+            android:layout_height="65dp"
+            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_below="@+id/e"
 
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp">
+            card_view:cardCornerRadius="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp">
+                android:layout_height="65dp">
 
                 <ImageView
                     android:layout_width="98dp"
@@ -82,16 +81,16 @@
         <android.support.v7.widget.CardView
             android:id="@+id/b"
             android:layout_width="333dp"
-            android:layout_height="77dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
 
-            android:layout_alignParentTop="true"
-            card_view:cardCornerRadius="5dp"
+            android:layout_below="@+id/a"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="101dp">
+            card_view:cardCornerRadius="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="98dp"
@@ -123,16 +122,17 @@
         <android.support.v7.widget.CardView
             android:id="@+id/c"
             android:layout_width="333dp"
-            android:layout_height="77dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="65dp"
+            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
 
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="187dp">
+
+            card_view:cardCornerRadius="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp">
+                android:layout_height="61dp">
 
                 <ImageView
                     android:layout_width="98dp"
@@ -164,15 +164,16 @@
         <android.support.v7.widget.CardView
             android:id="@+id/d"
             android:layout_width="333dp"
-            android:layout_height="77dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="65dp"
+            android:layout_below="@+id/c"
+            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="216dp">
+            card_view:cardCornerRadius="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:layout_width="98dp"
@@ -204,11 +205,12 @@
         <android.support.v7.widget.CardView
             android:id="@+id/e"
             android:layout_width="333dp"
-            android:layout_height="77dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="65dp"
+            android:layout_below="@+id/f"
+            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="130dp">
+            card_view:cardCornerRadius="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -233,7 +235,7 @@
                     android:layout_marginEnd="39dp"
                     android:layout_marginRight="39dp"
                     android:gravity="center"
-                    android:text="Wash and Iron"
+                    android:text="Steam Ironing"
                     android:textColor="@color/black"
                     android:textStyle="normal" />
             </RelativeLayout>
@@ -244,15 +246,16 @@
         <android.support.v7.widget.CardView
             android:id="@+id/f"
             android:layout_width="333dp"
-            android:layout_height="77dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="65dp"
+            android:layout_below="@+id/d"
+            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="44dp">
+            card_view:cardCornerRadius="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp">
+                android:layout_height="60dp">
 
                 <ImageView
                     android:layout_width="98dp"

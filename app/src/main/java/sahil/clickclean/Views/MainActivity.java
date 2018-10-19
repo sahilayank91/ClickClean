@@ -42,38 +42,6 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
 
     }
-
-//    @Override
-//    public boolean onTouchEvent(MotionEvent touchevent) {
-//        switch (touchevent.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                initialX = touchevent.getX();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                float finalX = touchevent.getX();
-//                if (initialX > finalX) {
-//                    if (mViewFlipper.getDisplayedChild() == 1)
-//                        break;
-//
-//                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(mContext, R.anim.in_from_left));
-//                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(mContext, R.anim.out_from_left));
-//
-//                    mViewFlipper.showNext();
-//                } else {
-//                    if (mViewFlipper.getDisplayedChild() == 0)
-//                        break;
-//
-//                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(mContext, R.anim.in_from_right));
-//                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(mContext, R.anim.out_from_right));
-//
-//                    mViewFlipper.showPrevious();
-//                }
-//                break;
-//        }
-//        return false;
-//    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,10 +127,9 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-
-
+            Intent intent  = new Intent(MainActivity.this,PickupActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_schedule_pickup) {
-
             Intent intent = new Intent(MainActivity.this,SchedulePickup.class);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {

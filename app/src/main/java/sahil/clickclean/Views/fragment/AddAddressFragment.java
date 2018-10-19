@@ -90,7 +90,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         if (view == null) view = inflater.inflate(R.layout.fragment_add_address, container, false);
         else return view;
         addressContainer = view.findViewById(R.id.address_container);
-        
+
         btnDatePicker=(Button)view.findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
 

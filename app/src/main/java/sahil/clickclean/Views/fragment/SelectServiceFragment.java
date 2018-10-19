@@ -19,7 +19,7 @@ import java.util.List;
 
 import sahil.clickclean.R;
 
-public class SelectServiceFragment extends Fragment implements View.OnClickListener {
+public class SelectServiceFragment extends Fragment {
     View view;
     private Spinner mSpinner;
 
@@ -47,26 +47,23 @@ public class SelectServiceFragment extends Fragment implements View.OnClickListe
         washironkg = view.findViewById(R.id.d);
         washiron = view.findViewById(R.id.e);
         premiumlaundry = view.findViewById(R.id.f);
-        steamIroning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                steamIroning.setCardBackgroundColor(Color.GRAY);
-            }
-        });
-        washfoldkg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                washfoldkg.setCardBackgroundColor(Color.GRAY);
-            }
-        });
-
+//        steamIroning.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                steamIroning.setCardBackgroundColor(Color.GRAY);
+//            }
+//        });
+//        washfoldkg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                washfoldkg.setCardBackgroundColor(Color.GRAY);
+//            }
+//        });
+//
 
 
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }
