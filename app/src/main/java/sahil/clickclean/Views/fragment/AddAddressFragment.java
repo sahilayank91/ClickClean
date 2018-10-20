@@ -22,6 +22,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
     Button getPlaceButton;
     private EditText orderPickupDate;
     public LocationAddress locationAddress;
-    Button btnDatePicker, btnTimePicker;
+    Button btnDatePicker, btnTimePicker,checkoutButton;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private TextView mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
 
@@ -121,7 +122,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         numblanketdouble = view.findViewById(R.id.check_blanket_double);
         numbedsheetsingle = view.findViewById(R.id.check_bedsheet_single);
         numbedsheetdouble  = view.findViewById(R.id.check_bedsheet_double);
-
+        checkoutButton = view.findViewById(R.id.checkoutbutton);
 
         numuppper.setText(String.valueOf(CreateOrderFragment.upper));
         numbottom.setText(String.valueOf(CreateOrderFragment.bottom));
@@ -163,6 +164,16 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
 
             }
         });
+
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AddOrder().execute();
+            }
+        });
+
+
+
         return view;
     }
 
@@ -225,6 +236,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(getContext(), data);
+                Log.e("address:",place.getName().toString());
                 addressContainer.setText(place.getAddress());
                 LatLng latLng =  place.getLatLng();
                 latitude = latLng.latitude;
@@ -282,7 +294,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             addressContainer.setText(locationAddress);
         }
     }
-    class RegisterUser extends AsyncTask<String, String, String> {
+    class AddOrder extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();
         private ProgressDialog progress;
@@ -298,8 +310,11 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("blanket_double",numblanketdouble.getText().toString());
             params.put("bedsheet_single",numbedsheetsingle.getText().toString());
             params.put("bedsheet_double",numbedsheetdouble.getText().toString());
+            params.put("latitude",String.valueOf(latitude));
+            params.put("longitude",String.valueOf(longitude));
+            params.put("status","Recieved");
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
-
+            params.put("address",addressContainer.getText().toString());
             @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
             Date date = null;
             try {
@@ -307,8 +322,9 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            //            long millis = date.getTime();
-            params.put("pickupdate",date.toString());
+            assert date != null;
+            long millis = date.getTime();
+            params.put("pickup_date",String.valueOf(millis));
 
             progress=new ProgressDialog(getContext());
             progress.setMessage("Registering..");
@@ -339,7 +355,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                 Gson gson = new Gson();
                 String json = gson.toJson(params);
                 System.out.println(json);
-                result = Server.post(getResources().getString(R.string.register),json);
+                result = Server.post(getResources().getString(R.string.newOrder),json);
                 success = true;
             } catch (Exception e){
                 e.printStackTrace();

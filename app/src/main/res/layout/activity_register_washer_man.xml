@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     tools:context="sahil.clickclean.Views.RegisterWasherMan">
 
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="600dp">
     <WebView
         android:id="@+id/wvAttribution"
         android:layout_width="wrap_content"
@@ -24,16 +22,14 @@
         android:id="@+id/firstname"
         android:layout_width="173dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="56dp"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginTop="59dp"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:ems="10"
         android:hint=" Firstname"
         android:inputType="textPersonName"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignLeft="@+id/password" />
 
     <EditText
         android:id="@+id/password"
@@ -50,7 +46,8 @@
         android:id="@+id/address"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/phone"
+        android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/ic_map_black_24dp"
         android:ems="10"
         android:hint=" Locality"
@@ -60,36 +57,34 @@
         android:id="@+id/phone"
         android:layout_width="174dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/wvAttribution"
+        android:layout_alignStart="@+id/password"
         android:layout_below="@+id/password"
         android:drawableLeft="@drawable/ic_local_phone_black_24dp"
         android:ems="10"
         android:hint=" Phone"
-        android:inputType="phone"
-        android:layout_alignLeft="@+id/wvAttribution" />
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/lastname"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/firstname"
-        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/password"
+        android:layout_alignTop="@+id/firstname"
         android:ems="10"
         android:hint="Lastname"
         android:inputType="textPersonName"
-        android:layout_alignParentRight="true" />
+        android:layout_alignRight="@+id/password" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="353dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/wvAttribution"
         android:layout_below="@+id/firstname"
-        android:ems="10"
+        android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:ems="10"
         android:hint=" Email"
-        android:inputType="textEmailAddress"
-        android:layout_alignLeft="@+id/wvAttribution" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/secondary_phone"
@@ -115,14 +110,37 @@
         android:hint=" House No"
         android:inputType="textPostalAddress" />
 
-    <Button
-        android:layout_width="wrap_content"
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="176dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/firstname"
+        android:layout_below="@+id/flataddress"
+        android:hint="City"
+        android:layout_alignLeft="@+id/firstname" />
+
+    <EditText
+        android:id="@+id/pincode"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/password"
+        android:layout_alignRight="@+id/password"
+        android:layout_below="@+id/flataddress"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:hint="Pincode" />
+
+    <Button
         android:id="@+id/register_washerman"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="105dp"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/city"
+        android:layout_marginEnd="31dp"
         android:drawableLeft="@drawable/ic_person_pin_black_24dp"
         android:text=" Register WasherMan" />
-
 </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

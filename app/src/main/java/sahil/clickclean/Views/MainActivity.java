@@ -151,6 +151,9 @@ public class MainActivity extends AppCompatActivity
 
             Intent intent = new Intent(MainActivity.this,RegisterWasherMan.class);
             startActivity(intent);
+        }else if(id==R.id.nav_register_washerman){
+            Intent intent = new Intent(MainActivity.this,RegisterWasherMan.class);
+            startActivity(intent);
         }
 
 

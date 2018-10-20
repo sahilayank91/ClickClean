@@ -23,17 +23,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.Views.fragment.CompletedFragment;
@@ -46,11 +39,7 @@ import sahil.clickclean.Views.fragment.UpcomingFragment;
  */
 public class PickupActivity extends AppCompatActivity {
 
-
-
     private DrawerLayout mDrawerLayout;
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
-    int counter=0;
 
 
     @Override

@@ -31,12 +31,13 @@ import sahil.clickclean.utilities.Server;
 
 public class RegisterWasherMan extends AppCompatActivity {
 
-    EditText mFirstname, mLastname, mEmail, mPhone,mSecondaryPhone,mAddress,mPassword,mUserFlat;
-    String firstname,lastname, password,useremail,secondaryPhone, userphone, useraddress,userflataddress;
+    EditText mFirstname, mLastname, mEmail, mPhone,mSecondaryPhone,mAddress,mPassword,mUserFlat,mUserPincode,mUserCity;;
+    String firstname,lastname, password,useremail,secondaryPhone, userphone, useraddress,userflataddress,usercity,userpincode;
     TextView placeNameText;
     TextView placeAddressText;
     WebView attributionText;
     Button registerWasherman;
+    public double longitude,latitude;
     private final static int MY_PERMISSION_FINE_LOCATION = 101;
     private final static int PLACE_PICKER_REQUEST = 1;
 
@@ -55,6 +56,8 @@ public class RegisterWasherMan extends AppCompatActivity {
         mPassword = findViewById(R.id.password);
         mUserFlat = findViewById(R.id.flataddress);
         mSecondaryPhone = findViewById(R.id.secondary_phone);
+        mUserCity = findViewById(R.id.city);
+        mUserPincode = findViewById(R.id.pincode);
         registerWasherman= findViewById(R.id.register_washerman);
         attributionText = (WebView) findViewById(R.id.wvAttribution);
         mAddress.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,8 @@ public class RegisterWasherMan extends AppCompatActivity {
                 useraddress = mAddress.getText().toString();
                 userflataddress = mUserFlat.getText().toString();
                 secondaryPhone = mSecondaryPhone.getText().toString();
+                usercity = mUserCity.getText().toString();
+                userpincode = mUserPincode.getText().toString();
                 new RegisterUser().execute();
             }
         });
@@ -119,6 +124,8 @@ public class RegisterWasherMan extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(RegisterWasherMan.this, data);
                 mAddress.setText(place.getAddress());
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
                 if (place.getAttributions() == null) {
                     attributionText.loadData("no attribution", "text/html; charset=utf-8", "UFT-8");
                 } else {
@@ -144,6 +151,11 @@ public class RegisterWasherMan extends AppCompatActivity {
             params.put("email",useremail);
             params.put("userflataddress",userflataddress);
             params.put("secondary_phone",secondaryPhone);
+            params.put("pincode",userpincode);
+            params.put("city",usercity);
+            params.put("latitude",String.valueOf(latitude));
+            params.put("longitude",String.valueOf(longitude));
+            params.put("role","Washerman");
             progress=new ProgressDialog(RegisterWasherMan.this);
             progress.setMessage("Registering..");
             progress.setIndeterminate(true);

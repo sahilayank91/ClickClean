@@ -36,8 +36,8 @@ import sahil.clickclean.utilities.Server;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat;
-    String firstname,lastname, password,useremail, userphone, useraddress,userflataddress;
+    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mUserCity;
+    String firstname,lastname, password,useremail, userphone, useraddress,userflataddress,usercity,userpincode;
     Button submit;
     private final static int MY_PERMISSION_FINE_LOCATION = 101;
     private final static int PLACE_PICKER_REQUEST = 1;
@@ -54,6 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
         mAddress=findViewById(R.id.useraddress);
         mPassword = findViewById(R.id.userpassword);
         mUserFlat = findViewById(R.id.userflatAddress);
+        mUserCity = findViewById(R.id.city);
+        mUserPincode = findViewById(R.id.pincode);
 
         submit = findViewById(R.id.register);
 
@@ -67,14 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
                 password = mPassword.getText().toString();
                 useraddress = mAddress.getText().toString();
                 userflataddress = mUserFlat.getText().toString();
-
-                User user = new User();
-
-                user.setFirstname(firstname);
-                user.setAddress(useraddress);
-                user.setEmail(useremail);
-                user.setLastname(lastname);
-                user.setPhone(userphone);
+                usercity = mUserCity.getText().toString();
+                userpincode = mUserPincode.getText().toString();
                 new RegisterUser().execute();
             }
         });
@@ -152,6 +148,9 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("phone",userphone);
             params.put("email",useremail);
             params.put("userflataddress",userflataddress);
+            params.put("pincode",userpincode);
+            params.put("city",usercity);
+            params.put("role","Customer");
             progress=new ProgressDialog(RegisterActivity.this);
             progress.setMessage("Registering..");
             progress.setIndeterminate(true);
