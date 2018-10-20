@@ -5,11 +5,13 @@ import android.annotation.SuppressLint;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,16 +43,27 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import sahil.clickclean.R;
+import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.Views.LoginActivity;
+import sahil.clickclean.Views.RegisterActivity;
+import sahil.clickclean.Views.YourOrders;
 import sahil.clickclean.helper.AppLocationService;
 import sahil.clickclean.helper.LocationAddress;
+import sahil.clickclean.utilities.Server;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.gson.Gson;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
+import static sahil.clickclean.Views.fragment.SelectServiceFragment.service;
 
 public class AddAddressFragment extends Fragment implements OnMapReadyCallback,View.OnClickListener{
 
@@ -68,6 +81,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
     public LocationAddress locationAddress;
     Button btnDatePicker, btnTimePicker;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private TextView mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
 
     public AddAddressFragment() {
         // Required empty public constructor
@@ -93,7 +107,30 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
 
         btnDatePicker=(Button)view.findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
+        mService = view.findViewById(R.id.check_selectedService);
 
+        mService.setText(SelectServiceFragment.service);
+
+
+
+        numuppper= view.findViewById(R.id.check_upper);
+        numbottom = view.findViewById(R.id.check_bottom_num);
+        numwoollen = view.findViewById(R.id.check_woollen);
+        numjacket = view.findViewById(R.id.check_jacket);
+        numblancketsingle = view.findViewById(R.id.check_blanket_single);
+        numblanketdouble = view.findViewById(R.id.check_blanket_double);
+        numbedsheetsingle = view.findViewById(R.id.check_bedsheet_single);
+        numbedsheetdouble  = view.findViewById(R.id.check_bedsheet_double);
+
+
+        numuppper.setText(String.valueOf(CreateOrderFragment.upper));
+        numbottom.setText(String.valueOf(CreateOrderFragment.bottom));
+        numwoollen.setText(String.valueOf(CreateOrderFragment.woollen));
+        numjacket.setText(String.valueOf(CreateOrderFragment.jacket));
+        numblancketsingle.setText(String.valueOf(CreateOrderFragment.blancket_single));
+        numblanketdouble.setText(String.valueOf(CreateOrderFragment.blancket_double));
+        numbedsheetdouble.setText(String.valueOf(CreateOrderFragment.bedsheet_double));
+        numbedsheetsingle.setText(String.valueOf(CreateOrderFragment.bedsheet_single));
         locationAddress = new LocationAddress();
 
         requestPermission();
@@ -243,6 +280,76 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                     locationAddress = null;
             }
             addressContainer.setText(locationAddress);
+        }
+    }
+    class RegisterUser extends AsyncTask<String, String, String> {
+        boolean success = false;
+        HashMap<String, String> params = new HashMap<>();
+        private ProgressDialog progress;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            params.put("upper", numuppper.getText().toString());
+            params.put("bottom", numbottom.getText().toString());
+            params.put("woollen", numwoollen.getText().toString());
+            params.put("jacket", numjacket.getText().toString());
+            params.put("blanket_single",numblancketsingle.getText().toString());
+            params.put("blanket_double",numblanketdouble.getText().toString());
+            params.put("bedsheet_single",numbedsheetsingle.getText().toString());
+            params.put("bedsheet_double",numbedsheetdouble.getText().toString());
+            params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = null;
+            try {
+                date = sdf.parse(orderPickupDate.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long millis = date.getTime();
+
+//            params.put("pickupdate",)
+
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Registering..");
+            progress.setIndeterminate(true);
+            progress.setProgress(0);
+            progress.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progress.dismiss();
+            if (success) {
+                Toast.makeText(getContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), YourOrders.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+            } else {
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = "";
+            try {
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
+                System.out.println(json);
+                result = Server.post(getResources().getString(R.string.register),json);
+                success = true;
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+
+            System.out.println("Result:" + result);
+            return result;
         }
     }
 }

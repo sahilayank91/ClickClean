@@ -24,7 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class CreateOrderFragment extends Fragment implements View.OnClickListener{
     View view;
 
-    private int upper = 0, bottom = 0, woollen = 0, jacket = 0, blancket_single = 0, blancket_double = 0, bedsheet_single = 0, bedsheet_double = 0;
+    public static int upper = 0, bottom = 0, woollen = 0, jacket = 0, blancket_single = 0, blancket_double = 0, bedsheet_single = 0, bedsheet_double = 0;
     private ImageButton upper_min,upper_add,bottom_min,bottom_add,woollen_min,woollen_add,jacket_min, jacket_add,blancket_single_min,blancket_single_add,
             blancket_double_min,blancket_double_add,bedsheet_single_min,bedsheet_single_add,bedsheet_double_min,bedsheet_double_add;
     private Button setAddress;
@@ -208,29 +208,6 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
         });
 
 //
-//        setAddress = view.findViewById(R.id.addPickupAddress);
-//        setAddress.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                HashMap<String,Integer> order = new HashMap<>();
-//                order.put("upper",Integer.parseInt(mupper.getText().toString()));
-//                order.put("bottom",Integer.parseInt(mbottom.getText().toString()));
-//                order.put("woollen",Integer.parseInt(mwoollen.getText().toString()));
-//                order.put("jacket",Integer.parseInt(mjacket.getText().toString()));
-//                order.put("blanket_single",Integer.parseInt(mblanketsingle.getText().toString()));
-//                order.put("blanket_double",Integer.parseInt(mblanketdouble.getText().toString()));
-//                order.put("bedsheet_single",Integer.parseInt(mbedsheetsingle.getText().toString()));
-//                order.put("bedsheet_double",Integer.parseInt(mbedsheetdouble.getText().toString()));
-//
-//                Gson gson = new Gson();
-//                String hashMapString = gson.toJson(order);
-//
-//                SharedPreferences prefs = getContext().getSharedPreferences("order", MODE_PRIVATE);
-//                prefs.edit().putString("order", hashMapString).apply();
-//
-//            }
-//        });
-
         return view;
     }
 

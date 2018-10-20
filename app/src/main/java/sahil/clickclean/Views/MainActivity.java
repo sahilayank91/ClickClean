@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView navImageView;
     private TextView navEmailView;
     private TextView navNameView;
+    private TextView navPhoneView;
     private Button buttonschedulepickup;
     @Override
     protected void onStart() {
@@ -62,13 +64,16 @@ public class MainActivity extends AppCompatActivity
 
 
         View header = navigationView.getHeaderView(0);
-        navImageView= (ImageView) header.findViewById(R.id.header_profile);
         navEmailView = (TextView) header.findViewById(R.id.nav_header_email);
         navNameView = (TextView) header.findViewById(R.id.nav_header_name);
-
-        navEmailView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("email",""));
-        navNameView.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("firstname","") +
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastname",""));
+        navPhoneView= (TextView)header.findViewById(R.id.nav_header_phone);
+        String name;
+        String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname","User Not Registered");
+        String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname","User Not Registered");
+        name = firstname + " " + lastname;
+        navEmailView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("email","User Not Registered"));
+        navNameView.setText(name);
+        navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone","Phone not registered"));
 
         buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +93,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

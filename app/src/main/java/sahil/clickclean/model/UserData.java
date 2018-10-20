@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import sahil.clickclean.SharedPreferenceSingleton;
 
@@ -40,7 +41,7 @@ public class UserData {
 
         return ourInstance;
     }
-
+//
 //        public void initUserData(String data, Context context) throws Exception {
 //        this.context = context;
 //        JSONObject userdata = new JSONObject(data);
@@ -61,6 +62,8 @@ public class UserData {
         setEmail(user.getEmail());
         setPhone(user.getPhone());
         setAddress(user.getAddress());
+        Log.e("Userccc",user.get_id()) ;
+
     }
 
     public boolean getUserData(Context context) {
@@ -73,16 +76,13 @@ public class UserData {
             this.email = SharedPreferenceSingleton.getInstance(context).getString("email");
             this.lastname=SharedPreferenceSingleton.getInstance(context).getString("lastname");
             this.address=SharedPreferenceSingleton.getInstance(context).getString("address");
-            Log.e("id:",this._id);
-            Log.e("firstanae:",this.firstname);
-
-        } catch (Exception e) {
+          } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-//        if(this._id.length()==0)return false;
-//        return true;
+        if(this._id==null)return false;
         return true;
+
     }
 
     public User getUser() throws JSONException {
@@ -93,7 +93,6 @@ public class UserData {
         user.setPhone(this.phone);
         user.setLastname(this.lastname);
         user.setAddress(this.address);
-
         return user;
     }
 

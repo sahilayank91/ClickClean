@@ -16,23 +16,21 @@ public class User {
     private String address;
     private String role;
     private String phone;
-    private Long secondary_mobileno;
+    private String secondary_mobileno;
     private Long dob;
     private String email;
     private Date created_at;
 
     public User(JSONObject data) throws JSONException {
-        Log.e("data",data.toString());
-//        JSONObject data = jsonObject.getJSONObject("data");
         if(data.has("_id"))this._id=data.getString("_id");
         if(data.has("firstname"))this.firstname=data.getString("firstname");
         if(data.has("phone"))this.phone=data.getString("phone");
         if(data.has("email"))this.email=data.getString("email");
         if(data.has("address"))this.address=data.getString("address");
-        if(data.has("lastname"))this.address=data.getString("lastname");
-
-
-        System.out.println(this._id + this.firstname + this.lastname + this.phone );
+        if(data.has("lastname"))this.lastname=data.getString("lastname");
+        if(data.has("role"))this.role = data.getString("role");
+        if(data.has("secondary_mobileno"))this.secondary_mobileno = data.getString("secondary_mobileno");
+        Log.e("llklkjkl:",lastname);
     }
 
     public User() {
@@ -103,11 +101,11 @@ public class User {
         this.phone = mobileno;
     }
 
-    public Long getSecondary_mobileno() {
+    public String getSecondary_mobileno() {
         return secondary_mobileno;
     }
 
-    public void setSecondary_mobileno(Long secondary_mobileno) {
+    public void setSecondary_mobileno(String secondary_mobileno) {
         this.secondary_mobileno = secondary_mobileno;
     }
 
