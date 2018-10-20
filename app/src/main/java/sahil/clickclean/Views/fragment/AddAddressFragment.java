@@ -300,16 +300,15 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("bedsheet_double",numbedsheetdouble.getText().toString());
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
             Date date = null;
             try {
                 date = sdf.parse(orderPickupDate.getText().toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            long millis = date.getTime();
-
-//            params.put("pickupdate",)
+            //            long millis = date.getTime();
+            params.put("pickupdate",date.toString());
 
             progress=new ProgressDialog(getContext());
             progress.setMessage("Registering..");

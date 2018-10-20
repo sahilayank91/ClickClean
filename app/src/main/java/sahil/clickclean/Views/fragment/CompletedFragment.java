@@ -20,7 +20,7 @@ import sahil.clickclean.R;
 /**
  * Provides UI for the view with Cards.
  */
-public class PickupFragment extends Fragment {
+public class CompletedFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

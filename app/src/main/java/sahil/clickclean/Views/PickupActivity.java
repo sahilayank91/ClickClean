@@ -36,7 +36,9 @@ import java.util.List;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
-import sahil.clickclean.Views.fragment.PickupFragment;
+import sahil.clickclean.Views.fragment.CompletedFragment;
+import sahil.clickclean.Views.fragment.TodayFragment;
+import sahil.clickclean.Views.fragment.UpcomingFragment;
 
 
 /**
@@ -130,16 +132,12 @@ public class PickupActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new PickupFragment(), "Home");
-        adapter.addFragment(new PickupFragment(), "Workshop");
-        adapter.addFragment(new PickupFragment(), "Notification");
+        adapter.addFragment(new TodayFragment(), "Today");
+        adapter.addFragment(new UpcomingFragment(), "Upcoming");
+        adapter.addFragment(new CompletedFragment(), "Completed");
         viewPager.setAdapter(adapter);
     }
 
