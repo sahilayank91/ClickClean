@@ -1,4 +1,4 @@
-<!DOCTYPE resources [<!ENTITY server "192.168.43.117:3000/">]>
+<!DOCTYPE resources [<!ENTITY server "172.21.4.181:3000/">]>
 
 <resources>
     <string name="app_name">ClickClean</string>
@@ -80,9 +80,9 @@
 
     <string name="login">http://&server;service/authenticate/login</string>
     <string name="register">http://&server;service/authenticate/register</string>
-    <string name="getOrder">http://&server;service/order/getOrdeList/</string>
+    <string name="getOrder">http://&server;service/order/getOrder/</string>
+    <string name="getOrderByUserId">http://&server;service/order/getOrderByUserId/</string>
     <string name="newOrder">http://&server;service/order/newOrder/</string>
-
 
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="login_success">Logged In Successfully</string>

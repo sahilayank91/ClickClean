@@ -1,16 +1,23 @@
 package sahil.clickclean.Views;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-
+import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -20,8 +27,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import sahil.clickclean.R;
+import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.adapter.OrderAdapter;
 import sahil.clickclean.interfaces.RCVItemClickListener;
 import sahil.clickclean.model.Order;
@@ -30,7 +39,7 @@ import sahil.clickclean.utilities.Server;
 
 import static android.view.View.GONE;
 
-public class YourOrders extends Activity implements RCVItemClickListener{
+public class YourOrders extends AppCompatActivity implements RCVItemClickListener{
     private SwipeRefreshLayout mSwipeRefreshLayout;
     public static ArrayList<Order> listOrders = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -41,6 +50,8 @@ public class YourOrders extends Activity implements RCVItemClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_orders);
+
+
         mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
@@ -48,7 +59,7 @@ public class YourOrders extends Activity implements RCVItemClickListener{
             public void onRefresh() {
                 // Refresh items
 
-//               prepareOrderItems();
+               prepareOrderItems();
             }
         });
 
@@ -62,7 +73,7 @@ public class YourOrders extends Activity implements RCVItemClickListener{
 //        prepareOrderItems();
 
 
-
+            new GetOrders().execute();
 
     }
     private void prepareOrderItems() {
@@ -81,8 +92,8 @@ public class YourOrders extends Activity implements RCVItemClickListener{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            String userid = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("_id","");
-            params.put("_id",userid);
+            String userid = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("_id","User Not Registered");
+            params.put("userid",userid);
             mSwipeRefreshLayout.setRefreshing(true);
 
 
@@ -96,7 +107,7 @@ public class YourOrders extends Activity implements RCVItemClickListener{
                 Gson gson = new Gson();
                 String json = gson.toJson(params);
 
-              result = Server.post(getResources().getString(R.string.getOrder),json);
+              result = Server.post(getResources().getString(R.string.getOrderByUserId),json);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -109,27 +120,35 @@ public class YourOrders extends Activity implements RCVItemClickListener{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-
+            Log.e("result of getting order",s);
             mSwipeRefreshLayout.setRefreshing(false);
 
 
             try {
 
-                JSONArray jsonArray = new JSONArray(s);
-                listOrders.clear();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject post = jsonArray.getJSONObject(i);
-                    Order current = new Order(post);
-                    listOrders.add(current);
+                JSONObject jsonObject =new JSONObject(s);
 
+                String success = jsonObject.getString("success");
+                if (!success.equals("true")) {
+                    Toast.makeText(YourOrders.this,"Some error occured in getting Data..Please check your internet connection",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(YourOrders.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    listOrders.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject post = jsonArray.getJSONObject(i);
+                        Order current = new Order(post);
+                        listOrders.add(current);
+                    }
+                    adapter.notifyDataSetChanged();
                 }
 
-                adapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            progressBar.setVisibility(GONE);
 
 
 

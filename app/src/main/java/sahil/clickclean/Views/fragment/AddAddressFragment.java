@@ -323,7 +323,8 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                 e.printStackTrace();
             }
             assert date != null;
-            long millis = date.getTime();
+            Long millis = date.getTime();
+            Log.e("date: ",String.valueOf(millis));
             params.put("pickup_date",String.valueOf(millis));
 
             progress=new ProgressDialog(getContext());

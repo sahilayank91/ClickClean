@@ -1,28 +1,37 @@
 package sahil.clickclean.model;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
 
 public class Order {
-    public Order(JSONObject order) {
+    public Order(JSONObject order) throws JSONException {
+        if(order.has("_id"))this._id = order.getString("_id");
+        if(order.has("pickup_date"))this.pickup_date = order.getString("pickup_date");
+        if(order.has("userid"))this.userid = order.getString("userid");
+        if(order.has("address"))this.address = order.getString("address");
+        if(order.has("latitude"))this.latitude = order.getString("latitude");
+        if(order.has("longitude"))this.longitude = order.getString("longitude");
+        if(order.has("created_at"))this.create_time = order.getString("created_at");
+        if(order.has("status"))this.status = order.getString("status");
     }
 
     private String _id;
     private String orderdate;
-    private String orderpickupdate;
-    private String orderstatus;
+    private String pickup_date;
+    private String status;
     private String userid;
     private String address;
-    private Long longitude;
-    private Long latitude;
-    private Date create_time;
+    private String longitude;
+    private String latitude;
+    private String create_time;
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 
@@ -35,19 +44,19 @@ public class Order {
     }
 
     public String getOrderpickupdate() {
-        return orderpickupdate;
+        return pickup_date;
     }
 
     public void setOrderpickupdate(String orderpickupdate) {
-        this.orderpickupdate = orderpickupdate;
+        this.pickup_date = orderpickupdate;
     }
 
     public String getOrderstatus() {
-        return orderstatus;
+        return status;
     }
 
     public void setOrderstatus(String orderstatus) {
-        this.orderstatus = orderstatus;
+        this.status = orderstatus;
     }
 
     public String get_id() {
@@ -74,19 +83,19 @@ public class Order {
         this.address = address;
     }
 
-    public Long getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public Long getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 

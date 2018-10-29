@@ -49,6 +49,11 @@
                 android:icon="@drawable/ic_person_black_24dp"
                 android:title="@string/add_washerman"
                 app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/nav_orders"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Today's Orders"
+                app:showAsAction="ifRoom"/>
         </menu>
     </item>
 

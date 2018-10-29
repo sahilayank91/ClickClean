@@ -2,13 +2,7 @@ package sahil.clickclean.Views;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,38 +12,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
-
-import org.w3c.dom.Text;
-
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Context mContext;
-    private float initialX;
-    private ImageView navImageView;
     private TextView navEmailView;
     private TextView navNameView;
     private TextView navPhoneView;
     private Button buttonschedulepickup;
+
     @Override
     protected void onStart() {
         super.onStart();
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mContext = this;
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,19 +53,19 @@ public class MainActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         navEmailView = (TextView) header.findViewById(R.id.nav_header_email);
         navNameView = (TextView) header.findViewById(R.id.nav_header_name);
-        navPhoneView= (TextView)header.findViewById(R.id.nav_header_phone);
+        navPhoneView = (TextView) header.findViewById(R.id.nav_header_phone);
         String name;
-        String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname","User Not Registered");
-        String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname","User Not Registered");
+        String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
+        String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname", "User Not Registered");
         name = firstname + " " + lastname;
-        navEmailView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("email","User Not Registered"));
+        navEmailView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("email", "User Not Registered"));
         navNameView.setText(name);
-        navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone","Phone not registered"));
+        navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
 
         buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,SchedulePickup.class);
+                Intent intent = new Intent(MainActivity.this, SchedulePickup.class);
                 startActivity(intent);
             }
         });
@@ -125,19 +112,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profile) {
             // Handle the camera action
-            Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-            Intent intent  = new Intent(MainActivity.this,PickupActivity.class);
+            Intent intent = new Intent(MainActivity.this, YourOrders.class);
             startActivity(intent);
         } else if (id == R.id.nav_schedule_pickup) {
-            Intent intent = new Intent(MainActivity.this,SchedulePickup.class);
+            Intent intent = new Intent(MainActivity.this, SchedulePickup.class);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
             getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
-
         } else if (id == R.id.nav_share) {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
@@ -145,17 +131,16 @@ public class MainActivity extends AppCompatActivity
             String message = "\nDownload ClickClean *Your app link* \n\n";
             i.putExtra(Intent.EXTRA_TEXT, message);
             startActivity(Intent.createChooser(i, "Choose Sharing Method"));
-
-
         } else if (id == R.id.nav_feedback) {
-
-            Intent intent = new Intent(MainActivity.this,RegisterWasherMan.class);
+            Intent intent = new Intent(MainActivity.this, RegisterWasherMan.class);
             startActivity(intent);
-        }else if(id==R.id.nav_register_washerman){
-            Intent intent = new Intent(MainActivity.this,RegisterWasherMan.class);
+        } else if (id == R.id.nav_register_washerman) {
+            Intent intent = new Intent(MainActivity.this, RegisterWasherMan.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_orders) {
+            Intent intent = new Intent(MainActivity.this, PickupActivity.class);
             startActivity(intent);
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -27,14 +27,13 @@ import java.util.HashMap;
  * Created by SS Verma on 14-03-2017.
  */
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.NewsFeedViewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
-    private Context context;
     private ArrayList<Order> listOrders;
     private RCVItemClickListener rcvItemClickListener;
 
     public OrderAdapter(Context context, ArrayList<Order> listOrders) {
-        this.context = context;
+//        Context context1 = context;
         this.listOrders = listOrders;
     }
 
@@ -43,18 +42,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.NewsFeedView
     }
 
     @Override
-    public NewsFeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_orders, parent, false);
-        return new NewsFeedViewHolder(rootView);
+        return new OrderViewHolder(rootView);
     }
 
     @Override
-    public void onBindViewHolder(final NewsFeedViewHolder holder, int position) {
+    public void onBindViewHolder(final OrderViewHolder holder, int position) {
         final Order current = listOrders.get(position);
         holder.orderid.setText(current.get_id());
         holder.orderstatus.setText(current.getOrderstatus());
         holder.orderpickupdate.setText(current.getOrderpickupdate());
-        holder.orderdate.setText(current.getOrderdate());
+        holder.orderdate.setText(current.getCreate_time());
     }
 
     @Override
@@ -62,20 +61,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.NewsFeedView
         return listOrders.size();
     }
 
-    public class NewsFeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         TextView orderid, orderdate, orderpickupdate, orderstatus;
 
 
-        public NewsFeedViewHolder(View itemView) {
+        private OrderViewHolder(View itemView) {
             super(itemView);
 
             orderid= itemView.findViewById(R.id.order_id);
             orderdate = itemView.findViewById(R.id.order_date);
             orderpickupdate = itemView.findViewById(R.id.order_pickup_date);
             orderstatus = itemView.findViewById(R.id.order_status);
-
             itemView.setOnClickListener(this);
             orderstatus.setOnClickListener(this);
 

@@ -62,7 +62,8 @@
         android:drawableLeft="@drawable/ic_local_phone_black_24dp"
         android:ems="10"
         android:hint=" Phone"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:layout_alignLeft="@+id/password" />
 
     <EditText
         android:id="@+id/lastname"
