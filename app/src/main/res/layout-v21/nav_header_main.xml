@@ -16,8 +16,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="66dp"
-        android:layout_height="32dp"
-        android:backgroundTint="@color/black"
+        android:layout_height="35dp"
+        android:backgroundTint="@color/white"
         android:tint="@color/white"
         app:srcCompat="@drawable/ic_person_black_24dp" />
 

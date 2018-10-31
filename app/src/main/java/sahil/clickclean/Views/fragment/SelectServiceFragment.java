@@ -31,7 +31,7 @@ public class SelectServiceFragment extends Fragment {
     }
 
     CardView steamIroning, washfoldkg, washironkg, washiron, dryclean, premiumlaundry;
-TextView selectedService;
+    TextView selectedService;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,10 +40,6 @@ TextView selectedService;
         else return view;
 
         List<String> services = Arrays.asList(getResources().getStringArray(R.array.services));
-//        Spinner spinner = view.findViewById(R.id.service_spinner);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, services);
-//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-//        spinner.setAdapter(adapter);
         steamIroning = view.findViewById(R.id.a);
         washfoldkg = view.findViewById(R.id.b);
         dryclean = view.findViewById(R.id.c);

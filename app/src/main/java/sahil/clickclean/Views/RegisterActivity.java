@@ -9,9 +9,13 @@ import android.os.Build;
 import android.service.autofill.UserData;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,16 +40,37 @@ import sahil.clickclean.utilities.Server;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mUserCity;
-    String firstname,lastname, password,useremail, userphone, useraddress,userflataddress,usercity,userpincode;
+    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mUserCity,mConfirmPassword;
+    String firstname,lastname, password,useremail, userphone, useraddress,userflataddress,usercity,userpincode,confirmpass;
     Button submit;
     private final static int MY_PERMISSION_FINE_LOCATION = 101;
     private final static int PLACE_PICKER_REQUEST = 1;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mFirstname = findViewById(R.id.firstname);
         mLastname = findViewById(R.id.lastname);
@@ -56,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
         mUserFlat = findViewById(R.id.userflatAddress);
         mUserCity = findViewById(R.id.city);
         mUserPincode = findViewById(R.id.pincode);
-
+        mConfirmPassword = findViewById(R.id.confirmpassword);
         submit = findViewById(R.id.register);
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +96,16 @@ public class RegisterActivity extends AppCompatActivity {
                 userflataddress = mUserFlat.getText().toString();
                 usercity = mUserCity.getText().toString();
                 userpincode = mUserPincode.getText().toString();
-                new RegisterUser().execute();
+                confirmpass = mConfirmPassword.getText().toString();
+
+
+
+                if(Patterns.EMAIL_ADDRESS.matcher(useremail).matches() && password.equals(confirmpass) && userphone.length()>=10 && userphone.length()<=12)
+                        new RegisterUser().execute();
+                else{
+                    Toast.makeText(RegisterActivity.this,"Please enter valid Email",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

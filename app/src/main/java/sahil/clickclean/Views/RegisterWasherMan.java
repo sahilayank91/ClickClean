@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +63,7 @@ public class RegisterWasherMan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Toast.makeText(RegisterWasherMan.this,"Wait till we access the Map",Toast.LENGTH_LONG).show();
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                 try {
                     Intent intent = builder.build(RegisterWasherMan.this);

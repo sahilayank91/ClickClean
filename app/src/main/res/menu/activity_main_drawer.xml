@@ -17,6 +17,18 @@
             android:id="@+id/nav_schedule_pickup"
             android:icon="@drawable/ic_add_shopping_cart_black_24dp"
             android:title="@string/schedule_pickup"/>
+        <item
+            android:id="@+id/nav_coupons"
+            android:icon="@drawable/ic_card_giftcard_black_24dp"
+            android:title="@string/coupons"/>
+        <item
+            android:id="@+id/nav_rate_card"
+            android:icon="@drawable/ic_rate_review_black_24dp"
+            android:title="@string/rate_card"/>
+        <item
+            android:id="@+id/nav_donate_clothes"
+            android:icon="@drawable/ic_child_care_black_24dp"
+            android:title="@string/donateclothes"/>
     </group>
 
     <item android:title="@string/communicate">
@@ -29,8 +41,12 @@
                 />
             <item
                 android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_feedback_black_24dp"
+                android:icon="@drawable/ic_assignment_black_24dp"
                 android:title="@string/feedback" />
+            <item
+                android:id="@+id/nav_terms"
+                android:icon="@drawable/ic_feedback_black_24dp"
+                android:title="@string/termsofuse" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_person_pin_black_24dp"

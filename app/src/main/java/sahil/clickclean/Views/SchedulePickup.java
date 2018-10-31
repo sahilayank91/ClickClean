@@ -204,9 +204,11 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragment)
+       FragmentTransaction ft = fragmentManager.beginTransaction();
+       ft.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        ft.replace(R.id.main_container, fragment)
                 .commit();
+//        ft.commitAllowingStateLoss();
     }
 
     @Override

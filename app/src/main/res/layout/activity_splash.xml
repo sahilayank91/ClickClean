@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:background="@color/bg_screen1" >
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/imgLogo"
         android:layout_width="281dp"
         android:layout_height="216dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="161dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/splash_gif" />
 
     <TextView
         android:layout_width="fill_parent"

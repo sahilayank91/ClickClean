@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1055714129427",
+    "firebase_url": "https://clickclean-493a2.firebaseio.com",
+    "project_id": "clickclean-493a2",
+    "storage_bucket": "clickclean-493a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055714129427:android:8f51963b3d0b4d36",
+        "android_client_info": {
+          "package_name": "sahil.clickclean"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055714129427-i70bfmdt95j8iin9u29p3tu33qtfh1cr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sahil.clickclean",
+            "certificate_hash": "0914029d311e287d78e891ee4466f43c3ab07182"
+          }
+        },
+        {
+          "client_id": "1055714129427-46rp4tegpnvkg6knvhatc2ldgmcifknf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPUXhq-ylCcGCQfNUelYfwTKTEc5QJmvg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055714129427-46rp4tegpnvkg6knvhatc2ldgmcifknf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

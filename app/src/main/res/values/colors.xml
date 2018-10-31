@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9380ea</color>
-    <color name="colorPrimaryDark">#00838F</color>
+    <color name="colorPrimary">#29b6f6</color>
+    <color name="colorPrimaryDark">#0086c3</color>
     <color name="colorAccent">#1b345c</color>
     <!--Intro Slider-->
     <!-- Screens background color-->

@@ -1,8 +1,15 @@
 package sahil.clickclean.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,10 +19,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
+
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.Views.fragment.AddAddressFragment;
+import sahil.clickclean.Views.fragment.CategoryFragment;
+import sahil.clickclean.Views.fragment.CreateOrderFragment;
+import sahil.clickclean.Views.fragment.HomeFragment;
+import sahil.clickclean.Views.fragment.OfferFragment;
+import sahil.clickclean.Views.fragment.SelectServiceFragment;
+
+import static sahil.clickclean.Views.fragment.SelectServiceFragment.service;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,12 +44,21 @@ public class MainActivity extends AppCompatActivity
     private TextView navPhoneView;
     private Button buttonschedulepickup;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private HomeFragment homeFragment;
+    private OfferFragment offerFragment;
+    private CategoryFragment categoryFragment;
+    FragmentManager fragmentManager;
 
-    }
+    private float startX;
+    private ViewFlipper vf;
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//    }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
 
-        buttonschedulepickup = findViewById(R.id.button_schedule_pickup);
+//        buttonschedulepickup = findViewById(R.id.button_schedule_pickup);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -55,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         navNameView = (TextView) header.findViewById(R.id.nav_header_name);
         navPhoneView = (TextView) header.findViewById(R.id.nav_header_phone);
         String name;
+        String role = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("role", "Customer");
         String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
         String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname", "User Not Registered");
         name = firstname + " " + lastname;
@@ -62,13 +92,29 @@ public class MainActivity extends AppCompatActivity
         navNameView.setText(name);
         navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
 
-        buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SchedulePickup.class);
-                startActivity(intent);
-            }
-        });
+//        buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, SchedulePickup.class);
+//                startActivity(intent);
+//            }
+//        });
+
+
+
+        if(role.equals("Customer")){
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
+            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+        }
+        fragmentManager = getSupportFragmentManager();
+        if (homeFragment == null)
+            homeFragment = new HomeFragment();
+        replaceFragment(homeFragment);
+        getSupportActionBar().setTitle("Select Service");
+
+        setUpBottomBar();
+
     }
 
     @Override
@@ -81,6 +127,41 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+
+    private void setUpBottomBar(){
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.main_navigation);
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        if (homeFragment == null)
+                            homeFragment = new HomeFragment();
+                        getSupportActionBar().setTitle("Home");
+                        replaceFragment(homeFragment);
+                        break;
+                    case R.id.navigation_categories:
+
+                        if (categoryFragment == null)
+                            categoryFragment = new CategoryFragment();
+                            getSupportActionBar().setTitle("Categories")    ;
+                            replaceFragment(categoryFragment);
+                        break;
+                    case R.id.navigation_offers:
+                        if (offerFragment == null)
+                            offerFragment = new OfferFragment();
+                            getSupportActionBar().setTitle("Offers");
+                            replaceFragment(offerFragment);
+                        break;
+
+                }
+                return true;
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,4 +228,52 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void replaceFragment(Fragment new_fragment, String tag) {
+
+        if (isTagInBackStack(tag)) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.main_container, fragmentManager.findFragmentByTag(tag));
+            transaction.commit();
+        } else {
+            addFragment(new_fragment, tag);
+        }
+
+    }
+    public boolean isTagInBackStack(String tag) {
+        int x;
+        boolean toReturn = false;
+        int backStackCount = fragmentManager.getBackStackEntryCount();
+        System.out.println("backstack" + backStackCount);
+
+        for (x = 0; x < backStackCount; x++) {
+            if (tag.equals(fragmentManager.getBackStackEntryAt(x).getName())) {
+                toReturn = true;
+            }
+        }
+
+        return toReturn;
+    }
+
+    private void addFragment(Fragment fragment, String tag) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.main_container, fragment, tag);
+        transaction.addToBackStack(tag);
+        transaction.commit();
+    }
+    private void addFragment(Fragment fragmentToAdd) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.main_container, fragmentToAdd)
+                .commit();
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        ft.replace(R.id.main_container, fragment)
+                .commit();
+//        ft.commitAllowingStateLoss();
+    }
+
 }

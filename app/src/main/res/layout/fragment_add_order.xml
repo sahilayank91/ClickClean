@@ -34,6 +34,7 @@
                 android:layout_marginStart="19dp"
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
+                android:textColor="@color/background_gradient_start"
                 android:text="Uppers (Shirt and T-shirts )" />
 
             <ImageButton
@@ -59,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
 
                 android:clickable="true"
                 android:layout_centerVertical="true"
@@ -79,6 +81,7 @@
             tools:ignore="RtlCompat">
 
             <TextView
+                android:textColor="@color/background_gradient_start"
 
                 android:id="@+id/tc"
                 android:layout_width="wrap_content"
@@ -120,6 +123,7 @@
                 android:gravity="center_vertical"
                 android:text="0"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
 
                 android:focusable="true"
                 android:clickable="true"
@@ -136,6 +140,7 @@
 
             <TextView
                 android:textStyle="bold"
+                android:textColor="@color/background_gradient_start"
 
                 android:id="@+id/tcd"
                 android:layout_width="wrap_content"
@@ -175,7 +180,7 @@
                 android:gravity="center_vertical"
                 android:text="0"
                 android:textStyle="bold"
-
+                android:textColor="@color/colorPrimary"
                 android:focusable="true"
                 android:clickable="true"
                 android:textAlignment="center" />
@@ -191,6 +196,7 @@
 
             <TextView
                 android:textStyle="bold"
+                android:textColor="@color/background_gradient_start"
 
                 android:id="@+id/tdc"
                 android:layout_width="wrap_content"
@@ -233,6 +239,7 @@
 
                 android:focusable="true"
                 android:clickable="true"
+                android:textColor="@color/colorPrimary"
 
                 android:textAlignment="center" />
 
@@ -247,6 +254,7 @@
 
             <TextView
                 android:textStyle="bold"
+                android:textColor="@color/background_gradient_start"
 
                 android:id="@+id/tsc"
                 android:layout_width="wrap_content"
@@ -286,6 +294,7 @@
                 android:gravity="center_vertical"
                 android:text="0"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
 
                 android:focusable="true"
                 android:clickable="true"
@@ -304,6 +313,7 @@
 
                 android:id="@+id/tscd"
                 android:textStyle="bold"
+                android:textColor="@color/background_gradient_start"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -342,6 +352,7 @@
                 android:gravity="center_vertical"
                 android:text="0"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
 
                 android:focusable="true"
                 android:clickable="true"
@@ -359,6 +370,7 @@
 
             <TextView
                 android:textStyle="bold"
+                android:textColor="@color/background_gradient_start"
 
                 android:id="@+id/tdsscdds"
                 android:layout_width="wrap_content"
@@ -398,6 +410,7 @@
                 android:gravity="center_vertical"
                 android:text="0"
                 android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
 
                 android:focusable="true"
                 android:clickable="true"
@@ -414,6 +427,7 @@
 
             <TextView
                 android:textStyle="bold"
+                android:textColor="@color/background_gradient_start"
 
                 android:id="@+id/tdsscd"
                 android:layout_width="wrap_content"
@@ -454,7 +468,7 @@
                 android:text="0"
                 android:focusable="true"
                 android:textStyle="bold"
-
+                android:textColor="@color/colorPrimary"
                 android:clickable="true"
                 android:textAlignment="center" />
 

@@ -83,7 +83,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
     Button btnDatePicker, btnTimePicker,checkoutButton;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private TextView mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
-
+    String pickup_date;
     public AddAddressFragment() {
         // Required empty public constructor
     }
@@ -271,10 +271,21 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            orderPickupDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.DAY_OF_MONTH, datePickerDialog.getDatePicker().getDayOfMonth());
+            cal.set(Calendar.MONTH, datePickerDialog.getDatePicker().getMonth());
+            cal.set(Calendar.YEAR, datePickerDialog.getDatePicker().getYear());
+            Long time = cal.getTimeInMillis();
+            pickup_date = String.valueOf(time);
+
+
         }
     }
 
@@ -315,18 +326,18 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("status","Recieved");
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
             params.put("address",addressContainer.getText().toString());
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-            Date date = null;
-            try {
-                date = sdf.parse(orderPickupDate.getText().toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            assert date != null;
-            Long millis = date.getTime();
-            Log.e("date: ",String.valueOf(millis));
-            params.put("pickup_date",String.valueOf(millis));
-
+//            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+//            Date date = null;
+//            try {
+//                date = sdf.parse(orderPickupDate.getText().toString());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            assert date != null;
+//            Long millis = date.getTime();
+//            Log.e("date: ",String.valueOf(millis));
+//            params.put("pickup_date",String.valueOf(millis));
+            params.put("pickup_date",pickup_date);
             progress=new ProgressDialog(getContext());
             progress.setMessage("Registering..");
             progress.setIndeterminate(true);

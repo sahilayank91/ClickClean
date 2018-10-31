@@ -17,28 +17,28 @@
     <LinearLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="210dp"
         android:layout_marginTop="180dp"
         android:orientation="vertical">
 
 
-        <AutoCompleteTextView
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
             android:drawableLeft="@drawable/ic_email_black_24dp"
-            android:drawableTint="@color/colorPrimaryDark"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
+            android:drawableTint="@color/colorPrimaryDark"
+
             android:maxLines="1"
+            android:backgroundTint="@color/colorPrimary"
             android:singleLine="true" />
 
-        <AutoCompleteTextView
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:drawableTint="@color/colorPrimaryDark"
             android:hint="@string/prompt_password"
@@ -47,30 +47,18 @@
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:backgroundTint="@color/colorPrimary"
             android:singleLine="true" />
 
         <Button
             android:id="@+id/email_sign_in_button"
             style="?android:textAppearanceSmall"
-            android:layout_width="164dp"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_corner"
             android:text="@string/action_sign_in"
-            android:textColor="#fff"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/forgetpassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/forget_password"
-            android:textAlignment="center"
-            android:textColor="#000" />
-
 
         <TextView
             android:id="@+id/signup_text"
@@ -79,27 +67,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="New User ? Sign Up Here"
-            android:textAlignment="center"
-            android:textColor="#000" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="By proceeding, you agree to our"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Terms and Conditions"
-            android:textColor="@color/colorPrimary"
-            android:gravity="center"
-            android:textStyle="bold"
-            />
+            android:textAlignment="center" />
 
     </LinearLayout>
 </RelativeLayout>

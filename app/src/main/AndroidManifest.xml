@@ -61,7 +61,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Sign Up" />
         <activity
             android:name=".Views.ProfileActivity"
             android:label="@string/title_activity_profile" />
@@ -82,14 +82,17 @@
 
         <activity
             android:name=".Views.YourOrders"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_your_orders" />
+            android:label="@string/title_activity_your_orders"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.RegisterWasherMan"
             android:label="@string/title_activity_register_washer_man" />
         <activity
             android:name=".Views.PickupActivity"
-            android:label="@string/title_activity_pickup"></activity>
+            android:label="@string/title_activity_pickup" />
+        <activity
+            android:name=".Views.RateCardActivity"
+            android:label="@string/title_activity_rate_card"></activity>
     </application>
 
 </manifest>

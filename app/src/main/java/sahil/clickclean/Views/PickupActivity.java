@@ -1,12 +1,8 @@
 package sahil.clickclean.Views;
 
 
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,7 +11,6 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -25,6 +20,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import sahil.clickclean.R;
@@ -40,7 +38,6 @@ import sahil.clickclean.Views.fragment.UpcomingFragment;
 public class PickupActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +58,31 @@ public class PickupActivity extends AppCompatActivity {
         // Create Navigation drawer and inlfate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
+
+
+        View header = navigationView.getHeaderView(0);
+        TextView navEmailView = (TextView) header.findViewById(R.id.nav_header_email);
+        TextView navNameView = (TextView) header.findViewById(R.id.nav_header_name);
+        TextView navPhoneView = (TextView) header.findViewById(R.id.nav_header_phone);
+        String name;
+        String role= SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("role", "Customer");
+        String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
+        String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname", "User Not Registered");
+        name = firstname + " " + lastname;
+        navEmailView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("email", "User Not Registered"));
+        navNameView.setText(name);
+        navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
+
+
+
+        if(role.equals("Customer")){
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
+            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+        }
+
+
         // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
