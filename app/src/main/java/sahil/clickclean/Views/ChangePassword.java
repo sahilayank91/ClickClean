@@ -27,6 +27,7 @@ public class ChangePassword extends Activity {
     EditText newpass,confirmpass;
     Button changepasswordbutton;
     TextView backbutton;
+    String newpassword,confirmpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,14 @@ public class ChangePassword extends Activity {
         changepasswordbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                 newpassword = newpass.getText().toString();
+                 confirmpassword = confirmpass.getText().toString();
+
+
+                if(newpassword.equals(confirmpassword)){
+                    new ChangePass().execute();
+                }
+
 
             }
         });
@@ -62,7 +71,7 @@ public class ChangePassword extends Activity {
 
 
 
-    class AddOrder extends AsyncTask<String, String, String> {
+    class ChangePass extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();
         private ProgressDialog progress;
@@ -70,6 +79,8 @@ public class ChangePassword extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            params.put("newpass",newpassword);
+//            params.put("phone",)
 
             progress=new ProgressDialog(ChangePassword.this);
             progress.setMessage("Registering..");
@@ -101,7 +112,7 @@ public class ChangePassword extends Activity {
                 Gson gson = new Gson();
                 String json = gson.toJson(params);
                 System.out.println(json);
-                result = Server.post(getResources().getString(R.string.newOrder),json);
+                result = Server.post(getResources().getString(R.string.changePasswordUsingPhone),json);
                 success = true;
             } catch (Exception e){
                 e.printStackTrace();

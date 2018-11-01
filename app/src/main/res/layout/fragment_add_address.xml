@@ -41,8 +41,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
+                android:textAlignment="center"
+                android:layout_marginBottom="@dimen/nav_header_vertical_spacing"
                 android:background="@drawable/rounded_corner"
-                android:drawableLeft="@drawable/ic_edit_black_24dp"
                 android:text="@string/change_address" />
 
             <TextView

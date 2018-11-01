@@ -23,9 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by SS Verma on 14-03-2017.
- */
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
@@ -54,6 +51,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.orderstatus.setText(current.getOrderstatus());
         holder.orderpickupdate.setText(current.getOrderpickupdate());
         holder.orderdate.setText(current.getCreate_time());
+        holder.orderservice.setText(current.getOrderservice());
+
+
+
+
+
     }
 
     @Override
@@ -64,7 +67,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus;
+        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice;
 
 
         private OrderViewHolder(View itemView) {
@@ -74,6 +77,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             orderdate = itemView.findViewById(R.id.order_date);
             orderpickupdate = itemView.findViewById(R.id.order_pickup_date);
             orderstatus = itemView.findViewById(R.id.order_status);
+            orderservice = itemView.findViewById(R.id.order_service);
             itemView.setOnClickListener(this);
             orderstatus.setOnClickListener(this);
 

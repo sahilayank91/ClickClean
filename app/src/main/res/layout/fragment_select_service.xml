@@ -71,8 +71,9 @@
                     android:layout_marginEnd="39dp"
                     android:layout_marginRight="39dp"
                     android:gravity="center"
+
                     android:text="Steam Ironing"
-                    android:textColor="@color/black"
+                    android:textColor="@color/background_gradient_start"
                     android:textStyle="normal" />
             </RelativeLayout>
 
@@ -113,7 +114,8 @@
                     android:layout_marginRight="39dp"
                     android:gravity="center"
                     android:text="Wash and Fold (Kg Basis)"
-                    android:textColor="@color/black"
+                    android:textColor="@color/background_gradient_start"
+
                     android:textStyle="normal" />
             </RelativeLayout>
 
@@ -155,7 +157,8 @@
                     android:layout_marginRight="39dp"
                     android:gravity="center"
                     android:text="Dry Cleaning"
-                    android:textColor="@color/black"
+                    android:textColor="@color/background_gradient_start"
+
                     android:textStyle="normal" />
             </RelativeLayout>
 
@@ -196,7 +199,8 @@
                     android:layout_marginRight="39dp"
                     android:gravity="center"
                     android:text="Wash and Iron (Kg Basis)"
-                    android:textColor="@color/black"
+                    android:textColor="@color/background_gradient_start"
+
                     android:textStyle="normal" />
             </RelativeLayout>
 
@@ -237,7 +241,8 @@
                     android:layout_marginRight="39dp"
                     android:gravity="center"
                     android:text="Steam Ironing"
-                    android:textColor="@color/black"
+                    android:textColor="@color/background_gradient_start"
+
                     android:textStyle="normal" />
             </RelativeLayout>
 
@@ -278,7 +283,8 @@
                     android:layout_marginRight="39dp"
                     android:gravity="center"
                     android:text="Premium Laundry"
-                    android:textColor="@color/black"
+                    android:textColor="@color/background_gradient_start"
+
                     android:textStyle="normal" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>

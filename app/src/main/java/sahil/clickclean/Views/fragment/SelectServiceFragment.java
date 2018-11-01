@@ -1,5 +1,6 @@
 package sahil.clickclean.Views.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,6 +24,9 @@ import java.util.List;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.Views.LoginActivity;
+import sahil.clickclean.Views.MainActivity;
+import sahil.clickclean.Views.RegisterActivity;
 
 public class SelectServiceFragment extends Fragment {
     View view;
@@ -34,6 +39,19 @@ public class SelectServiceFragment extends Fragment {
 
     CardView steamIroning, washfoldkg, washironkg, washiron, dryclean, premiumlaundry;
     TextView selectedService;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(getContext(),MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

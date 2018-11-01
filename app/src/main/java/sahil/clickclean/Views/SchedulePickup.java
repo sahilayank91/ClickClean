@@ -47,11 +47,23 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
 
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(SchedulePickup.this,MainActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+
         Intent intent = new Intent(SchedulePickup.this,MainActivity.class);
         startActivity(intent);
         finish();
+        super.onBackPressed();
     }
 
 

@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,6 +27,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
@@ -67,14 +70,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
-//        buttonschedulepickup = findViewById(R.id.button_schedule_pickup);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -93,15 +94,6 @@ public class MainActivity extends AppCompatActivity
         navNameView.setText(name);
         navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
 
-//        buttonschedulepickup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, SchedulePickup.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
 
         if(role.equals("Customer")){
             Menu nav_Menu = navigationView.getMenu();
@@ -112,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         if (homeFragment == null)
             homeFragment = new HomeFragment();
         replaceFragment(homeFragment);
-        getSupportActionBar().setTitle("Select Service");
+        getSupportActionBar().setTitle("Home");
 
         setUpBottomBar();
 
@@ -139,25 +131,20 @@ public class MainActivity extends AppCompatActivity
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-
                             homeFragment = new HomeFragment();
                         getSupportActionBar().setTitle("Home");
                         replaceFragment(homeFragment);
                         break;
                     case R.id.navigation_categories:
-
-
                             categoryFragment = new CategoryFragment();
                             getSupportActionBar().setTitle("Categories")    ;
                             replaceFragment(categoryFragment);
                         break;
                     case R.id.navigation_offers:
-
                             offerFragment = new OfferFragment();
                             getSupportActionBar().setTitle("Offers");
                             replaceFragment(offerFragment);
                         break;
-
                 }
                 return true;
             }
@@ -225,6 +212,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id==R.id.nav_rate_card){
             Intent intent = new Intent(MainActivity.this,RateCardActivity.class);
             startActivity(intent);
+        } else if(id==R.id.nav_terms){
+            Intent intent = new Intent(MainActivity.this,TermsAndCondition.class);
+            startActivity(intent);
         }
 
 
@@ -279,5 +269,6 @@ public class MainActivity extends AppCompatActivity
                 .commit();
 //        ft.commitAllowingStateLoss();
     }
+
 
 }

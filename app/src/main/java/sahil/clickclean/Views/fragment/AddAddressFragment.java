@@ -24,6 +24,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -272,11 +273,12 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 //                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                            orderPickupDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
 
                         }
                     }, mYear, mMonth, mDay);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.DAY_OF_MONTH, datePickerDialog.getDatePicker().getDayOfMonth());
@@ -287,6 +289,17 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
 
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressLint("HandlerLeak")
@@ -305,6 +318,8 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             addressContainer.setText(locationAddress);
         }
     }
+
+
     class AddOrder extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();

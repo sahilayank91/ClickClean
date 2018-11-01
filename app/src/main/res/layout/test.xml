@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Views.MainActivity"
-    tools:showIn="@layout/app_bar_main">
-
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -16,78 +10,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        android:layout_marginBottom="100dp"
         android:layout_marginTop="27dp"
         android:layout_alignParentLeft="true">
 
-        <ViewFlipper
-            android:id="@+id/viewFlipper"
-            android:layout_width="match_parent"
-            android:layout_height="201dp"
-            >
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view1"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view2"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view3"
-                />
-
-        </ViewFlipper>
-
-        <ViewFlipper
-            android:id="@+id/offerFlipper"
-            android:layout_below="@+id/viewFlipper"
-            android:layout_width="match_parent"
-            android:layout_height="201dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view1"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view2"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view3"
-                />
-
-        </ViewFlipper>
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
             android:layout_height="wrap_content">
@@ -151,7 +79,6 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.CardView
@@ -311,15 +238,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-
-            android:layout_marginBottom="100dp"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/fffdss"
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="76dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -337,7 +261,4 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
-
 </android.support.v4.widget.NestedScrollView>

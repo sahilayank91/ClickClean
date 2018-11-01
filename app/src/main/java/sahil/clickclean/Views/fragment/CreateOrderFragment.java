@@ -1,5 +1,6 @@
 package sahil.clickclean.Views.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.INotificationSideChannel;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 
 import sahil.clickclean.R;
+import sahil.clickclean.Views.MainActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -32,6 +35,17 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
     public TextView mupper, mbottom, mwoollen, mjacket, mblanketsingle, mblanketdouble, mbedsheetsingle, mbedsheetdouble;
     public CreateOrderFragment(){
         //necessary default constructor
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                SelectServiceFragment selectServiceFragment = new SelectServiceFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,selectServiceFragment).commit();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Nullable
     @Override

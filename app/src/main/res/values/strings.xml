@@ -90,7 +90,7 @@
     <string name="getTodayOrders">http://&server;service/order/getTodayOrders/</string>
     <string name="getUpcomingOrders">http://&server;service/order/getUpcomingOrders/</string>
     <string name="getCompletedOrders">http://&server;service/order/getCompletedOrders/</string>
-
+    <string name="changePasswordUsingPhone">http://&server;service/authenticate/changePasswordUsingPhone</string>
     <string name="newOrder">http://&server;service/order/newOrder/</string>
 
     <string name="title_activity_profile">ProfileActivity</string>

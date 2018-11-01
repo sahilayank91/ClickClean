@@ -86,45 +86,39 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        of.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                int action = event.getActionMasked();
-                Intent intent =  new Intent(getContext(), DonateClothes.class);
-                startActivity(intent);
-                getActivity().finish();
+//        of.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent event) {
+//                int action = event.getActionMasked();
+//                Intent intent =  new Intent(getContext(), DonateClothes.class);
+//                startActivity(intent);
+//                getActivity().finish();
+//
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        startX = event.getX();
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        float endX = event.getX();
+//                        float endY = event.getY();
+//
+//                        //swipe right
+//                        if (startX < endX) {
+//                            of.showNext();
+//                        }
+//
+//                        //swipe left
+//                        if (startX > endX) {
+//                            of.showPrevious();
+//                        }
+//
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        startX = event.getX();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        float endX = event.getX();
-                        float endY = event.getY();
 
-                        //swipe right
-                        if (startX < endX) {
-                            of.showNext();
-                        }
-
-                        //swipe left
-                        if (startX > endX) {
-                            of.showPrevious();
-                        }
-
-                        break;
-                }
-                return true;
-            }
-        });
-
-
-        of.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         vf.startFlipping();
         of.startFlipping();
 

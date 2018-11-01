@@ -15,6 +15,7 @@ public class Order {
         if(order.has("longitude"))this.longitude = order.getString("longitude");
         if(order.has("created_at"))this.create_time = order.getString("created_at");
         if(order.has("status"))this.status = order.getString("status");
+        if(order.has("service"))this.orderservice = order.getString("service");
     }
 
     private String _id;
@@ -26,6 +27,33 @@ public class Order {
     private String longitude;
     private String latitude;
     private String create_time;
+
+    public String getPickup_date() {
+        return pickup_date;
+    }
+
+    public void setPickup_date(String pickup_date) {
+        this.pickup_date = pickup_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOrderservice() {
+        return orderservice;
+    }
+
+    public void setOrderservice(String orderservice) {
+        this.orderservice = orderservice;
+    }
+
+    private String orderservice;
+
 
     public String getCreate_time() {
         return create_time;
