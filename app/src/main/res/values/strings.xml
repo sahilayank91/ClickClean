@@ -1,7 +1,7 @@
 <!DOCTYPE resources [<!ENTITY server "172.21.4.31:3000/">]>
 
 <resources>
-    <string name="app_name">ClickClean</string>
+    <string name="app_name">Yours Dhobi</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
