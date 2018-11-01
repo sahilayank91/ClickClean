@@ -107,7 +107,7 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
 
         mTextMessage = (TextView) findViewById(R.id.message);
 
-        setUpBottomBar();
+//        setUpBottomBar();
 
         fragmentManager = getSupportFragmentManager();
 
@@ -119,50 +119,50 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
         mEditor = mSharedPreferences.edit();
     }
 
-    private void setUpBottomBar(){
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.navigation_select_service:
-                        if (selectServiceFragment == null)
-                            selectServiceFragment = new SelectServiceFragment();
-                        getSupportActionBar().setTitle(R.string.title_select_service);
-                        replaceFragment(selectServiceFragment);
-                        break;
-                    case R.id.navigation_create_order:
-
-                        if (createOrderFragment == null)
-                            createOrderFragment = new CreateOrderFragment();
-                        if(service==null){
-                            Toast.makeText(SchedulePickup.this,"Please Select a Service First",Toast.LENGTH_LONG).show();
-                        }else{
-                            getSupportActionBar().setTitle(R.string.create_order);
-                            replaceFragment(createOrderFragment);
-                        }
-                        break;
-                    case R.id.navigation_add_address:
-                        if (addAddressFragment == null)
-                            addAddressFragment = new AddAddressFragment();
-
-                        if(service==null){
-                            Toast.makeText(SchedulePickup.this,"Please Select a Service First",Toast.LENGTH_LONG).show();
-                        }else if (CreateOrderFragment.upper  + CreateOrderFragment.bottom + CreateOrderFragment.woollen + CreateOrderFragment.blancket_single + CreateOrderFragment.blancket_double + CreateOrderFragment.bedsheet_single+ CreateOrderFragment.bedsheet_double + CreateOrderFragment.jacket ==0 ){
-                            Toast.makeText(SchedulePickup.this,"Please select some of the clothes",Toast.LENGTH_LONG).show();
-                        }else{
-                            getSupportActionBar().setTitle(R.string.title_add_address);
-                            replaceFragment(addAddressFragment);
-                        }
-                        break;
-
-                }
-                return true;
-            }
-        });
-    }
+//    private void setUpBottomBar(){
+//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+//
+//        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                switch (item.getItemId()) {
+//                    case R.id.navigation_select_service:
+//                        if (selectServiceFragment == null)
+//                            selectServiceFragment = new SelectServiceFragment();
+//                        getSupportActionBar().setTitle(R.string.title_select_service);
+//                        replaceFragment(selectServiceFragment);
+//                        break;
+//                    case R.id.navigation_create_order:
+//
+//                        if (createOrderFragment == null)
+//                            createOrderFragment = new CreateOrderFragment();
+//                        if(service==null){
+//                            Toast.makeText(SchedulePickup.this,"Please Select a Service First",Toast.LENGTH_LONG).show();
+//                        }else{
+//                            getSupportActionBar().setTitle(R.string.create_order);
+//                            replaceFragment(createOrderFragment);
+//                        }
+//                        break;
+//                    case R.id.navigation_add_address:
+//                        if (addAddressFragment == null)
+//                            addAddressFragment = new AddAddressFragment();
+//
+//                        if(service==null){
+//                            Toast.makeText(SchedulePickup.this,"Please Select a Service First",Toast.LENGTH_LONG).show();
+//                        }else if (CreateOrderFragment.upper  + CreateOrderFragment.bottom + CreateOrderFragment.woollen + CreateOrderFragment.blancket_single + CreateOrderFragment.blancket_double + CreateOrderFragment.bedsheet_single+ CreateOrderFragment.bedsheet_double + CreateOrderFragment.jacket ==0 ){
+//                            Toast.makeText(SchedulePickup.this,"Please select some of the clothes",Toast.LENGTH_LONG).show();
+//                        }else{
+//                            getSupportActionBar().setTitle(R.string.title_add_address);
+//                            replaceFragment(addAddressFragment);
+//                        }
+//                        break;
+//
+//                }
+//                return true;
+//            }
+//        });
+//    }
     private void replaceFragment(Fragment new_fragment, String tag) {
 
         if (isTagInBackStack(tag)) {

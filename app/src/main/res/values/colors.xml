@@ -67,4 +67,8 @@
     <color name="title">#222222</color>
     <color name="backcolor">#B2EBF2</color>
     <color name="text_colour">#66bb6a</color>
+
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_500">#9E9E9E</color>
 </resources>

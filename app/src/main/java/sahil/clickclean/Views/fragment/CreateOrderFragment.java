@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -23,7 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CreateOrderFragment extends Fragment implements View.OnClickListener{
     View view;
-
+    private Button checkout;
     public static int upper = 0, bottom = 0, woollen = 0, jacket = 0, blancket_single = 0, blancket_double = 0, bedsheet_single = 0, bedsheet_double = 0;
     private ImageButton upper_min,upper_add,bottom_min,bottom_add,woollen_min,woollen_add,jacket_min, jacket_add,blancket_single_min,blancket_single_add,
             blancket_double_min,blancket_double_add,bedsheet_single_min,bedsheet_single_add,bedsheet_double_min,bedsheet_double_add;
@@ -37,7 +38,7 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) view = inflater.inflate(R.layout.fragment_add_order, container, false);
         else return view;
-
+        checkout = view.findViewById(R.id.checkoutbutton);
         upper_min = view.findViewById(R.id.min_upper);
         upper_add = view.findViewById(R.id.add_upper);
         mupper = view.findViewById(R.id.uppers);
@@ -204,6 +205,20 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
             public void onClick(View v) {
                 bedsheet_double++;
                 mbedsheetdouble.setText(String.valueOf(bedsheet_double));
+            }
+        });
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (CreateOrderFragment.upper  + CreateOrderFragment.bottom + CreateOrderFragment.woollen + CreateOrderFragment.blancket_single + CreateOrderFragment.blancket_double + CreateOrderFragment.bedsheet_single+ CreateOrderFragment.bedsheet_double + CreateOrderFragment.jacket ==0 ){
+                    Toast.makeText(getContext(),"Please select some of the clothes",Toast.LENGTH_LONG).show();
+                }else{
+                    AddAddressFragment addAddressFragment = new AddAddressFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,addAddressFragment).commit();
+
+                }
+
             }
         });
 

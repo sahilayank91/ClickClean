@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -138,20 +139,20 @@ public class MainActivity extends AppCompatActivity
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        if (homeFragment == null)
+
                             homeFragment = new HomeFragment();
                         getSupportActionBar().setTitle("Home");
                         replaceFragment(homeFragment);
                         break;
                     case R.id.navigation_categories:
 
-                        if (categoryFragment == null)
+
                             categoryFragment = new CategoryFragment();
                             getSupportActionBar().setTitle("Categories")    ;
                             replaceFragment(categoryFragment);
                         break;
                     case R.id.navigation_offers:
-                        if (offerFragment == null)
+
                             offerFragment = new OfferFragment();
                             getSupportActionBar().setTitle("Offers");
                             replaceFragment(offerFragment);
@@ -220,6 +221,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_orders) {
             Intent intent = new Intent(MainActivity.this, PickupActivity.class);
+            startActivity(intent);
+        } else if (id==R.id.nav_rate_card){
+            Intent intent = new Intent(MainActivity.this,RateCardActivity.class);
             startActivity(intent);
         }
 

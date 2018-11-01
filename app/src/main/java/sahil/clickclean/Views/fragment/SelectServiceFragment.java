@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import sahil.clickclean.SharedPreferenceSingleton;
 public class SelectServiceFragment extends Fragment {
     View view;
     private Spinner mSpinner;
+
     public static String service=null;
     public SelectServiceFragment() {
 
@@ -61,6 +63,8 @@ public class SelectServiceFragment extends Fragment {
                 washironkg.setCardBackgroundColor(Color.WHITE);
                 premiumlaundry.setCardBackgroundColor(Color.WHITE);
 
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
             }
         });
         washfoldkg.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +79,8 @@ public class SelectServiceFragment extends Fragment {
                 washiron.setCardBackgroundColor(Color.WHITE);
                 washironkg.setCardBackgroundColor(Color.WHITE);
                 premiumlaundry.setCardBackgroundColor(Color.WHITE);
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
             }
         });
         dryclean.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +95,8 @@ public class SelectServiceFragment extends Fragment {
                 washiron.setCardBackgroundColor(Color.WHITE);
                 washironkg.setCardBackgroundColor(Color.WHITE);
                 premiumlaundry.setCardBackgroundColor(Color.WHITE);
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
             }
         });
         washironkg.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +112,8 @@ public class SelectServiceFragment extends Fragment {
                     washiron.setCardBackgroundColor(Color.WHITE);
                     dryclean.setCardBackgroundColor(Color.WHITE);
                     premiumlaundry.setCardBackgroundColor(Color.WHITE);
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
             }
         });
         washiron.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +128,8 @@ public class SelectServiceFragment extends Fragment {
                 washironkg.setCardBackgroundColor(Color.WHITE);
                 dryclean.setCardBackgroundColor(Color.WHITE);
                 premiumlaundry.setCardBackgroundColor(Color.WHITE);
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
             }
         });
 
@@ -133,6 +145,8 @@ public class SelectServiceFragment extends Fragment {
                 washironkg.setCardBackgroundColor(Color.WHITE);
                 dryclean.setCardBackgroundColor(Color.WHITE);
                 washiron.setCardBackgroundColor(Color.WHITE);
+                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
             }
         });
 

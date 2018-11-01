@@ -22,16 +22,16 @@
     </FrameLayout>
 
 
-    <android.support.design.widget.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        app:menu="@menu/navigation"
-        app:itemTextColor="@color/colorAccent"
-        app:itemIconTint="@color/colorAccent"
-        app:elevation="4dp"
-        android:background="@android:color/white"
-        android:id="@+id/navigation"></android.support.design.widget.BottomNavigationView>
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="56dp"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--app:menu="@menu/navigation"-->
+        <!--app:itemTextColor="@color/colorAccent"-->
+        <!--app:itemIconTint="@color/colorAccent"-->
+        <!--app:elevation="4dp"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:id="@+id/navigation"></android.support.design.widget.BottomNavigationView>-->
 
 
 

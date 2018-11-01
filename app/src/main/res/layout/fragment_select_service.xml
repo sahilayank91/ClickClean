@@ -35,14 +35,14 @@
             <!--tools:layout_editor_absoluteY="161dp" />-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:id="@+id/a"
             android:layout_width="333dp"
             android:layout_height="65dp"
-            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_below="@+id/e"
 
             android:layout_centerHorizontal="true"
@@ -83,7 +83,7 @@
             android:id="@+id/b"
             android:layout_width="333dp"
             android:layout_height="65dp"
-            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
 
             android:layout_below="@+id/a"
             android:layout_centerHorizontal="true"
@@ -124,7 +124,7 @@
             android:id="@+id/c"
             android:layout_width="333dp"
             android:layout_height="65dp"
-            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
 
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -167,7 +167,7 @@
             android:layout_width="333dp"
             android:layout_height="65dp"
             android:layout_below="@+id/c"
-            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
 
             android:layout_centerHorizontal="true"
             card_view:cardCornerRadius="5dp">
@@ -208,7 +208,7 @@
             android:layout_width="333dp"
             android:layout_height="65dp"
             android:layout_below="@+id/f"
-            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
 
             android:layout_centerHorizontal="true"
             card_view:cardCornerRadius="5dp">
@@ -249,7 +249,7 @@
             android:layout_width="333dp"
             android:layout_height="65dp"
             android:layout_below="@+id/d"
-            android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
 
             android:layout_centerHorizontal="true"
             card_view:cardCornerRadius="5dp">

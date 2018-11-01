@@ -92,7 +92,19 @@
             android:label="@string/title_activity_pickup" />
         <activity
             android:name=".Views.RateCardActivity"
-            android:label="@string/title_activity_rate_card"></activity>
+            android:label="@string/title_activity_rate_card" />
+        <activity
+            android:name=".Views.DonateClothes"
+            android:label="@string/title_activity_donate_clothes" />
+        <activity
+            android:name=".Views.TermsAndCondition"
+            android:label="@string/title_activity_terms_and_condition" />
+        <activity
+            android:name=".Views.ForgotPassword"
+            android:label="@string/title_activity_forgot_password" />
+        <activity
+            android:name=".Views.ChangePassword"
+            android:label="@string/title_activity_change_password"></activity>
     </application>
 
 </manifest>

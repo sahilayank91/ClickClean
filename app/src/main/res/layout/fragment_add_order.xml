@@ -473,6 +473,54 @@
                 android:textAlignment="center" />
 
         </RelativeLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/colorAccent"
+            android:background="@color/colorAccent"
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_margin="@dimen/nav_header_vertical_spacing"
+            android:layout_height="wrap_content">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Total Amount"
+                   android:padding="@dimen/nav_header_vertical_spacing"
+                   android:textColor="@color/background_gradient_start"
+                   android:textStyle="bold"
+                   android:textSize="19sp"
+                   android:id="@+id/b"
+                   android:layout_marginLeft="@dimen/activity_vertical_margin"
+                   />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:layout_alignParentEnd="true"
+                   android:layout_alignParentTop="true"
+                   android:layout_marginEnd="41dp"
+                   android:padding="@dimen/nav_header_vertical_spacing"
+                   android:text="Rs 100"
+                   android:textSize="19sp"
+                   android:textStyle="bold"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginRight="41dp" />
+           </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/checkoutbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:text="Checkout"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
