@@ -82,8 +82,7 @@
 
         <activity
             android:name=".Views.YourOrders"
-            android:label="@string/title_activity_your_orders"
-            />
+            android:label="@string/title_activity_your_orders" />
         <activity
             android:name=".Views.RegisterWasherMan"
             android:label="@string/title_activity_register_washer_man" />
@@ -104,14 +103,17 @@
             android:label="@string/title_activity_forgot_password" />
         <activity
             android:name=".Views.ChangePassword"
-            android:label="@string/title_activity_change_password"></activity>
+            android:label="@string/title_activity_change_password" />
 
-        <!--<service-->
-            <!--android:name=".MyFirebaseInstanceIDService">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+        <!-- <service -->
+        <!-- android:name=".MyFirebaseInstanceIDService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <activity
+            android:name=".Views.UploadImage"
+            android:label="@string/title_activity_upload_image"></activity>
     </application>
 
 </manifest>

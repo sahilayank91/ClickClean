@@ -215,6 +215,9 @@ public class MainActivity extends AppCompatActivity
         } else if(id==R.id.nav_terms){
             Intent intent = new Intent(MainActivity.this,TermsAndCondition.class);
             startActivity(intent);
+        } else if(id==R.id.nav_add_image){
+            Intent intent = new Intent(MainActivity.this,UploadImage.class);
+            startActivity(intent);
         }
 
 

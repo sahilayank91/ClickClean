@@ -13,12 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;
 
 import sahil.clickclean.R;
-import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.utilities.Server;
 
 public class ChangePassword extends Activity {

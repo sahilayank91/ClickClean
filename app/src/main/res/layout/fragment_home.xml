@@ -8,8 +8,6 @@
     tools:context=".Views.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,74 +15,33 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:layout_marginBottom="100dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
         android:layout_alignParentLeft="true">
-
-        <ViewFlipper
-            android:id="@+id/viewFlipper"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="201dp"
-            >
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view1"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view2"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view3"
-                />
-
-        </ViewFlipper>
-
-        <ViewFlipper
-            android:id="@+id/offerFlipper"
-            android:layout_below="@+id/viewFlipper"
+            android:layout_height="200dp">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_marginLeft="@dimen/nav_header_vertical_spacing"
+            android:layout_marginEnd="@dimen/nav_header_vertical_spacing"
+            android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+            android:layout_marginRight="@dimen/nav_header_vertical_spacing"
             android:layout_width="match_parent"
-            android:layout_height="201dp">
+            android:layout_height="match_parent" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view1"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view2"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/view3"
-                />
+        <LinearLayout
+            android:id="@+id/layoutDots"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dots_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dots_margin_bottom"
+            android:gravity="center"
+            android:orientation="horizontal"/>
 
-        </ViewFlipper>
+        </RelativeLayout>
+
+
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -158,7 +115,7 @@
                 android:id="@+id/a"
                 android:layout_width="105dp"
 
-                android:layout_height="106dp"
+                android:layout_height="119dp"
 
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -168,10 +125,16 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-
                     android:src="@drawable/steam" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/steam_ironing"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
 
             </android.support.v7.widget.CardView>
 
@@ -179,28 +142,34 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/b"
                 android:layout_width="105dp"
-                android:layout_height="106dp"
+                android:layout_height="119dp"
                 android:layout_centerInParent="true">
 
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:src="@drawable/washingmachine" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_fold"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
             </android.support.v7.widget.CardView>
 
 
             <android.support.v7.widget.CardView
                 android:id="@+id/f"
                 android:layout_width="105dp"
-                android:layout_height="106dp"
+                android:layout_height="119dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp">
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp">
 
                 <ImageView
 
@@ -208,7 +177,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:src="@drawable/laundry" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_iron"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
             </android.support.v7.widget.CardView>
         </RelativeLayout>
 
@@ -224,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:padding="@dimen/activity_vertical_margin"
-                android:text="Express Services (24 Hours)"
+                android:text="@string/express_services_24_hours"
                 android:textColor="@color/colorPrimary"
                 android:textSize="19sp"
                 android:textStyle="bold" />
@@ -238,7 +213,7 @@
                 android:id="@+id/afdsaf"
                 android:layout_width="105dp"
 
-                android:layout_height="106dp"
+                android:layout_height="119dp"
 
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -248,34 +223,45 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-
                     android:src="@drawable/steam" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/steam_ironing"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
             </android.support.v7.widget.CardView>
 
 
             <android.support.v7.widget.CardView
                 android:id="@+id/fsafb"
                 android:layout_width="105dp"
-                android:layout_height="106dp"
+                android:layout_height="119dp"
                 android:layout_centerInParent="true">
 
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:src="@drawable/washingmachine" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_fold"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
             </android.support.v7.widget.CardView>
 
 
             <android.support.v7.widget.CardView
                 android:id="@+id/ffs"
                 android:layout_width="105dp"
-                android:layout_height="106dp"
+                android:layout_height="119dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
@@ -285,16 +271,23 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:src="@drawable/laundry" />
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_iron"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
             </android.support.v7.widget.CardView>
         </RelativeLayout>
 
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_height="wrap_content">
 
             <TextView
@@ -302,39 +295,43 @@
                 android:layout_height="wrap_content"
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="Dry Cleaning"
+                android:text="@string/dry_cleaning"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:padding="@dimen/activity_vertical_margin"/>
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_vertical_margin" />
 
         </android.support.v7.widget.CardView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-
-            android:layout_marginBottom="100dp"
-            android:layout_height="match_parent">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/fffdss"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp">
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+
+                android:layout_marginStart="18dp"
+                android:layout_marginBottom="100dp"
+
+                android:layout_marginLeft="18dp">
 
                 <ImageView
 
-                    android:layout_width="99dp"
-                    android:layout_height="56dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/fashion" />
+                    android:src="@drawable/fashion"
+                    android:contentDescription="@string/dry_cleaning" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dry_cleaning"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="190dp"
+                    android:layout_marginLeft="190dp" />
             </android.support.v7.widget.CardView>
-        </RelativeLayout>
+
 
     </LinearLayout>
 

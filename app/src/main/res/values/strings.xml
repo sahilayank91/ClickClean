@@ -251,4 +251,10 @@
     <string name="title_activity_forgot_password">ForgotPassword</string>
     <string name="title_activity_change_password">ChangePassword</string>
     <string name="back"><![CDATA[< < Back]]></string>
+    <string name="title_activity_upload_image">UploadImage</string>
+    <string name="steam_ironing">Steam Ironing</string>
+    <string name="wash_and_fold">Wash and Fold</string>
+    <string name="wash_and_iron">Wash and Iron</string>
+    <string name="express_services_24_hours">Express Services (24 Hours)</string>
+    <string name="dry_cleaning">Dry Cleaning</string>
 </resources>

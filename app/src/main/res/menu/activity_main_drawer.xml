@@ -73,4 +73,16 @@
         </menu>
     </item>
 
+
+    <item android:title="Admin">
+
+        <menu>
+            <item
+                android:id="@+id/nav_add_image"
+                android:icon="@drawable/ic_add_circle_outline_black_24dp"
+                android:title="Add Offers or Images"
+                app:showAsAction="ifRoom"/>
+        </menu>
+
+    </item>
 </menu>
