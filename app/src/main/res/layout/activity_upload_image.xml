@@ -8,34 +8,87 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="net.simplifiedcoding.firebasestorage.MainActivity">
+    tools:context=".Views.UploadImage">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="184dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Select Type"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            android:tag="Select type"
+
+            android:tooltipText="Select Type">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Offer"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Donation"
+                android:textSize="18sp" />
+
+        </RadioGroup>
+
 
         <Button
             android:id="@+id/buttonChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Choose" />
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="23dp"
+            android:layout_marginStart="37dp"
+            android:text="Choose"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="37dp" />
 
         <Button
             android:id="@+id/buttonUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Upload" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/buttonChoose"
+            android:layout_marginEnd="36dp"
+            android:text="Upload"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="36dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/linearLayout" />
+        android:layout_height="338dp"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginTop="-5dp" />
 
 </RelativeLayout>

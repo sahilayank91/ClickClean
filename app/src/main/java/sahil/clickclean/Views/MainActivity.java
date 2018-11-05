@@ -95,11 +95,11 @@ public class MainActivity extends AppCompatActivity
         navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
 
 
-        if(role.equals("Customer")){
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
-            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
-        }
+//        if(role.equals("Customer")){
+//            Menu nav_Menu = navigationView.getMenu();
+//            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
+//            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+//        }
         fragmentManager = getSupportFragmentManager();
         if (homeFragment == null)
             homeFragment = new HomeFragment();

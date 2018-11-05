@@ -51,14 +51,19 @@ import sahil.clickclean.WelcomeActivity;
 
 public class HomeFragment extends Fragment {
 
-
+    Timer timer = new Timer();
     View view;
     private ViewPager viewPager;
+    private ViewPager donationViewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private LinearLayout dotsLayout;
-    private TextView[] dots;
+    private MyDonationViewPagerAdapter donationOfferViewPagerAdapter;
+    private LinearLayout dotsLayout,donationDotsLayout;
+    private TextView[] dots,donation_dots;
     private int[] layouts;
+    SliderTimer sliderTimer =  new SliderTimer();
     private ArrayList<String> images = new ArrayList<>();
+    private ArrayList<String> donation_images = new ArrayList<>();
+
     public HomeFragment(){
 
     }
@@ -66,8 +71,21 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         getAllImages();
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new SliderTimer(), 2000, 3000);
+//        timer.scheduleAtFixedRate(sliderTimer, 2000, 3000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.purge();
+//        sliderTimer.cancel();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        timer.purge();
+//        sliderTimer.cancel();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -78,8 +96,9 @@ public class HomeFragment extends Fragment {
         else return view;
 
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        donationViewPager = view.findViewById(R.id.donation_view_pager);
         dotsLayout = (LinearLayout) view.findViewById(R.id.layoutDots);
-
+        donationDotsLayout = view.findViewById(R.id.donationlayoutDots);
 
 
         // layouts of all welcome sliders
@@ -92,12 +111,6 @@ public class HomeFragment extends Fragment {
                 R.layout.welcome_slide5,
                 R.layout.welcome_slide6};
 
-
-
-
-
-
-
         // adding bottom dots
 //        addBottomDots(0);
 
@@ -109,6 +122,9 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 //
+        donationOfferViewPagerAdapter = new MyDonationViewPagerAdapter();
+        donationViewPager.setAdapter(donationOfferViewPagerAdapter);
+        donationViewPager.addOnPageChangeListener(donationViewPagerChangeListener);
 
 
         return view;
@@ -134,6 +150,25 @@ public class HomeFragment extends Fragment {
             dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
+    private void addBottomDotstoOfferPager(int currentPage) {
+        donation_dots = new TextView[donation_images.size()];
+
+        int[] colorsActive = getContext().getResources().getIntArray(R.array.array_dot_active);
+        int[] colorsInactive = getContext().getResources().getIntArray(R.array.array_dot_inactive);
+
+        donationDotsLayout.removeAllViews();
+        for (int i = 0; i < donation_images.size(); i++) {
+            donation_dots[i] = new TextView(getContext());
+            donation_dots[i].setText(Html.fromHtml("&#8226;"));
+            donation_dots[i].setTextSize(35);
+            donation_dots[i].setTextColor(getResources().getColor(R.color.white));
+            donationDotsLayout.addView(donation_dots[i]);
+        }
+
+        if (donation_dots.length > 0)
+            donation_dots[currentPage].setTextColor(colorsActive[currentPage]);
+    }
+
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
     }
@@ -146,6 +181,25 @@ public class HomeFragment extends Fragment {
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
+
+    //  viewpager change listener
+    ViewPager.OnPageChangeListener donationViewPagerChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            addBottomDotstoOfferPager(position);
         }
 
         @Override
@@ -210,13 +264,63 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
+
+
+
+    /**
+     * View pager adapter
+     */
+    public class MyDonationViewPagerAdapter extends PagerAdapter {
+        private LayoutInflater layoutInflater;
+
+        MyDonationViewPagerAdapter() {
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = layoutInflater.inflate(R.layout.viewpager_image, container, false);
+            ImageView imageView= view.findViewById(R.id.imageOffer);
+            Glide.with(getContext()).load(donation_images.get(position)).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            container.addView(view);
+
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return donation_images.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, Object obj) {
+            return view == obj;
+        }
+
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            View view = (View) object;
+            container.removeView(view);
+        }
+    }
+
     private class SliderTimer extends TimerTask {
+
+        @Override
+        public boolean cancel() {
+            return super.cancel();
+        }
 
         @TargetApi(Build.VERSION_CODES.KITKAT)
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
             public void run() {
-                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if(images.size()>0){
@@ -227,6 +331,19 @@ public class HomeFragment extends Fragment {
                             }
                         }
 
+                        if(donation_images.size()>0){
+                            if (donationViewPager.getCurrentItem() < donation_dots.length - 1) {
+                                donationViewPager.setCurrentItem(donationViewPager.getCurrentItem() + 1);
+                            } else {
+                                donationViewPager.setCurrentItem(0);
+                            }
+                        }
+
+
+
+
+
+
                     }
                 });
             }
@@ -235,8 +352,48 @@ public class HomeFragment extends Fragment {
     }
 
     public void getAllImages(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("image");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("donation_image");
         ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+//                Post newPost = dataSnapshot.getValue(Post.class);
+                Log.e("fasfdsfsfsa",dataSnapshot.toString());
+                donation_images.add(dataSnapshot.getValue().toString());
+                donationOfferViewPagerAdapter.notifyDataSetChanged();
+                addBottomDotstoOfferPager(0);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+               addBottomDotstoOfferPager(0);
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+              donation_images.remove(dataSnapshot.getValue().toString());
+                donationOfferViewPagerAdapter.notifyDataSetChanged();
+
+                addBottomDotstoOfferPager(0);
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+                addBottomDotstoOfferPager(0);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+
+
+
+        DatabaseReference refs = FirebaseDatabase.getInstance().getReference("image");
+        refs.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
 //                Post newPost = dataSnapshot.getValue(Post.class);
@@ -249,13 +406,13 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-               addBottomDots(0);
+                addBottomDots(0);
 
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-              images.remove(dataSnapshot.getValue().toString());
+                images.remove(dataSnapshot.getValue().toString());
                 myViewPagerAdapter.notifyDataSetChanged();
 
                 addBottomDots(0);
