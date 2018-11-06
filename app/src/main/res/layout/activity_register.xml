@@ -139,6 +139,18 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <AutoCompleteTextView
+                android:id="@+id/city"
+                android:layout_width="349dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:inputType="textPostalAddress"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_home_black_24dp"
+                android:hint=" City" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/useraddress"
             android:layout_width="349dp"
@@ -170,18 +182,7 @@
             android:inputType="textPostalAddress"
        />
         </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="349dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:inputType="textPostalAddress"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_home_black_24dp"
-            android:hint=" City" />
-        </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

@@ -55,8 +55,9 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(UploadImage.this,LoginActivity.class);
+                Intent intent = new Intent(UploadImage.this,MainActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

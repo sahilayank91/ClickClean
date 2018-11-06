@@ -1,4 +1,4 @@
-<!DOCTYPE resources [<!ENTITY server "172.21.4.31:3000/">]>
+<!DOCTYPE resources [<!ENTITY server "192.168.43.117:3000/">]>
 
 <resources>
     <string name="app_name">Yours Dhobi</string>
@@ -257,4 +257,36 @@
     <string name="wash_and_iron">Wash and Iron</string>
     <string name="express_services_24_hours">Express Services (24 Hours)</string>
     <string name="dry_cleaning">Dry Cleaning</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string-array name="city">
+        <item>Jaipur</item>
+        <item>Barmer</item>
+        <item>Jodhpur</item>
+        <item>Kota</item>
+        <item>Jaisalmer</item>
+        <item>Hanumangarh</item>
+        <item>Udaipur</item>
+    </string-array>
+
+
+
+
+
+
+
+
 </resources>

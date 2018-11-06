@@ -235,8 +235,6 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
 
             }
         });
-
-//
         return view;
     }
 

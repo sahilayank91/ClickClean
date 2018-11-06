@@ -19,6 +19,8 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -41,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -51,9 +54,10 @@ import sahil.clickclean.utilities.Server;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mUserCity,mConfirmPassword;
+    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mConfirmPassword;
     String firstname,lastname, password,useremail, userphone, useraddress,userflataddress,usercity,userpincode,confirmpass;
     Button submit;
+    AutoCompleteTextView mUserCity;
     private final static int MY_PERMISSION_FINE_LOCATION = 101;
     private final static int PLACE_PICKER_REQUEST = 1;
 
@@ -118,6 +122,9 @@ public class RegisterActivity extends AppCompatActivity {
         mConfirmPassword = findViewById(R.id.confirmpassword);
         submit = findViewById(R.id.register);
 
+        // Calling the suggestions method
+        setSuggestions();
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +154,24 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+
+        mAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                requestPermission();
+
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try {
+                    Intent intent = builder.build(RegisterActivity.this);
+                    startActivityForResult(intent, PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
                 mAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -469,4 +494,34 @@ public class RegisterActivity extends AppCompatActivity {
             return result;
         }
     }
+
+    void setSuggestions() {
+
+        // Getting the string array from strings.xml
+        String items[] = getResources().getStringArray(R.array.city);
+
+        // New Arrays list for storing items
+        ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0; i < items.length; i++) {
+
+            // Adding items to arary list
+            list.add(items[i]);
+        }
+
+        // Adapter for holding the data view
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                RegisterActivity.this, android.R.layout.simple_list_item_1, list);
+
+        // Specify the minimum type of characters before drop-down list is shown
+
+        mUserCity.setThreshold(1);
+        mUserCity.scrollBy(30,20);
+        // Setting adapter to both textviews
+        mUserCity.setAdapter(adapter);
+
+
+
+
+    }
+
 }

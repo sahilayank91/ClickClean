@@ -111,21 +111,29 @@ public class HomeFragment extends Fragment {
                 R.layout.welcome_slide5,
                 R.layout.welcome_slide6};
 
-        // adding bottom dots
-//        addBottomDots(0);
 
         // making notification bar transparent
         changeStatusBarColor();
-//
         myViewPagerAdapter = new MyViewPagerAdapter();
-//        viewPager.setVisibility(View.GONE);
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-//
+
         donationOfferViewPagerAdapter = new MyDonationViewPagerAdapter();
         donationViewPager.setAdapter(donationOfferViewPagerAdapter);
         donationViewPager.addOnPageChangeListener(donationViewPagerChangeListener);
+        donationViewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+        viewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }
@@ -147,8 +155,9 @@ public class HomeFragment extends Fragment {
         }
 
         if (dots.length > 0)
-            dots[currentPage].setTextColor(colorsActive[currentPage]);
+            dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
     }
+
 
     private void addBottomDotstoOfferPager(int currentPage) {
         donation_dots = new TextView[donation_images.size()];
@@ -166,7 +175,7 @@ public class HomeFragment extends Fragment {
         }
 
         if (donation_dots.length > 0)
-            donation_dots[currentPage].setTextColor(colorsActive[currentPage]);
+            donation_dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
     }
 
     private int getItem(int i) {

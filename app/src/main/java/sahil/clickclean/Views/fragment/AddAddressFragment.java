@@ -341,17 +341,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("status","Recieved");
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
             params.put("address",addressContainer.getText().toString());
-//            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-//            Date date = null;
-//            try {
-//                date = sdf.parse(orderPickupDate.getText().toString());
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            assert date != null;
-//            Long millis = date.getTime();
-//            Log.e("date: ",String.valueOf(millis));
-//            params.put("pickup_date",String.valueOf(millis));
+
             params.put("pickup_date",pickup_date);
             progress=new ProgressDialog(getContext());
             progress.setMessage("Registering..");

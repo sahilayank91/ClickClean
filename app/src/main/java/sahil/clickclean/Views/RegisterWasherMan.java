@@ -1,6 +1,7 @@
 package sahil.clickclean.Views;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -135,6 +136,7 @@ public class RegisterWasherMan extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     class RegisterUser extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();

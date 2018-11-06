@@ -29,7 +29,7 @@ public class TermsAndCondition extends AppCompatActivity implements OnPageChange
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(TermsAndCondition.this,MainActivity.class);
+                Intent intent = new Intent(TermsAndCondition.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;

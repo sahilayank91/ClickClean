@@ -30,7 +30,6 @@ public class User {
         if(data.has("lastname"))this.lastname=data.getString("lastname");
         if(data.has("role"))this.role = data.getString("role");
         if(data.has("secondary_mobileno"))this.secondary_mobileno = data.getString("secondary_mobileno");
-        Log.e("llklkjkl:",lastname);
     }
 
     public User() {
