@@ -20,6 +20,8 @@ public class User {
     private Long dob;
     private String email;
     private Date created_at;
+    private String city;
+    private String pincode;
 
     public User(JSONObject data) throws JSONException {
         if(data.has("_id"))this._id=data.getString("_id");
@@ -30,10 +32,27 @@ public class User {
         if(data.has("lastname"))this.lastname=data.getString("lastname");
         if(data.has("role"))this.role = data.getString("role");
         if(data.has("secondary_mobileno"))this.secondary_mobileno = data.getString("secondary_mobileno");
+        if(data.has("city"))this.city = data.getString("city");
+        if(data.has("pincode"))this.pincode = data.getString("pincode");
     }
 
     public User() {
 
+    }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public String get_id() {

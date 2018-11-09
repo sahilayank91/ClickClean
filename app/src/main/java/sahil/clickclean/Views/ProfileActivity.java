@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         name = findViewById(R.id.user_profile_name);
         email = findViewById(R.id.user_profile_email);
-address = findViewById(R.id.address_container);
+        address = findViewById(R.id.address_container);
         String username;
         String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
         String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname", "User Not Registered");

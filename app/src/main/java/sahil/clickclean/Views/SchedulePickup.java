@@ -35,17 +35,8 @@ import static sahil.clickclean.Views.fragment.CreateOrderFragment.woollen;
 import static sahil.clickclean.Views.fragment.SelectServiceFragment.service;
 
 public class SchedulePickup extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
-
-    private TextView mTextMessage;
-
-    private SelectServiceFragment selectServiceFragment;
     private CreateOrderFragment createOrderFragment;
-    private AddAddressFragment addAddressFragment;
     FragmentManager fragmentManager;
-    private SharedPreferences.Editor mEditor;
-    private SharedPreferences mSharedPreferences;
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -70,43 +61,19 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
     @Override
     protected void onStop() {
         super.onStop();
-        service = null;
-        CreateOrderFragment.upper = 0;
-        CreateOrderFragment.bottom = 0;
-        CreateOrderFragment.jacket = 0;
-        CreateOrderFragment.woollen =0;
-        CreateOrderFragment.blancket_single = 0;
-        CreateOrderFragment.blancket_double = 0;
-        CreateOrderFragment.bedsheet_single = 0;
-        CreateOrderFragment.bedsheet_double = 0;
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        service = null;
-        CreateOrderFragment.upper = 0;
-        CreateOrderFragment.bottom = 0;
-        CreateOrderFragment.jacket = 0;
-        CreateOrderFragment.woollen =0;
-        CreateOrderFragment.blancket_single = 0;
-        CreateOrderFragment.blancket_double = 0;
-        CreateOrderFragment.bedsheet_single = 0;
-        CreateOrderFragment.bedsheet_double = 0;
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        service = null;
-        CreateOrderFragment.upper = 0;
-        CreateOrderFragment.bottom = 0;
-        CreateOrderFragment.jacket = 0;
-        CreateOrderFragment.woollen =0;
-        CreateOrderFragment.blancket_single = 0;
-        CreateOrderFragment.blancket_double = 0;
-        CreateOrderFragment.bedsheet_single = 0;
-        CreateOrderFragment.bedsheet_double = 0;
+
     }
 
     @Override
@@ -115,66 +82,24 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.activity_schedule_pickup);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-
-//        setUpBottomBar();
 
         fragmentManager = getSupportFragmentManager();
 
-        if (selectServiceFragment == null)
-            selectServiceFragment = new SelectServiceFragment();
-        replaceFragment(selectServiceFragment);
-        getSupportActionBar().setTitle("Select Service");
 
-        mEditor = mSharedPreferences.edit();
+
+        String type = getIntent().getStringExtra("type");
+        String service = getIntent().getStringExtra("service");
+        Bundle b = new Bundle();
+        b.putString("type",type);
+        b.putString("service",service);
+        if (createOrderFragment == null)
+            createOrderFragment = new CreateOrderFragment();
+        createOrderFragment.setArguments(b);
+        replaceFragment(createOrderFragment);
+        getSupportActionBar().setTitle("Create Order");
+
     }
 
-//    private void setUpBottomBar(){
-//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-//
-//        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                switch (item.getItemId()) {
-//                    case R.id.navigation_select_service:
-//                        if (selectServiceFragment == null)
-//                            selectServiceFragment = new SelectServiceFragment();
-//                        getSupportActionBar().setTitle(R.string.title_select_service);
-//                        replaceFragment(selectServiceFragment);
-//                        break;
-//                    case R.id.navigation_create_order:
-//
-//                        if (createOrderFragment == null)
-//                            createOrderFragment = new CreateOrderFragment();
-//                        if(service==null){
-//                            Toast.makeText(SchedulePickup.this,"Please Select a Service First",Toast.LENGTH_LONG).show();
-//                        }else{
-//                            getSupportActionBar().setTitle(R.string.create_order);
-//                            replaceFragment(createOrderFragment);
-//                        }
-//                        break;
-//                    case R.id.navigation_add_address:
-//                        if (addAddressFragment == null)
-//                            addAddressFragment = new AddAddressFragment();
-//
-//                        if(service==null){
-//                            Toast.makeText(SchedulePickup.this,"Please Select a Service First",Toast.LENGTH_LONG).show();
-//                        }else if (CreateOrderFragment.upper  + CreateOrderFragment.bottom + CreateOrderFragment.woollen + CreateOrderFragment.blancket_single + CreateOrderFragment.blancket_double + CreateOrderFragment.bedsheet_single+ CreateOrderFragment.bedsheet_double + CreateOrderFragment.jacket ==0 ){
-//                            Toast.makeText(SchedulePickup.this,"Please select some of the clothes",Toast.LENGTH_LONG).show();
-//                        }else{
-//                            getSupportActionBar().setTitle(R.string.title_add_address);
-//                            replaceFragment(addAddressFragment);
-//                        }
-//                        break;
-//
-//                }
-//                return true;
-//            }
-//        });
-//    }
     private void replaceFragment(Fragment new_fragment, String tag) {
 
         if (isTagInBackStack(tag)) {
@@ -215,10 +140,10 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
     }
 
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+       FragmentManager fragmentManager = getSupportFragmentManager();
        FragmentTransaction ft = fragmentManager.beginTransaction();
        ft.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-        ft.replace(R.id.main_container, fragment)
+       ft.replace(R.id.service_main_container, fragment)
                 .commit();
 //        ft.commitAllowingStateLoss();
     }

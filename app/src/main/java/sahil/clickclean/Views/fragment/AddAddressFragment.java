@@ -274,20 +274,17 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                                               int monthOfYear, int dayOfMonth) {
 //                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
+                            Calendar cal = Calendar.getInstance();
+                            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                            cal.set(Calendar.MONTH, monthOfYear+1);
+                            cal.set(Calendar.YEAR, year);
+                            Long time = cal.getTimeInMillis();
+                            pickup_date = String.valueOf(time);
 
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.DAY_OF_MONTH, datePickerDialog.getDatePicker().getDayOfMonth());
-            cal.set(Calendar.MONTH, datePickerDialog.getDatePicker().getMonth());
-            cal.set(Calendar.YEAR, datePickerDialog.getDatePicker().getYear());
-            Long time = cal.getTimeInMillis();
-            pickup_date = String.valueOf(time);
-
-
         }
     }
 
@@ -341,8 +338,8 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("status","Recieved");
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
             params.put("address",addressContainer.getText().toString());
-
             params.put("pickup_date",pickup_date);
+            params.put("service",service);
             progress=new ProgressDialog(getContext());
             progress.setMessage("Registering..");
             progress.setIndeterminate(true);

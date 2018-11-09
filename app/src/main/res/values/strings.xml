@@ -92,6 +92,30 @@
     <string name="getCompletedOrders">http://&server;service/order/getCompletedOrders/</string>
     <string name="changePasswordUsingPhone">http://&server;service/authenticate/changePasswordUsingPhone</string>
     <string name="newOrder">http://&server;service/order/newOrder/</string>
+    <string name="cancelOrder">http://&server;service/order/cancelOrder/</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="login_success">Logged In Successfully</string>

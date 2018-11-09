@@ -3,6 +3,7 @@ package sahil.clickclean.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
@@ -27,6 +28,16 @@ public class Order {
     private String longitude;
     private String latitude;
     private String create_time;
+    private ArrayList<RateCard> clothList;
+
+    public ArrayList<RateCard> getRateCardList() {
+        return clothList;
+    }
+
+    public void setRateCardList(ArrayList<RateCard> clothList) {
+        this.clothList = clothList;
+    }
+
 
     public String getPickup_date() {
         return pickup_date;

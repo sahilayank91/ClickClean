@@ -10,12 +10,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,12 +50,23 @@ import java.util.TimerTask;
 
 import sahil.clickclean.PrefManager;
 import sahil.clickclean.R;
+import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.Views.DonateClothes;
 import sahil.clickclean.Views.LoginActivity;
 import sahil.clickclean.Views.MainActivity;
+import sahil.clickclean.Views.PickupActivity;
+import sahil.clickclean.Views.ProfileActivity;
+import sahil.clickclean.Views.RateCardActivity;
+import sahil.clickclean.Views.RegisterWasherMan;
+import sahil.clickclean.Views.SchedulePickup;
+import sahil.clickclean.Views.TermsAndCondition;
+import sahil.clickclean.Views.UploadImage;
+import sahil.clickclean.Views.YourOrders;
 import sahil.clickclean.WelcomeActivity;
 
-public class HomeFragment extends Fragment {
+import static android.content.Context.MODE_PRIVATE;
+
+public class HomeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
 
     Timer timer = new Timer();
     View view;
@@ -63,7 +80,9 @@ public class HomeFragment extends Fragment {
     SliderTimer sliderTimer =  new SliderTimer();
     private ArrayList<String> images = new ArrayList<>();
     private ArrayList<String> donation_images = new ArrayList<>();
-
+    NestedScrollView nestedScrollView;
+    CardView normal_steam,normal_wash_and_fold,normal_wash_and_iron;
+    CardView express_steam,express_wash_and_fold,express_wash_and_iron,dryclean;
     public HomeFragment(){
 
     }
@@ -95,10 +114,96 @@ public class HomeFragment extends Fragment {
         if (view == null) view = inflater.inflate(R.layout.fragment_home, container, false);
         else return view;
 
-        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        nestedScrollView = view.findViewById(R.id.scrollView);
+        nestedScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nestedScrollView.scrollTo(0,(int)view.findViewById(R.id.normal_wash_and_iron).getY());
+            }
+        },100);
+        viewPager = view.findViewById(R.id.view_pager);
         donationViewPager = view.findViewById(R.id.donation_view_pager);
-        dotsLayout = (LinearLayout) view.findViewById(R.id.layoutDots);
+        dotsLayout = view.findViewById(R.id.layoutDots);
         donationDotsLayout = view.findViewById(R.id.donationlayoutDots);
+
+        normal_steam = view.findViewById(R.id.normal_steam);
+        normal_wash_and_fold = view.findViewById(R.id.normal_wash_and_fold);
+        normal_wash_and_iron = view.findViewById(R.id.normal_wash_and_iron);
+        express_steam = view.findViewById(R.id.express_steam);
+        express_wash_and_fold = view.findViewById(R.id.express_wash_and_fold);
+        express_wash_and_iron = view.findViewById(R.id.express_wash_and_iron);
+        dryclean = view.findViewById(R.id.dryclean);
+
+        final Intent intent = new Intent(getActivity(), SchedulePickup.class);
+
+        normal_steam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Steam Ironing");
+                intent.putExtra("type","normal");
+                startActivity(intent);
+            }
+        });
+
+        normal_wash_and_fold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Fold");
+                intent.putExtra("type","normal");
+                startActivity(intent);
+            }
+        });
+
+        normal_wash_and_iron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Iron");
+                intent.putExtra("type","normal");
+                startActivity(intent);
+
+            }
+        });
+
+
+        express_steam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Steam Ironing");
+                intent.putExtra("type","express");
+                startActivity(intent);
+
+            }
+        });
+
+        express_wash_and_iron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Iron");
+                intent.putExtra("type","express");
+                startActivity(intent);
+
+            }
+        });
+
+        express_wash_and_fold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Fold");
+                intent.putExtra("type","express");
+                startActivity(intent);
+
+            }
+        });
+
+        dryclean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Dry Clean");
+                intent.putExtra("type","Normal");
+                startActivity(intent);
+            }
+
+        });
 
 
         // layouts of all welcome sliders
@@ -141,10 +246,6 @@ public class HomeFragment extends Fragment {
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[images.size()];
-
-        int[] colorsActive = getContext().getResources().getIntArray(R.array.array_dot_active);
-        int[] colorsInactive = getContext().getResources().getIntArray(R.array.array_dot_inactive);
-
         dotsLayout.removeAllViews();
         for (int i = 0; i < images.size(); i++) {
             dots[i] = new TextView(getContext());
@@ -161,10 +262,6 @@ public class HomeFragment extends Fragment {
 
     private void addBottomDotstoOfferPager(int currentPage) {
         donation_dots = new TextView[donation_images.size()];
-
-        int[] colorsActive = getContext().getResources().getIntArray(R.array.array_dot_active);
-        int[] colorsInactive = getContext().getResources().getIntArray(R.array.array_dot_inactive);
-
         donationDotsLayout.removeAllViews();
         for (int i = 0; i < donation_images.size(); i++) {
             donation_dots[i] = new TextView(getContext());
@@ -232,6 +329,62 @@ public class HomeFragment extends Fragment {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+
+        if (id == R.id.nav_profile) {
+            // Handle the camera action
+            Intent intent = new Intent(getContext(), ProfileActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_order) {
+            Intent intent = new Intent(getContext(), YourOrders.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_schedule_pickup) {
+//            Intent intent = new Intent(getContext(), SchedulePickup.class);
+//            startActivity(intent);
+            nestedScrollView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    nestedScrollView.scrollTo(0,(int)view.findViewById(R.id.normal_wash_and_iron).getY());
+                }
+            },100);
+        } else if (id == R.id.nav_logout) {
+            getContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
+            startActivity(new Intent(getContext(), LoginActivity.class));
+
+        } else if (id == R.id.nav_share) {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_SUBJECT, "ClickClean");
+            String message = "\nDownload ClickClean *Your app link* \n\n";
+            i.putExtra(Intent.EXTRA_TEXT, message);
+            startActivity(Intent.createChooser(i, "Choose Sharing Method"));
+        } else if (id == R.id.nav_feedback) {
+            Intent intent = new Intent(getContext(), RegisterWasherMan.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_register_washerman) {
+            Intent intent = new Intent(getContext(), RegisterWasherMan.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_orders) {
+            Intent intent = new Intent(getContext(), PickupActivity.class);
+            startActivity(intent);
+        } else if (id==R.id.nav_rate_card){
+            Intent intent = new Intent(getContext(),RateCardActivity.class);
+            startActivity(intent);
+        } else if(id==R.id.nav_terms){
+            Intent intent = new Intent(getContext(),TermsAndCondition.class);
+            startActivity(intent);
+        } else if(id==R.id.nav_add_image){
+            Intent intent = new Intent(getContext(),UploadImage.class);
+            startActivity(intent);
+        }
+        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     /**
      * View pager adapter
      */

@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,12 +48,13 @@ public class MainActivity extends AppCompatActivity
     private TextView navNameView;
     private TextView navPhoneView;
     private Button buttonschedulepickup;
+    NestedScrollView nestedScrollView;
 
     private HomeFragment homeFragment;
     private OfferFragment offerFragment;
     private CategoryFragment categoryFragment;
     FragmentManager fragmentManager;
-
+    private SelectServiceFragment selectServiceFragment;
     private float startX;
     private ViewFlipper vf;
 //
@@ -69,8 +71,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        nestedScrollView = findViewById(R.id.scrollView);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -136,9 +137,9 @@ public class MainActivity extends AppCompatActivity
                         replaceFragment(homeFragment);
                         break;
                     case R.id.navigation_categories:
-                            categoryFragment = new CategoryFragment();
+                            selectServiceFragment = new SelectServiceFragment();
                             getSupportActionBar().setTitle("Categories")    ;
-                            replaceFragment(categoryFragment);
+                            replaceFragment(selectServiceFragment);
                         break;
                     case R.id.navigation_offers:
                             offerFragment = new OfferFragment();
@@ -187,8 +188,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, YourOrders.class);
             startActivity(intent);
         } else if (id == R.id.nav_schedule_pickup) {
-            Intent intent = new Intent(MainActivity.this, SchedulePickup.class);
-            startActivity(intent);
+
+            selectServiceFragment = new SelectServiceFragment();
+            replaceFragment(selectServiceFragment);
+
         } else if (id == R.id.nav_logout) {
             getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));

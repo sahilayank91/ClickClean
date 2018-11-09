@@ -27,19 +27,18 @@ import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.Views.LoginActivity;
 import sahil.clickclean.Views.MainActivity;
 import sahil.clickclean.Views.RegisterActivity;
+import sahil.clickclean.Views.SchedulePickup;
 
 public class SelectServiceFragment extends Fragment {
     View view;
-    private Spinner mSpinner;
-
     public static String service=null;
     public SelectServiceFragment() {
 
     }
 
-    CardView steamIroning, washfoldkg, washironkg, washiron, dryclean, premiumlaundry;
-    TextView selectedService;
-
+    CardView normal_steam,normal_wash_and_fold,normal_wash_and_iron;
+    CardView express_steam,express_wash_and_fold,express_wash_and_iron;
+    CardView dryclean;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -60,114 +59,84 @@ public class SelectServiceFragment extends Fragment {
         else return view;
 
         List<String> services = Arrays.asList(getResources().getStringArray(R.array.services));
-        steamIroning = view.findViewById(R.id.a);
-        washfoldkg = view.findViewById(R.id.b);
-        dryclean = view.findViewById(R.id.c);
-        washironkg = view.findViewById(R.id.d);
-        washiron = view.findViewById(R.id.e);
-        premiumlaundry = view.findViewById(R.id.f);
-        selectedService = view.findViewById(R.id.selected_service);
 
-        steamIroning.setOnClickListener(new View.OnClickListener() {
+
+        normal_steam = view.findViewById(R.id.normal_steam);
+        normal_wash_and_fold = view.findViewById(R.id.normal_wash_and_fold);
+        normal_wash_and_iron = view.findViewById(R.id.normal_wash_and_iron);
+        express_steam = view.findViewById(R.id.express_steam);
+        express_wash_and_fold = view.findViewById(R.id.express_wash_and_fold);
+        express_wash_and_iron = view.findViewById(R.id.express_wash_and_iron);
+        dryclean = view.findViewById(R.id.dryclean);
+
+        final Intent intent = new Intent(getContext(), SchedulePickup.class);
+        normal_steam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                steamIroning.setCardBackgroundColor(Color.GRAY);
-                selectedService.setText("Steam Ironing");
-                SharedPreferenceSingleton.getInstance(getContext()).put("service", "steamIroning");
-                service = "steamIroning";
-                washfoldkg.setCardBackgroundColor(Color.WHITE);
-                dryclean.setCardBackgroundColor(Color.WHITE);
-                washiron.setCardBackgroundColor(Color.WHITE);
-                washironkg.setCardBackgroundColor(Color.WHITE);
-                premiumlaundry.setCardBackgroundColor(Color.WHITE);
-
-                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
+                intent.putExtra("service","Steam Ironing");
+                intent.putExtra("type","normal");
+                startActivity(intent);
             }
         });
-        washfoldkg.setOnClickListener(new View.OnClickListener() {
+
+        normal_wash_and_fold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                washfoldkg.setCardBackgroundColor(Color.GRAY);
-                selectedService.setText("Wash and Fold (Kg Basis)");
-                SharedPreferenceSingleton.getInstance(getContext()).put("service", "washandfold_kg");
-                service = "washandfold_kg";
-                steamIroning.setCardBackgroundColor(Color.WHITE);
-                dryclean.setCardBackgroundColor(Color.WHITE);
-                washiron.setCardBackgroundColor(Color.WHITE);
-                washironkg.setCardBackgroundColor(Color.WHITE);
-                premiumlaundry.setCardBackgroundColor(Color.WHITE);
-                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
+                intent.putExtra("service","Wash and Fold");
+                intent.putExtra("type","normal");
+                startActivity(intent);
+            }
+        });
+
+        normal_wash_and_iron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Iron");
+                intent.putExtra("type","normal");
+                startActivity(intent);
+
+            }
+        });
+
+
+        express_steam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Steam Ironing");
+                intent.putExtra("type","express");
+                startActivity(intent);
+
+            }
+        });
+
+        express_wash_and_iron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Iron");
+                intent.putExtra("type","express");
+                startActivity(intent);
+
+            }
+        });
+
+        express_wash_and_fold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("service","Wash and Fold");
+                intent.putExtra("type","express");
+                startActivity(intent);
+
             }
         });
         dryclean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dryclean.setCardBackgroundColor(Color.GRAY);
-                selectedService.setText("Dry Cleaning");
-                SharedPreferenceSingleton.getInstance(getContext()).put("service", "dryclean");
-                service= "dryclean";
-                steamIroning.setCardBackgroundColor(Color.WHITE);
-                washfoldkg.setCardBackgroundColor(Color.WHITE);
-                washiron.setCardBackgroundColor(Color.WHITE);
-                washironkg.setCardBackgroundColor(Color.WHITE);
-                premiumlaundry.setCardBackgroundColor(Color.WHITE);
-                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
+                intent.putExtra("service","Dry Clean");
+                intent.putExtra("type","Normal");
+                startActivity(intent);
             }
-        });
-        washironkg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                    washironkg.setCardBackgroundColor(Color.GRAY);
-                    selectedService.setText("Wash and Iron (Kg Basis)");
-                SharedPreferenceSingleton.getInstance(getContext()).put("service", "washandiron_kg");
-                service = "washandiron_kg";
-                steamIroning.setCardBackgroundColor(Color.WHITE);
-                    washfoldkg.setCardBackgroundColor(Color.WHITE);
-                    washiron.setCardBackgroundColor(Color.WHITE);
-                    dryclean.setCardBackgroundColor(Color.WHITE);
-                    premiumlaundry.setCardBackgroundColor(Color.WHITE);
-                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
-            }
         });
-        washiron.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                washiron.setCardBackgroundColor(Color.GRAY);
-                selectedService.setText("Wash and Iron");
-                SharedPreferenceSingleton.getInstance(getContext()).put("service", "washandiron");
-                service = "washandiron";
-                steamIroning.setCardBackgroundColor(Color.WHITE);
-                washfoldkg.setCardBackgroundColor(Color.WHITE);
-                washironkg.setCardBackgroundColor(Color.WHITE);
-                dryclean.setCardBackgroundColor(Color.WHITE);
-                premiumlaundry.setCardBackgroundColor(Color.WHITE);
-                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
-            }
-        });
-
-        premiumlaundry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                premiumlaundry.setCardBackgroundColor(Color.GRAY);
-                selectedService.setText("Premium Laundry");
-                SharedPreferenceSingleton.getInstance(getContext()).put("service", "premiumLaundry");
-                service  = "premiumLaundry";
-                steamIroning.setCardBackgroundColor(Color.WHITE);
-                washfoldkg.setCardBackgroundColor(Color.WHITE);
-                washironkg.setCardBackgroundColor(Color.WHITE);
-                dryclean.setCardBackgroundColor(Color.WHITE);
-                washiron.setCardBackgroundColor(Color.WHITE);
-                CreateOrderFragment createOrderFragment = new CreateOrderFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,createOrderFragment).commit();
-            }
-        });
-
 
 
         return view;

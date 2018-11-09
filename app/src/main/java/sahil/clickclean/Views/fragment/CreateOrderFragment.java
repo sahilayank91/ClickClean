@@ -1,12 +1,13 @@
 package sahil.clickclean.Views.fragment;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.INotificationSideChannel;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,25 +17,34 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import sahil.clickclean.R;
-import sahil.clickclean.Views.MainActivity;
-
-import static android.content.Context.MODE_PRIVATE;
+import sahil.clickclean.adapter.ClothListAdapter;
+import sahil.clickclean.model.RateCard;
 
 public class CreateOrderFragment extends Fragment implements View.OnClickListener{
     View view;
+    private RecyclerView recyclerView;
+    private ArrayList<RateCard> listCloth = new ArrayList<>();
     private Button checkout;
+    private ClothListAdapter adapter;
     public static int upper = 0, bottom = 0, woollen = 0, jacket = 0, blancket_single = 0, blancket_double = 0, bedsheet_single = 0, bedsheet_double = 0;
     private ImageButton upper_min,upper_add,bottom_min,bottom_add,woollen_min,woollen_add,jacket_min, jacket_add,blancket_single_min,blancket_single_add,
             blancket_double_min,blancket_double_add,bedsheet_single_min,bedsheet_single_add,bedsheet_double_min,bedsheet_double_add;
     private Button setAddress;
+    private String service;
     public TextView mupper, mbottom, mwoollen, mjacket, mblanketsingle, mblanketdouble, mbedsheetsingle, mbedsheetdouble;
+
+
     public CreateOrderFragment(){
-        //necessary default constructor
+
     }
 
     @Override
@@ -52,176 +62,18 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) view = inflater.inflate(R.layout.fragment_add_order, container, false);
         else return view;
+
+
+        assert getArguments() != null;
+        String service = getArguments().getString("service");
+        String type = getArguments().getString("type");
+        recyclerView = view.findViewById(R.id.my_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ClothListAdapter(getContext(), listCloth, service, type);
+        recyclerView.setAdapter(adapter);
+        getRateDetails();
+
         checkout = view.findViewById(R.id.checkoutbutton);
-        upper_min = view.findViewById(R.id.min_upper);
-        upper_add = view.findViewById(R.id.add_upper);
-        mupper = view.findViewById(R.id.uppers);
-
-        bottom_min = view.findViewById(R.id.min_bottom);
-        bottom_add = view.findViewById(R.id.add_bottom);
-        mbottom = view.findViewById(R.id.bottom);
-
-        woollen_min = view.findViewById(R.id.min_woollen);
-        woollen_add = view.findViewById(R.id.add_woollen);
-        mwoollen = view.findViewById(R.id.woollen);
-
-        jacket_min = view.findViewById(R.id.min_jacket);
-        jacket_add = view.findViewById(R.id.add_jacket);
-        mjacket = view.findViewById(R.id.jacket);
-
-        blancket_single_min = view.findViewById(R.id.min_blanket_single);
-        blancket_single_add = view.findViewById(R.id.add_blanket_single);
-        mblanketsingle = view.findViewById(R.id.blanket_single);
-
-        blancket_double_min = view.findViewById(R.id.min_blanket_double);
-        blancket_double_add = view.findViewById(R.id.add_blanket_double);
-        mblanketdouble = view.findViewById(R.id.blanket_double);
-
-        bedsheet_single_min = view.findViewById(R.id.min_bedsheet_single);
-        bedsheet_single_add = view.findViewById(R.id.add_bedsheet_single);
-        mbedsheetsingle = view.findViewById(R.id.bedsheet_single);
-
-        bedsheet_double_min = view.findViewById(R.id.min_bedsheet_double);
-        bedsheet_double_add = view.findViewById(R.id.add_bedsheet_double);
-        mbedsheetdouble = view.findViewById(R.id.bedsheet_double);
-
-
-
-        upper_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(upper!=0)
-                upper--;
-                mupper.setText(String.valueOf(upper));
-            }
-        });
-
-
-        upper_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                upper++;
-                mupper.setText(String.valueOf(upper));
-            }
-        });
-
-        bottom_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(bottom!=0)
-                bottom--;
-                mbottom.setText(String.valueOf(bottom));
-            }
-        });
-
-        bottom_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottom++;
-                mbottom.setText(String.valueOf(bottom));
-            }
-        });
-
-        woollen_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(woollen!=0)
-                woollen--;
-                mwoollen.setText(String.valueOf(woollen));
-            }
-        });
-
-        woollen_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                woollen++;
-                mwoollen.setText(String.valueOf(woollen));
-            }
-        });
-
-        jacket_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(jacket!=0)
-                jacket--;
-                mjacket.setText(String.valueOf(jacket));
-            }
-        });
-
-        jacket_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jacket++;
-                mjacket.setText(String.valueOf(jacket));
-            }
-        });
-
-        blancket_single_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(blancket_single!=0)
-                blancket_single--;
-                mblanketsingle.setText(String.valueOf(blancket_single));
-            }
-        });
-        blancket_single_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                blancket_single++;
-                mblanketsingle.setText(String.valueOf(blancket_single));
-            }
-        });
-
-        blancket_double_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(blancket_double!=0)
-                blancket_double--;
-                mblanketdouble.setText(String.valueOf(blancket_double));
-            }
-        });
-        blancket_double_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                blancket_double++;
-                mblanketdouble.setText(String.valueOf(blancket_double));
-            }
-        });
-
-        bedsheet_single_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(bedsheet_single!=0)
-                bedsheet_single--;
-                mbedsheetsingle.setText(String.valueOf(bedsheet_single));
-            }
-        });
-        bedsheet_single_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bedsheet_single++;
-                mbedsheetsingle.setText(String.valueOf(bedsheet_single));
-            }
-        });
-
-        bedsheet_double_min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(bedsheet_double!=0)
-                bedsheet_double--;
-                mbedsheetdouble.setText(String.valueOf(bedsheet_double));
-            }
-        });
-
-        bedsheet_double_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bedsheet_double++;
-                mbedsheetdouble.setText(String.valueOf(bedsheet_double));
-            }
-        });
-
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,4 +94,51 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
 
     }
+    public void getRateDetails(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("clothes");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+//                Post newPost = dataSnapshot.getValue(Post.class);
+                Log.e("fasfdsfsfsa",dataSnapshot.toString());
+                RateCard cloth = new RateCard();
+                cloth.setCloth(dataSnapshot.getKey());
+                if(dataSnapshot.hasChild("Wash and Iron")){
+                    cloth.setWashandiron(dataSnapshot.child("Wash and Iron").getValue().toString());
+
+                }
+                if(dataSnapshot.hasChild("Wash")){
+                    cloth.setWash(dataSnapshot.child("Wash").getValue().toString());
+                }
+//
+//
+                if(dataSnapshot.hasChild("Iron")){
+                    cloth.setIron(dataSnapshot.child("Iron").getValue().toString());
+                }
+
+                listCloth.add(cloth);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+    }
+
 }

@@ -70,7 +70,6 @@ public class YourOrders extends AppCompatActivity implements RCVItemClickListene
             @Override
             public void onRefresh() {
                 // Refresh items
-
                prepareOrderItems();
             }
         });

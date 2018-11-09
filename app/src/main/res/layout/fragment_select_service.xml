@@ -1,316 +1,508 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
-
-        <!--<Spinner-->
-            <!--android:id="@+id/service_spinner"-->
-            <!--android:layout_width="350dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_marginEnd="18dp"-->
-            <!--android:layout_marginRight="18dp"-->
-            <!--android:layout_marginTop="235dp"-->
-            <!--tools:layout_editor_absoluteX="8dp"-->
-            <!--tools:layout_editor_absoluteY="215dp" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView"-->
-            <!--android:layout_width="260dp"-->
-            <!--android:layout_height="70dp"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginTop="102dp"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/select_service"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="25dp"-->
-            <!--android:textStyle="bold"-->
-            <!--tools:layout_editor_absoluteX="163dp"-->
-            <!--tools:layout_editor_absoluteY="161dp" />-->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/a"
-            android:layout_width="333dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_below="@+id/e"
-
-            android:layout_centerHorizontal="true"
-            card_view:cardCornerRadius="5dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp">
-
-                <ImageView
-                    android:layout_width="98dp"
-                    android:layout_height="59dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginStart="14dp"
-                    android:src="@drawable/steam" />
-
-                <TextView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="39dp"
-                    android:layout_marginRight="39dp"
-                    android:gravity="center"
-
-                    android:text="Steam Ironing"
-                    android:textColor="@color/background_gradient_start"
-                    android:textStyle="normal" />
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/b"
-            android:layout_width="333dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-
-            android:layout_below="@+id/a"
-            android:layout_centerHorizontal="true"
-            card_view:cardCornerRadius="5dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="98dp"
-                    android:layout_height="59dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginStart="14dp"
-                    android:src="@drawable/washingmachine" />
-
-                <TextView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="39dp"
-                    android:layout_marginRight="39dp"
-                    android:gravity="center"
-                    android:text="Wash and Fold (Kg Basis)"
-                    android:textColor="@color/background_gradient_start"
-
-                    android:textStyle="normal" />
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/c"
-            android:layout_width="333dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-
-            card_view:cardCornerRadius="5dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="61dp">
-
-                <ImageView
-                    android:layout_width="98dp"
-                    android:layout_height="59dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginStart="14dp"
-                    android:src="@drawable/towel" />
-
-                <TextView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="39dp"
-                    android:layout_marginRight="39dp"
-                    android:gravity="center"
-                    android:text="Dry Cleaning"
-                    android:textColor="@color/background_gradient_start"
-
-                    android:textStyle="normal" />
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/d"
-            android:layout_width="333dp"
-            android:layout_height="65dp"
-            android:layout_below="@+id/c"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-
-            android:layout_centerHorizontal="true"
-            card_view:cardCornerRadius="5dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="98dp"
-                    android:layout_height="59dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginStart="14dp"
-                    android:src="@drawable/fashion" />
-
-                <TextView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="39dp"
-                    android:layout_marginRight="39dp"
-                    android:gravity="center"
-                    android:text="Wash and Iron (Kg Basis)"
-                    android:textColor="@color/background_gradient_start"
-
-                    android:textStyle="normal" />
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/e"
-            android:layout_width="333dp"
-            android:layout_height="65dp"
-            android:layout_below="@+id/f"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-
-            android:layout_centerHorizontal="true"
-            card_view:cardCornerRadius="5dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="75dp">
-
-                <ImageView
-                    android:layout_width="98dp"
-                    android:layout_height="59dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginStart="14dp"
-                    android:src="@drawable/shirts" />
-
-                <TextView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="39dp"
-                    android:layout_marginRight="39dp"
-                    android:gravity="center"
-                    android:text="Steam Ironing"
-                    android:textColor="@color/background_gradient_start"
-
-                    android:textStyle="normal" />
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/f"
-            android:layout_width="333dp"
-            android:layout_height="65dp"
-            android:layout_below="@+id/d"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-
-            android:layout_centerHorizontal="true"
-            card_view:cardCornerRadius="5dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
-
-                <ImageView
-                    android:layout_width="98dp"
-                    android:layout_height="59dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginStart="14dp"
-                    android:src="@drawable/laundry" />
-
-                <TextView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="39dp"
-                    android:layout_marginRight="39dp"
-                    android:gravity="center"
-                    android:text="Premium Laundry"
-                    android:textColor="@color/background_gradient_start"
-
-                    android:textStyle="normal" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-
-    </RelativeLayout>
-
-        <!--<Button-->
-            <!--android:id="@+id/button2"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="320dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:text="NEXT ->" />-->
-    <TextView
-        android:id="@+id/selected_service"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Not Selected any Service"
-        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
-        android:textSize="15sp"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:visibility="visible" />
+        android:layout_alignParentStart="true"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true">
 
 
-</LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:text="Normal Services (48 Hours)"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_margin"/>
+
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/normal_steam"
+                android:layout_width="105dp"
+                android:layout_height="119dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/steam" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/steam_ironing"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/normal_wash_and_fold"
+                android:layout_width="105dp"
+                android:layout_height="119dp"
+                android:layout_centerInParent="true">
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/washingmachine" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_fold"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/normal_wash_and_iron"
+                android:layout_width="105dp"
+                android:layout_height="119dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp">
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/laundry" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_iron"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/nav_header_vertical_spacing"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_margin"
+                android:text="@string/express_services_24_hours"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/express_steam"
+                android:layout_width="105dp"
+
+                android:layout_height="119dp"
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/steam" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/steam_ironing"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/express_wash_and_fold"
+                android:layout_width="105dp"
+                android:layout_height="119dp"
+                android:layout_centerInParent="true">
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/washingmachine" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_fold"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/express_wash_and_iron"
+                android:layout_width="105dp"
+                android:layout_height="119dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp">
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/laundry" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wash_and_iron"
+                    android:layout_marginTop="97dp"
+                    android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+                    android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:text="@string/dry_cleaning"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_vertical_margin" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/dryclean"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:contentDescription="@string/dry_cleaning"
+                android:src="@drawable/fashion" />
+
+            <TextView
+                android:layout_width="149dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="190dp"
+                android:layout_marginStart="190dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/dry_cleaning" />
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/a"-->
+            <!--android:layout_width="333dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+            <!--android:layout_below="@+id/e"-->
+
+            <!--android:layout_centerHorizontal="true"-->
+            <!--card_view:cardCornerRadius="5dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="65dp">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="98dp"-->
+                    <!--android:layout_height="59dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="14dp"-->
+                    <!--android:layout_marginStart="14dp"-->
+                    <!--android:src="@drawable/steam" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="194dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="39dp"-->
+                    <!--android:layout_marginRight="39dp"-->
+                    <!--android:gravity="center"-->
+
+                    <!--android:text="Steam Ironing"-->
+                    <!--android:textColor="@color/background_gradient_start"-->
+                    <!--android:textStyle="normal" />-->
+            <!--</RelativeLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/b"-->
+            <!--android:layout_width="333dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+
+            <!--android:layout_below="@+id/a"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--card_view:cardCornerRadius="5dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="98dp"-->
+                    <!--android:layout_height="59dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="14dp"-->
+                    <!--android:layout_marginStart="14dp"-->
+                    <!--android:src="@drawable/washingmachine" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="194dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="39dp"-->
+                    <!--android:layout_marginRight="39dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Wash and Fold (Kg Basis)"-->
+                    <!--android:textColor="@color/background_gradient_start"-->
+
+                    <!--android:textStyle="normal" />-->
+            <!--</RelativeLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/c"-->
+            <!--android:layout_width="333dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+
+            <!--card_view:cardCornerRadius="5dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="61dp">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="98dp"-->
+                    <!--android:layout_height="59dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="14dp"-->
+                    <!--android:layout_marginStart="14dp"-->
+                    <!--android:src="@drawable/towel" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="194dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="39dp"-->
+                    <!--android:layout_marginRight="39dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Dry Cleaning"-->
+                    <!--android:textColor="@color/background_gradient_start"-->
+
+                    <!--android:textStyle="normal" />-->
+            <!--</RelativeLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/d"-->
+            <!--android:layout_width="333dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_below="@+id/c"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+
+            <!--android:layout_centerHorizontal="true"-->
+            <!--card_view:cardCornerRadius="5dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="98dp"-->
+                    <!--android:layout_height="59dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="14dp"-->
+                    <!--android:layout_marginStart="14dp"-->
+                    <!--android:src="@drawable/fashion" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="194dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="39dp"-->
+                    <!--android:layout_marginRight="39dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Wash and Iron (Kg Basis)"-->
+                    <!--android:textColor="@color/background_gradient_start"-->
+
+                    <!--android:textStyle="normal" />-->
+            <!--</RelativeLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/e"-->
+            <!--android:layout_width="333dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_below="@+id/f"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+
+            <!--android:layout_centerHorizontal="true"-->
+            <!--card_view:cardCornerRadius="5dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="75dp">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="98dp"-->
+                    <!--android:layout_height="59dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="14dp"-->
+                    <!--android:layout_marginStart="14dp"-->
+                    <!--android:src="@drawable/shirts" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="194dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="39dp"-->
+                    <!--android:layout_marginRight="39dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Steam Ironing"-->
+                    <!--android:textColor="@color/background_gradient_start"-->
+
+                    <!--android:textStyle="normal" />-->
+            <!--</RelativeLayout>-->
+
+        <!--</android.support.v7.widget.CardView>-->
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/f"-->
+            <!--android:layout_width="333dp"-->
+            <!--android:layout_height="65dp"-->
+            <!--android:layout_below="@+id/d"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+
+            <!--android:layout_centerHorizontal="true"-->
+            <!--card_view:cardCornerRadius="5dp">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="98dp"-->
+                    <!--android:layout_height="59dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="14dp"-->
+                    <!--android:layout_marginStart="14dp"-->
+                    <!--android:src="@drawable/laundry" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="194dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginEnd="39dp"-->
+                    <!--android:layout_marginRight="39dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Premium Laundry"-->
+                    <!--android:textColor="@color/background_gradient_start"-->
+
+                    <!--android:textStyle="normal" />-->
+            <!--</RelativeLayout>-->
+        <!--</android.support.v7.widget.CardView>-->
+
+
+
+
+</android.support.v4.widget.NestedScrollView>
