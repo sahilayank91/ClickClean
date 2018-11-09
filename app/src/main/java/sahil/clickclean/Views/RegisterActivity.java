@@ -82,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private ProgressDialog progress;
+    private Double latitude,longitude;
 
 
     @Override
@@ -431,6 +432,8 @@ public class RegisterActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(RegisterActivity.this, data);
                 mAddress.setText(place.getAddress());
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
                 if (place.getAttributions() == null) {
                 } else {
                 }
@@ -457,6 +460,8 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("pincode",userpincode);
             params.put("city",usercity);
             params.put("role","Customer");
+            params.put("latitude",String.valueOf(latitude));
+            params.put("longitude",String.valueOf(longitude));
 
         }
 

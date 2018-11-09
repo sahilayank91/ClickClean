@@ -23,6 +23,10 @@ public class User {
     private String city;
     private String pincode;
 
+
+    private String latitude;
+    private String longitude;
+
     public User(JSONObject data) throws JSONException {
         if(data.has("_id"))this._id=data.getString("_id");
         if(data.has("firstname"))this.firstname=data.getString("firstname");
@@ -34,10 +38,29 @@ public class User {
         if(data.has("secondary_mobileno"))this.secondary_mobileno = data.getString("secondary_mobileno");
         if(data.has("city"))this.city = data.getString("city");
         if(data.has("pincode"))this.pincode = data.getString("pincode");
+        if(data.has("latitude"))this.latitude = data.getString("latitude");
+        if(data.has("longitude"))this.longitude = data.getString("longitude");
+
     }
 
     public User() {
 
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
     public String getCity() {
         return city;

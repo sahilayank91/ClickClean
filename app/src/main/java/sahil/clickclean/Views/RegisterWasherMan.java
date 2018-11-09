@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import sahil.clickclean.R;
@@ -32,8 +35,9 @@ import sahil.clickclean.utilities.Server;
 
 public class RegisterWasherMan extends AppCompatActivity {
 
-    EditText mFirstname, mLastname, mEmail, mPhone,mSecondaryPhone,mAddress,mPassword,mUserFlat,mUserPincode,mUserCity;;
+    EditText mFirstname, mLastname, mEmail, mPhone,mSecondaryPhone,mAddress,mPassword,mUserFlat,mUserPincode;
     String firstname,lastname, password,useremail,secondaryPhone, userphone, useraddress,userflataddress,usercity,userpincode;
+    AutoCompleteTextView mUserCity;
     TextView placeNameText;
     TextView placeAddressText;
     WebView attributionText;
@@ -48,6 +52,7 @@ public class RegisterWasherMan extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent(RegisterWasherMan.this,MainActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -72,7 +77,6 @@ public class RegisterWasherMan extends AppCompatActivity {
         mUserCity = findViewById(R.id.city);
         mUserPincode = findViewById(R.id.pincode);
         registerWasherman= findViewById(R.id.register_washerman);
-        attributionText = (WebView) findViewById(R.id.wvAttribution);
         mAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +111,7 @@ public class RegisterWasherMan extends AppCompatActivity {
                 new RegisterUser().execute();
             }
         });
+        setSuggestions();
     }
 
     private void requestPermission() {
@@ -147,6 +152,34 @@ public class RegisterWasherMan extends AppCompatActivity {
                 }
             }
         }
+    }
+    void setSuggestions() {
+
+        // Getting the string array from strings.xml
+        String items[] = getResources().getStringArray(R.array.city);
+
+        // New Arrays list for storing items
+        ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0; i < items.length; i++) {
+
+            // Adding items to arary list
+            list.add(items[i]);
+        }
+
+        // Adapter for holding the data view
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                RegisterWasherMan.this, android.R.layout.simple_list_item_1, list);
+
+        // Specify the minimum type of characters before drop-down list is shown
+
+        mUserCity.setThreshold(1);
+        mUserCity.scrollBy(30,20);
+        // Setting adapter to both textviews
+        mUserCity.setAdapter(adapter);
+
+
+
+
     }
 
     @SuppressLint("StaticFieldLeak")

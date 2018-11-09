@@ -52,14 +52,12 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_card);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.rate_card_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RateCardAdapter(this, listRateCard);
         recyclerView.setAdapter(adapter);
         adapter.setRcvItemClickListener(this);
-
         getRateDetails();
     }
 
@@ -68,8 +66,6 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-//                Post newPost = dataSnapshot.getValue(Post.class);
-                Log.e("fasfdsfsfsa",dataSnapshot.toString());
                 RateCard rateCard = new RateCard();
                 rateCard.setCloth(dataSnapshot.getKey());
                 if(dataSnapshot.hasChild("Wash and Iron")){
@@ -79,8 +75,7 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
                 if(dataSnapshot.hasChild("Wash")){
                     rateCard.setWash(dataSnapshot.child("Wash").getValue().toString());
                 }
-//
-//
+
                 if(dataSnapshot.hasChild("Iron")){
                     rateCard.setIron(dataSnapshot.child("Iron").getValue().toString());
                 }

@@ -22,8 +22,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import sahil.clickclean.R;
 import sahil.clickclean.adapter.ClothListAdapter;
@@ -41,8 +43,9 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
     private Button setAddress;
     private String service;
     public TextView mupper, mbottom, mwoollen, mjacket, mblanketsingle, mblanketdouble, mbedsheetsingle, mbedsheetdouble;
-
-
+    private TextView totalCost;
+    public static HashMap<String,String> order = new HashMap<>();
+    public static Integer total  = 0;
     public CreateOrderFragment(){
 
     }
@@ -65,7 +68,7 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
 
 
         assert getArguments() != null;
-        String service = getArguments().getString("service");
+        final String service = getArguments().getString("service");
         String type = getArguments().getString("type");
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -73,15 +76,28 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
         recyclerView.setAdapter(adapter);
         getRateDetails();
 
+
         checkout = view.findViewById(R.id.checkoutbutton);
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CreateOrderFragment.upper  + CreateOrderFragment.bottom + CreateOrderFragment.woollen + CreateOrderFragment.blancket_single + CreateOrderFragment.blancket_double + CreateOrderFragment.bedsheet_single+ CreateOrderFragment.bedsheet_double + CreateOrderFragment.jacket ==0 ){
+                if (total==0){
                     Toast.makeText(getContext(),"Please select some of the clothes",Toast.LENGTH_LONG).show();
                 }else{
+                    Log.e("total:",String.valueOf(total));
+                    Gson gson = new Gson();
+                    String json = gson.toJson(order);
+                    Log.e("order:",json);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("total",String.valueOf(total));
+                    bundle.putString("order",json);
+                    bundle.putString("service",service);
+                    order.clear();
+                    total=0;
                     AddAddressFragment addAddressFragment = new AddAddressFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,addAddressFragment).commit();
+                    addAddressFragment.setArguments(bundle);
+                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.service_main_container,addAddressFragment).commit();
 
                 }
 

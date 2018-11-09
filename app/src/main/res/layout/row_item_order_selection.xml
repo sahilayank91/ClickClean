@@ -55,7 +55,7 @@
             android:layout_marginStart="-101dp"
             android:layout_toEndOf="@+id/cloth_minus"
             android:gravity="center_vertical"
-            android:text="fasd"
+            android:text="0"
             android:textAlignment="center" />
 
     </RelativeLayout>

@@ -122,6 +122,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     private void openCancelDialog(View view, final int position){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
         alertDialogBuilder.setMessage("Are you sure you want to cancel the Order");
+        alertDialogBuilder.setIcon(R.drawable.logo);
                 alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override

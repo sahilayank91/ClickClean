@@ -40,7 +40,6 @@ import sahil.clickclean.Views.fragment.HomeFragment;
 import sahil.clickclean.Views.fragment.OfferFragment;
 import sahil.clickclean.Views.fragment.SelectServiceFragment;
 
-import static sahil.clickclean.Views.fragment.SelectServiceFragment.service;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

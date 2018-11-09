@@ -93,10 +93,9 @@
             android:layout_alignTop="@+id/a"
             android:layout_toEndOf="@+id/a"
             android:layout_toRightOf="@+id/a"
-
             android:padding="10dp"
             android:text="date for pickup"
-            android:textColor="@color/background_gradient_start" />
+            android:textColor="@color/background_gradient_start"/>
 
         <TextView
             android:id="@+id/s"

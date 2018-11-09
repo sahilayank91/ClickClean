@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,14 +13,13 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -46,26 +44,30 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
-import sahil.clickclean.Views.LoginActivity;
-import sahil.clickclean.Views.RegisterActivity;
 import sahil.clickclean.Views.YourOrders;
-import sahil.clickclean.helper.AppLocationService;
+import sahil.clickclean.adapter.RateCardAdapter;
 import sahil.clickclean.helper.LocationAddress;
+import sahil.clickclean.model.RateCard;
 import sahil.clickclean.utilities.Server;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
-import static sahil.clickclean.Views.fragment.SelectServiceFragment.service;
 
 public class AddAddressFragment extends Fragment implements OnMapReadyCallback,View.OnClickListener{
 
@@ -83,21 +85,15 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
     public LocationAddress locationAddress;
     Button btnDatePicker, btnTimePicker,checkoutButton;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private TextView mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
+    private TextView mTotal,mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
     String pickup_date;
+    private String order,total,service;
+    private RecyclerView recyclerView;
+    private RateCardAdapter adapter;
+    ArrayList<RateCard> listRateCard = new ArrayList<>();
+    ArrayList<RateCard> orderlist = new ArrayList<>();
     public AddAddressFragment() {
         // Required empty public constructor
-    }
-    public void showRateCard() {
-        LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.rate_card, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setView(alertLayout);
-        builder.setTitle("Our Rate Card");
-        builder.setPositiveButton("OK", null);
-        builder.setNegativeButton("CANCEL", null);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 
     @Nullable
@@ -110,30 +106,36 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         btnDatePicker=(Button)view.findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
         mService = view.findViewById(R.id.check_selectedService);
+        mTotal = view.findViewById(R.id.totalCost);
 
-        mService.setText(SelectServiceFragment.service);
+        assert getArguments() != null;
+        order = getArguments().getString("order");
+        total = getArguments().getString("total");
+        service = getArguments().getString("service");
+        mService.setText(service);
 
 
-
-        numuppper= view.findViewById(R.id.check_upper);
-        numbottom = view.findViewById(R.id.check_bottom_num);
-        numwoollen = view.findViewById(R.id.check_woollen);
-        numjacket = view.findViewById(R.id.check_jacket);
-        numblancketsingle = view.findViewById(R.id.check_blanket_single);
-        numblanketdouble = view.findViewById(R.id.check_blanket_double);
-        numbedsheetsingle = view.findViewById(R.id.check_bedsheet_single);
-        numbedsheetdouble  = view.findViewById(R.id.check_bedsheet_double);
+        mTotal.setText(total);
+//        numuppper= view.findViewById(R.id.check_upper);
+//        numbottom = view.findViewById(R.id.check_bottom_num);
+//        numwoollen = view.findViewById(R.id.check_woollen);
+//        numjacket = view.findViewById(R.id.check_jacket);
+//        numblancketsingle = view.findViewById(R.id.check_blanket_single);
+//        numblanketdouble = view.findViewById(R.id.check_blanket_double);
+//        numbedsheetsingle = view.findViewById(R.id.check_bedsheet_single);
+//        numbedsheetdouble  = view.findViewById(R.id.check_bedsheet_double);
         checkoutButton = view.findViewById(R.id.checkoutbutton);
-
-        numuppper.setText(String.valueOf(CreateOrderFragment.upper));
-        numbottom.setText(String.valueOf(CreateOrderFragment.bottom));
-        numwoollen.setText(String.valueOf(CreateOrderFragment.woollen));
-        numjacket.setText(String.valueOf(CreateOrderFragment.jacket));
-        numblancketsingle.setText(String.valueOf(CreateOrderFragment.blancket_single));
-        numblanketdouble.setText(String.valueOf(CreateOrderFragment.blancket_double));
-        numbedsheetdouble.setText(String.valueOf(CreateOrderFragment.bedsheet_double));
-        numbedsheetsingle.setText(String.valueOf(CreateOrderFragment.bedsheet_single));
-        locationAddress = new LocationAddress();
+//
+//        numuppper.setText(String.valueOf(CreateOrderFragment.upper));
+//        numbottom.setText(String.valueOf(CreateOrderFragment.bottom));
+//        numwoollen.setText(String.valueOf(CreateOrderFragment.woollen));
+//        numjacket.setText(String.valueOf(CreateOrderFragment.jacket));
+//        numblancketsingle.setText(String.valueOf(CreateOrderFragment.blancket_single));
+//        numblanketdouble.setText(String.valueOf(CreateOrderFragment.blancket_double));
+//        numbedsheetdouble.setText(String.valueOf(CreateOrderFragment.bedsheet_double));
+//        numbedsheetsingle.setText(String.valueOf(CreateOrderFragment.bedsheet_single));
+        String address =SharedPreferenceSingleton.getInstance(getContext()).getString("address","User Not Registered");
+        addressContainer.setText(address);
 
         requestPermission();
 
@@ -196,13 +198,8 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             mMapView.onResume();
             mMapView.getMapAsync(this);
         }
-        Location location = new Location(LocationManager.GPS_PROVIDER);
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        LocationAddress.getAddressFromLocation(latitude, longitude,
-                    getActivity(), new GeocoderHandler());
-
-
+        latitude = Double.parseDouble(SharedPreferenceSingleton.getInstance(getContext()).getString("latitude","User Not Registered"));
+        longitude = Double.parseDouble(SharedPreferenceSingleton.getInstance(getContext()).getString("longitude","User Not Registered"));
     }
 
     @Override
@@ -299,24 +296,28 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressLint("HandlerLeak")
-    private class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
-            addressContainer.setText(locationAddress);
-        }
+
+    public void showRateCard() {
+
+        listRateCard.clear();
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.rate_card, null);
+        recyclerView =  alertLayout.findViewById(R.id.rate_card_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new RateCardAdapter(getContext(), listRateCard,service);
+        recyclerView.setAdapter(adapter);
+        getRateDetails();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(alertLayout);
+        builder.setTitle("Our Rate Card");
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("CANCEL", null);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     class AddOrder extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();
@@ -325,14 +326,9 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            params.put("upper", numuppper.getText().toString());
-            params.put("bottom", numbottom.getText().toString());
-            params.put("woollen", numwoollen.getText().toString());
-            params.put("jacket", numjacket.getText().toString());
-            params.put("blanket_single",numblancketsingle.getText().toString());
-            params.put("blanket_double",numblanketdouble.getText().toString());
-            params.put("bedsheet_single",numbedsheetsingle.getText().toString());
-            params.put("bedsheet_double",numbedsheetdouble.getText().toString());
+            params.put("order",order);
+            params.put("total",total);
+            params.put("city",SharedPreferenceSingleton.getInstance(getContext()).getString("city","Jaipur"));
             params.put("latitude",String.valueOf(latitude));
             params.put("longitude",String.valueOf(longitude));
             params.put("status","Recieved");
@@ -380,5 +376,48 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             System.out.println("Result:" + result);
             return result;
         }
+    }
+    public void getRateDetails(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("clothes");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+                RateCard rateCard = new RateCard();
+                rateCard.setCloth(dataSnapshot.getKey());
+                if(dataSnapshot.hasChild("Wash and Iron")){
+                    rateCard.setWashandiron(dataSnapshot.child("Wash and Iron").getValue().toString());
+
+                }
+                if(dataSnapshot.hasChild("Wash")){
+                    rateCard.setWash(dataSnapshot.child("Wash").getValue().toString());
+                }
+
+                if(dataSnapshot.hasChild("Iron")){
+                    rateCard.setIron(dataSnapshot.child("Iron").getValue().toString());
+                }
+                listRateCard.add(rateCard);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
     }
 }

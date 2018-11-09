@@ -29,11 +29,19 @@ public class RateCardAdapter extends RecyclerView.Adapter<RateCardAdapter.OrderV
 
     private ArrayList<RateCard> listRateCard;
     private RCVItemClickListener rcvItemClickListener;
-
+    private String service;
+    private Context context;
     public RateCardAdapter(Context context, ArrayList<RateCard> listRateCard) {
-//        Context context1 = context;
         this.listRateCard = listRateCard;
+        this.context  = context;
     }
+
+    public RateCardAdapter(Context c, ArrayList<RateCard> listRateCard,String service) {
+        context = c;
+        this.listRateCard = listRateCard;
+        this.service = service;
+    }
+
 
     public void setRcvItemClickListener(RCVItemClickListener rcvItemClickListener) {
         this.rcvItemClickListener = rcvItemClickListener;
@@ -73,7 +81,6 @@ public class RateCardAdapter extends RecyclerView.Adapter<RateCardAdapter.OrderV
             washandiron = itemView.findViewById(R.id.tag_washandiron);
             wash = itemView.findViewById(R.id.tag_wash);
             iron = itemView.findViewById(R.id.tag_iron);
-
 
         }
 

@@ -21,6 +21,11 @@ public class UserData {
     private String _id;
     private Context context;
 
+
+    private String pincode;
+    private String latitude;
+    private String longitude;
+
     private UserData() {
     }
 
@@ -54,15 +59,15 @@ public class UserData {
 //    }
     public void initUserData(User user,Context context)  {
         this.context = context;
-
-        Log.e("User",user.toString()) ;
+        setCity(user.getCity());
         setUser_id(user.get_id());
         setFirstname(user.getFirstname());
         setLastname(user.getLastname());
         setEmail(user.getEmail());
         setPhone(user.getPhone());
         setAddress(user.getAddress());
-        Log.e("Userccc",user.get_id()) ;
+        setLatitude(user.getLatitude());
+        setLongitude(user.getLongitude());
 
     }
 
@@ -93,6 +98,10 @@ public class UserData {
         user.setPhone(this.phone);
         user.setLastname(this.lastname);
         user.setAddress(this.address);
+        user.setLatitude(this.latitude);
+        user.setLongitude(this.longitude);
+        user.setCity(this.city);
+        user.setPincode(this.pincode);
         return user;
     }
 
@@ -156,5 +165,45 @@ public class UserData {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String city;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    private void setLatitude(String latitude) {
+        this.latitude = latitude;
+        SharedPreferenceSingleton.getInstance(context).put("latitude", latitude);
+
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    private void setLongitude(String longitude) {
+        this.longitude = longitude;
+        SharedPreferenceSingleton.getInstance(context).put("longitude", longitude);
+
+    }
+
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+        SharedPreferenceSingleton.getInstance(context).put("pincode", pincode);
+
     }
 }

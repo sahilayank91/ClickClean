@@ -8,15 +8,9 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="600dp">
-    <WebView
-        android:id="@+id/wvAttribution"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="Attribution"
-        android:textSize="16sp" />
+    android:layout_height="500dp">
+
+
 
     <EditText
         android:id="@+id/firstname"
@@ -27,6 +21,7 @@
         android:layout_marginTop="59dp"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
         android:hint=" Firstname"
         android:inputType="textPersonName"
         android:layout_alignLeft="@+id/password" />
@@ -40,6 +35,7 @@
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:ems="10"
         android:hint=" Password"
+        android:backgroundTint="@color/colorPrimary"
         android:inputType="textPassword" />
 
     <EditText
@@ -51,6 +47,7 @@
         android:drawableLeft="@drawable/ic_map_black_24dp"
         android:ems="10"
         android:hint=" Locality"
+        android:backgroundTint="@color/colorPrimary"
         android:inputType="textPostalAddress" />
 
     <EditText
@@ -62,6 +59,7 @@
         android:drawableLeft="@drawable/ic_local_phone_black_24dp"
         android:ems="10"
         android:hint=" Phone"
+        android:backgroundTint="@color/colorPrimary"
         android:inputType="phone"
         android:layout_alignLeft="@+id/password" />
 
@@ -74,6 +72,7 @@
         android:ems="10"
         android:hint="Lastname"
         android:inputType="textPersonName"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_alignRight="@+id/password" />
 
     <EditText
@@ -85,6 +84,7 @@
         android:drawableLeft="@drawable/ic_email_black_24dp"
         android:ems="10"
         android:hint=" Email"
+        android:backgroundTint="@color/colorPrimary"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -97,51 +97,80 @@
         android:drawableLeft="@drawable/ic_local_phone_black_24dp"
         android:ems="10"
         android:hint=" Other Phone"
+        android:backgroundTint="@color/colorPrimary"
         android:inputType="phone"
         android:layout_alignRight="@+id/password" />
 
-    <EditText
-        android:id="@+id/flataddress"
-        android:layout_width="354dp"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/address"
-        android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/ic_home_black_24dp"
-        android:ems="10"
-        android:hint=" House No"
-        android:inputType="textPostalAddress" />
+        android:id="@+id/ad"
+        android:layout_centerHorizontal="true">
 
+        <EditText
+            android:id="@+id/flataddress"
+            android:layout_width="354dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/ic_home_black_24dp"
+            android:ems="10"
+            android:backgroundTint="@color/colorPrimary"
+            android:hint=" House No"
+            android:inputType="textPostalAddress" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/city"
-        android:layout_width="176dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/dfa"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/address"
+        android:layout_below="@+id/ad"
+        android:layout_alignRight="@+id/address">
+
+        <AutoCompleteTextView
+            android:id="@+id/city"
+            android:layout_width="349dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_home_black_24dp"
+            android:hint=" City"
+            android:inputType="textPostalAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/dfasdfas"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/firstname"
-        android:layout_below="@+id/flataddress"
-        android:hint="City"
-        android:layout_alignLeft="@+id/firstname" />
+        android:layout_below="@+id/ad"
+        android:layout_alignLeft="@+id/firstname">
 
-    <EditText
-        android:id="@+id/pincode"
-        android:layout_width="156dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/password"
-        android:layout_alignRight="@+id/password"
-        android:layout_below="@+id/flataddress"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:hint="Pincode" />
+        <EditText
+            android:id="@+id/pincode"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/password"
+            android:layout_alignRight="@+id/password"
+            android:layout_below="@+id/flataddress"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:hint="Pincode"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/register_washerman"
         android:layout_width="296dp"
         android:layout_height="wrap_content"
-
-
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/city"
-        android:layout_marginEnd="31dp"
-        android:drawableLeft="@drawable/ic_person_pin_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"
+        android:background="@drawable/rounded_corner"
+        android:gravity="center"
+        android:textColor="@color/white"
         android:text=" Register WasherMan" />
 </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

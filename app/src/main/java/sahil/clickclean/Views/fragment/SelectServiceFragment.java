@@ -31,7 +31,7 @@ import sahil.clickclean.Views.SchedulePickup;
 
 public class SelectServiceFragment extends Fragment {
     View view;
-    public static String service=null;
+
     public SelectServiceFragment() {
 
     }
