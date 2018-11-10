@@ -53,12 +53,12 @@ import java.util.HashMap;
 import static java.security.AccessController.getContext;
 
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
+public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAdapter.OrderViewHolder> {
 
     private ArrayList<Order> listOrders;
     private RCVItemClickListener rcvItemClickListener;
     Context context1;
-    public OrderAdapter(Context context, ArrayList<Order> listOrders) {
+    public WashermanOrderAdapter(Context context, ArrayList<Order> listOrders) {
         context1 = context;
         this.listOrders = listOrders;
     }
@@ -87,7 +87,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         Date pickupdate=null;
         try {
-             pickupdate = new SimpleDateFormat("yyyy-MM-dd").parse(jsDate);
+            pickupdate = new SimpleDateFormat("yyyy-MM-dd").parse(jsDate);
             Log.e("date",pickupdate.toString());
             pickupdate.setHours(17);
 
@@ -135,38 +135,30 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(current.getOrderstatus()!="Recieved"){
+                if(!current.getOrderstatus().equals("Recieved")){
                     Toast.makeText(context1,"You cannot change the Order after it is picked up",Toast.LENGTH_SHORT).show();
                 }else{
-
-
-
-
-
+                    
                 }
-
-
-
 
             }
         });
-
 
     }
     private void openCancelDialog(View view, final int position){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
         alertDialogBuilder.setMessage("Are you sure you want to cancel the Order");
         alertDialogBuilder.setIcon(R.drawable.logo);
-                alertDialogBuilder.setPositiveButton("yes",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                Toast.makeText(context1,"You clicked yes button",Toast.LENGTH_LONG).show();
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Toast.makeText(context1,"You clicked yes button",Toast.LENGTH_LONG).show();
 
-                                new CancelOrder().execute(listOrders.get(position).get_id());
+                        new CancelOrder().execute(listOrders.get(position).get_id());
 
-                            }
-                        });
+                    }
+                });
 
         alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
             @Override
@@ -260,9 +252,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 if (!success.equals("true")) {
                     Toast.makeText(context1,"Some error occured in cancelling Order..Please check your internet connection",Toast.LENGTH_LONG).show();
                 }else{
-                   Toast.makeText(context1,"Order has been cancelled",Toast.LENGTH_SHORT).show();
-                   Intent intent = new Intent(context1,YourOrders.class);
-                   context1.startActivity(intent);
+                    Toast.makeText(context1,"Order has been cancelled",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context1,YourOrders.class);
+                    context1.startActivity(intent);
                 }
 
 

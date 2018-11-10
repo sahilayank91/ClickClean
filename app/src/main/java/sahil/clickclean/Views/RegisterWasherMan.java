@@ -145,11 +145,7 @@ public class RegisterWasherMan extends AppCompatActivity {
                 mAddress.setText(place.getAddress());
                 latitude = place.getLatLng().latitude;
                 longitude = place.getLatLng().longitude;
-                if (place.getAttributions() == null) {
-                    attributionText.loadData("no attribution", "text/html; charset=utf-8", "UFT-8");
-                } else {
-                    attributionText.loadData(place.getAttributions().toString(), "text/html; charset=utf-8", "UFT-8");
-                }
+
             }
         }
     }

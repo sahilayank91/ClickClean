@@ -269,11 +269,10 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-//                            orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             Calendar cal = Calendar.getInstance();
                             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                            cal.set(Calendar.MONTH, monthOfYear+1);
+                            cal.set(Calendar.MONTH, monthOfYear);
                             cal.set(Calendar.YEAR, year);
                             Long time = cal.getTimeInMillis();
                             pickup_date = String.valueOf(time);

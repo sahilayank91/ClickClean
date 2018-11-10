@@ -101,23 +101,27 @@
             android:id="@+id/s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/order_id"
 
-            android:layout_toEndOf="@+id/order_id"
-            android:layout_toRightOf="@+id/order_id"
+            android:layout_alignBottom="@+id/f"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="93dp"
             android:padding="10dp"
             android:text="@string/status"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginRight="93dp"
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/order_status"
-            android:layout_width="wrap_content"
+            android:layout_width="216dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_alignBottom="@+id/f"
+            android:layout_marginLeft="-122dp"
+            android:layout_marginStart="-122dp"
             android:layout_toEndOf="@+id/s"
             android:layout_toRightOf="@+id/s"
+            android:gravity="center"
             android:padding="10dp"
             android:text="status of order"
             android:textColor="@color/background_gradient_start" />
