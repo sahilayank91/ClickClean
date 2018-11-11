@@ -87,7 +87,7 @@ public class CheckoutDonationFragment extends Fragment implements OnMapReadyCall
     public LocationAddress locationAddress;
     Button btnDatePicker, btnTimePicker,checkoutButton;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private TextView mTotal,mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
+    private TextView textCheckoutTotal,mTotal,mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
     String pickup_date;
     private String order,total,service;
     private RecyclerView recyclerView;
@@ -105,13 +105,18 @@ public class CheckoutDonationFragment extends Fragment implements OnMapReadyCall
         else return view;
         addressContainer = view.findViewById(R.id.address_container);
         CardView cardservice = view.findViewById(R.id.servicecard);
-        cardservice.setVisibility(View.INVISIBLE);
+        cardservice.setVisibility(View.GONE);
+
+        CardView ratecardview = view.findViewById(R.id.rateCardView);
+        ratecardview.setVisibility(View.GONE);
+
         btnDatePicker=(Button)view.findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
         mService = view.findViewById(R.id.check_selectedService);
         mService.setText("Donation");
         checkoutButton = view.findViewById(R.id.checkoutbutton);
-
+        textCheckoutTotal = view.findViewById(R.id.c);
+        textCheckoutTotal.setText("Total Clothes");
 
         assert getArguments() != null;
         order = getArguments().getString("order");
@@ -120,6 +125,8 @@ public class CheckoutDonationFragment extends Fragment implements OnMapReadyCall
         addressContainer.setText(address);
 
         requestPermission();
+        mTotal = view.findViewById(R.id.totalCost);
+        mTotal.setText(total);
 
         orderPickupDate = view.findViewById(R.id.in_date);
 
@@ -301,7 +308,7 @@ public class CheckoutDonationFragment extends Fragment implements OnMapReadyCall
             super.onPostExecute(s);
             progress.dismiss();
             if (success) {
-                Toast.makeText(getContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Thank you for Donating!!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

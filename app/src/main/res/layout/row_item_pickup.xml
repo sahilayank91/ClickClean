@@ -15,8 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/nav_header_vertical_spacing"
-            android:layout_height="370dp">
+            android:layout_height="420dp"
+            android:layout_marginLeft="@dimen/nav_header_vertical_spacing">
 
             <TextView
                 android:id="@+id/textView"
@@ -24,34 +24,34 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="-37dp"
+                android:layout_marginRight="-37dp"
                 android:layout_marginTop="36dp"
+                android:layout_toLeftOf="@+id/phone"
                 android:layout_toStartOf="@+id/phone"
                 android:text="Order Id: "
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_marginRight="-37dp"
-                android:layout_toLeftOf="@+id/phone" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/orderid"
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/orderdate"
                 android:layout_alignStart="@+id/orderdate"
                 android:layout_alignTop="@+id/textView"
-                android:text="TextView"
-                android:layout_alignLeft="@+id/orderdate" />
+                android:text="TextView" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/textView"
                 android:layout_marginEnd="109dp"
                 android:text="Status: "
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_alignParentRight="true" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/orderstatus"
@@ -89,21 +89,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/textView6"
-                android:visibility="gone"
                 android:layout_below="@+id/textView"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
+                android:visibility="gone"
                 tools:text="@string/pickup_date" />
 
             <TextView
                 android:id="@+id/order_pickup_date"
                 android:layout_width="111dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_below="@+id/textView"
                 android:layout_toEndOf="@+id/textView10"
                 android:layout_toRightOf="@+id/textView10"
-                android:text="TextView" />
+                android:text="TextView"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/orderaddress"
@@ -162,10 +162,11 @@
                 android:id="@+id/ordercity"
                 android:layout_width="238dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/nav_header_vertical_spacing"
                 android:layout_alignStart="@+id/orderid"
                 android:layout_below="@+id/locality"
-                android:text="City" />
+                android:paddingLeft="@dimen/nav_header_vertical_spacing"
+                android:text="City"
+                android:layout_alignLeft="@+id/orderid" />
 
             <Button
                 android:id="@+id/navigate"
@@ -175,10 +176,12 @@
                 android:layout_alignStart="@+id/textView6"
                 android:layout_marginBottom="117dp"
                 android:background="@drawable/rounded_corner"
+
                 android:drawableLeft="@drawable/ic_map_black_24dp"
                 android:drawableTint="@color/white"
                 android:text="Navigate"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_alignLeft="@+id/textView6" />
 
             <Button
                 android:id="@+id/editOrder"
@@ -189,7 +192,8 @@
                 android:layout_marginBottom="73dp"
                 android:background="@drawable/rounded_corner"
                 android:text="Edit Order"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_alignRight="@+id/call" />
 
             <Button
                 android:id="@+id/orderwork"
@@ -199,18 +203,19 @@
                 android:layout_alignTop="@+id/editOrder"
                 android:background="@drawable/rounded_corner"
                 android:text="Recieve Order"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_alignLeft="@+id/textView6" />
 
             <TextView
                 android:id="@+id/fsdf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView"
                 android:layout_alignStart="@+id/textView"
                 android:layout_below="@+id/textView15"
                 android:text="Service:"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_alignLeft="@+id/textView" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/orderservice"
@@ -218,9 +223,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView15"
                 android:layout_toEndOf="@+id/textView"
+                android:layout_toRightOf="@+id/textView"
                 android:paddingLeft="25dp"
-                android:text="@string/select_service"
-                android:layout_toRightOf="@+id/textView" />
+                android:text="@string/select_service" />
 
             <TextView
                 android:id="@+id/dfasfd"
@@ -231,17 +236,19 @@
                 android:layout_marginBottom="-36dp"
                 android:text="Customer Name:"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/textView" />
 
             <TextView
                 android:id="@+id/cutomer_name"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textView"
+                android:layout_alignEnd="@+id/flataddress"
                 android:layout_marginBottom="-36dp"
-                android:layout_toEndOf="@+id/orderid"
                 android:text="Customer Name"
-                android:textColor="@color/background_gradient_start" />
+                android:textColor="@color/background_gradient_start"
+                android:layout_alignRight="@+id/flataddress" />
 
             <Button
                 android:id="@+id/refuse_order"
@@ -258,36 +265,36 @@
                 android:id="@+id/call"
                 android:layout_width="163dp"
                 android:layout_height="32dp"
-                android:textColor="@color/white"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignTop="@+id/navigate"
                 android:background="@drawable/rounded_corner"
-                android:drawableTint="@color/white"
                 android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+                android:drawableTint="@color/white"
                 android:text="Call Customer"
-                android:layout_alignParentLeft="true" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginBottom="173dp"
+                android:text="Total Cost: "
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_centerVertical="true"
-                android:text="Total Cost: " />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/total"
-                android:layout_width="match_parent"
+                android:layout_width="236dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="124dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/textView2"
+                android:text="total"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="total" />
+                android:textStyle="bold" />
         </RelativeLayout>
 
 

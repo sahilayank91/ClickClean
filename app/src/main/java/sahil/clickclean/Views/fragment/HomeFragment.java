@@ -413,7 +413,18 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             Glide.with(getContext()).load(images.get(position)).apply(new RequestOptions().placeholder(R.drawable.placeholder_image).fitCenter()).into(imageView);
 
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
             container.addView(view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    OfferFragment offerFragment = new OfferFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,offerFragment).commit();
+
+                }
+            });
+
 
             return view;
         }
@@ -458,6 +469,15 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             ImageView imageView= view.findViewById(R.id.imageOffer);
             Glide.with(getContext()).load(donation_images.get(position)).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(),DonateActivity.class);
+                    startActivity(intent);
+
+                }
+            });
             container.addView(view);
 
             return view;
