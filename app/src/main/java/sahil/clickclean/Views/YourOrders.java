@@ -144,6 +144,7 @@ public class YourOrders extends AppCompatActivity implements RCVItemClickListene
                 }else{
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     listOrders.clear();
+
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject post = jsonArray.getJSONObject(i);
                         Order current = new Order(post);

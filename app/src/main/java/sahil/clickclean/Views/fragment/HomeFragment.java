@@ -37,6 +37,7 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +52,7 @@ import java.util.TimerTask;
 import sahil.clickclean.PrefManager;
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.Views.DonateActivity;
 import sahil.clickclean.Views.DonateClothes;
 import sahil.clickclean.Views.LoginActivity;
 import sahil.clickclean.Views.MainActivity;
@@ -229,6 +231,8 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         donationViewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DonateActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -405,7 +409,9 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
             View view = layoutInflater.inflate(R.layout.viewpager_image, container, false);
             ImageView imageView= view.findViewById(R.id.imageOffer);
-            Glide.with(getContext()).load(images.get(position)).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
+//            Glide.with(getContext()).load(images.get(position)).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
+            Glide.with(getContext()).load(images.get(position)).apply(new RequestOptions().placeholder(R.drawable.placeholder_image).fitCenter()).into(imageView);
+
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             container.addView(view);
 

@@ -1,5 +1,4 @@
-<!--<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>-->
-<!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>
+<!--<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>--><!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>
 
 <resources>
     <string name="app_name">Yours Dhobi</string>
@@ -69,6 +68,7 @@
     <string name="reg_confirm_password_hint">Confirm password</string>
     <string name="reg_success">Registered Successfully!</string>
     <string name="change_password_success">Password Changed Successfully!</string>
+    <string name="update_success">Updated Successfully!</string>
 
 
     <!-- TODO: Removing Hardcoded Strings -->
@@ -85,6 +85,7 @@
     <!--   #################### URL ####################-->
 
     <string name="login">&server;service/authenticate/login</string>
+    <string name="loginById">&server;service/authenticate/getUserById</string>
     <string name="register">&server;service/authenticate/register</string>
     <string name="getOrder">&server;service/order/getOrder/</string>
     <string name="getOrderByUserId">&server;service/order/getOrderByUserId/</string>
@@ -95,27 +96,6 @@
     <string name="newOrder">&server;service/order/newOrder/</string>
     <string name="cancelOrder">&server;service/order/cancelOrder/</string>
     <string name="updateUser">&server;service/authenticate/updateUser</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <string name="title_activity_profile">ProfileActivity</string>
@@ -294,12 +274,7 @@
         <item>Hanumangarh</item>
         <item>Udaipur</item>
     </string-array>
-
-
-
-
-
-
+    <string name="title_activity_donate">DonateActivity</string>
 
 
 </resources>

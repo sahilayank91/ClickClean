@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -29,10 +30,16 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.model.User;
+import sahil.clickclean.model.UserData;
 import sahil.clickclean.utilities.Server;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -88,6 +95,10 @@ public class ProfileActivity extends AppCompatActivity {
         phone.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone Not Registered"));
         flat.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("flataddress", "Flat Address Not Registered"));
         city.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("city", "User city Not Registered"));
+
+
+        latitude = Double.parseDouble(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("latitude", "Latitude not available"));
+        longitude = Double.parseDouble(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("longitude", "Longitude not available"));
 
         address.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,29 +176,32 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progress.setTitle("Updating your Details");
+            progress = new ProgressDialog(ProfileActivity.this);
+            progress.setMessage("Updating your Details");
             progress.show();
+            params.put("_id",SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("_id", "User Not Registered"));
             params.put("firstname", firstname.getText().toString());
             params.put("lastname", lastname.getText().toString());
             params.put("address", address.getText().toString());
-            params.put("phone",phone.getText().toString());
-            params.put("userflataddress",flat.getText().toString());
+            params.put("flataddress",flat.getText().toString());
             params.put("city",city.getText().toString());
             params.put("latitude",String.valueOf(latitude));
             params.put("longitude",String.valueOf(longitude));
-
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progress.dismiss();
-            if (success) {
-                Toast.makeText(getApplicationContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+            if (true) {
+//                Toast.makeText(getApplicationContext(), R.string.update_success, Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+//                finish();
+
+                new GetUser(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("_id", "User Not Registered")).execute();
+
             } else {
                 Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
             }
@@ -199,14 +213,86 @@ public class ProfileActivity extends AppCompatActivity {
             try {
                 Gson gson = new Gson();
                 String json = gson.toJson(params);
-                System.out.println(json);
                 result = Server.post(getResources().getString(R.string.updateUser),json);
+                Log.e("result",result);
                 success = true;
             } catch (Exception e){
                 e.printStackTrace();
             }
             return result;
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class GetUser extends AsyncTask<String, String, String> {
+
+        private ProgressDialog progress;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress=new ProgressDialog(ProfileActivity.this);
+            progress.setMessage("Updating local Database...");
+//            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.setProgress(0);
+            progress.show();
+
+        }
+
+        private final String mId;
+        HashMap<String,String> map = new HashMap<>();
+        private Boolean success = false;
+        GetUser(String id) {
+            mId = id;
+            map.put("_id",mId);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            // TODO: attempt authentication against a network service.
+            String result="";
+            try {
+                Gson gson = new Gson();
+                String json = gson.toJson(map);
+                result = Server.post(getResources().getString(R.string.loginById),json);
+                success = true;
+                UserData.getInstance(getApplicationContext()).initUserData(new User(new JSONObject(result)), getApplicationContext());
+                return result;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+            // TODO: register the new account here.
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progress.dismiss();
+
+            super.onPostExecute(s);
+            if (success) {
+                Toast.makeText(getApplicationContext(), R.string.update_success, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                //REMOVE THIS AS TESTING IS OVER
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+//                finish();
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
+            }
+        }
+
+
+
     }
 
 

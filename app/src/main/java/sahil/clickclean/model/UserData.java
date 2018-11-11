@@ -182,6 +182,8 @@ public class UserData {
 
     public void setCity(String city) {
         this.city = city;
+        SharedPreferenceSingleton.getInstance(context).put("city", city);
+
     }
 
     private String city;

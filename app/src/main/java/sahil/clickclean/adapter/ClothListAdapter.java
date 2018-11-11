@@ -38,6 +38,12 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
         this.type = type;
     }
 
+    public ClothListAdapter(Context c, ArrayList<RateCard> listRateCard,String service) {
+        context = c;
+        this.listRateCard = listRateCard;
+        this.service = service;
+    }
+
     public void setRcvItemClickListener(RCVItemClickListener rcvItemClickListener) {
         this.rcvItemClickListener = rcvItemClickListener;
     }

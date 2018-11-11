@@ -39,6 +39,7 @@ import sahil.clickclean.Views.fragment.CreateOrderFragment;
 import sahil.clickclean.Views.fragment.HomeFragment;
 import sahil.clickclean.Views.fragment.OfferFragment;
 import sahil.clickclean.Views.fragment.SelectServiceFragment;
+import sahil.clickclean.utilities.BottomNavigationBehaviour;
 
 
 public class MainActivity extends AppCompatActivity
@@ -46,22 +47,11 @@ public class MainActivity extends AppCompatActivity
     private TextView navEmailView;
     private TextView navNameView;
     private TextView navPhoneView;
-    private Button buttonschedulepickup;
     NestedScrollView nestedScrollView;
-
     private HomeFragment homeFragment;
     private OfferFragment offerFragment;
-    private CategoryFragment categoryFragment;
     FragmentManager fragmentManager;
     private SelectServiceFragment selectServiceFragment;
-    private float startX;
-    private ViewFlipper vf;
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -72,6 +62,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         nestedScrollView = findViewById(R.id.scrollView);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+
+        // attaching bottom sheet behaviour - hide / show on scroll
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -124,6 +119,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setUpBottomBar(){
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.main_navigation);
+
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -191,7 +187,13 @@ public class MainActivity extends AppCompatActivity
             selectServiceFragment = new SelectServiceFragment();
             replaceFragment(selectServiceFragment);
 
-        } else if (id == R.id.nav_logout) {
+        } else if(id==R.id.nav_coupons) {
+            offerFragment = new OfferFragment();
+            replaceFragment(offerFragment);
+        }else if (id==R.id.nav_donate_clothes){
+            Intent intent = new Intent(MainActivity.this,DonateActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_logout) {
             getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();

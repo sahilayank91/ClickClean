@@ -84,7 +84,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         holder.orderstatus.setText(current.getOrderstatus());
         holder.name.setText(current.getUser().getFirstname() + " " + current.getUser().getLastname());
         holder.city.setText(current.getUser().getCity());
-        holder.locality.setText(current.getUser().getAddress());
+        holder.locality.setText(current.getAddress());
         if(current.getUser().getFlataddress()!=null){
             holder.flat.setText(current.getUser().getFlataddress());
         }
@@ -138,6 +138,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
 //
 //        }
 
+        holder.total.setText(current.getTotal());
         holder.phone.setText(current.getUser().getPhone());
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,20 +151,27 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
 
             }
         });
+        holder.call.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+current.getUser().getPhone()));//change the number.
+                context1.startActivity(callIntent);
+            }
+        });
 
         holder.navigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 String lat = SharedPreferenceSingleton.getInstance(context1).getString("latitude", "0.0");
                 String lng = SharedPreferenceSingleton.getInstance(context1).getString("longitude", "0.0");
 
                 String uri = "https://www.google.com/maps/dir/?api=1&origin=" +lat + ", "+ lng + "&destination=" + current.getLatitude()+","+current.getLongitude() + "&travelmode=driving&dir_action=navigate";
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 context1.startActivity(intent);
-
             }
         });
         holder.refuseorder.setOnClickListener(new View.OnClickListener() {
@@ -206,8 +214,8 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name;
-        Button navigate,edit,orderwork,refuseorder;
+        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name,total;
+        Button navigate,edit,orderwork,refuseorder,call;
 
         private OrderViewHolder(View itemView) {
             super(itemView);
@@ -224,7 +232,9 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             phone = itemView.findViewById(R.id.phone);
             navigate = itemView.findViewById(R.id.navigate);
             name = itemView.findViewById(R.id.cutomer_name);
+            total = itemView.findViewById(R.id.total);
             refuseorder = itemView.findViewById(R.id.refuse_order);
+            call = itemView.findViewById(R.id.call);
             refuseorder.setOnClickListener(this);
             navigate.setOnClickListener(this);
             orderwork.setOnClickListener(this);

@@ -18,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.Views.MainActivity;
 import sahil.clickclean.Views.YourOrders;
 import sahil.clickclean.adapter.RateCardAdapter;
 import sahil.clickclean.helper.LocationAddress;
@@ -69,7 +71,7 @@ import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AddAddressFragment extends Fragment implements OnMapReadyCallback,View.OnClickListener{
+public class CheckoutDonationFragment extends Fragment implements OnMapReadyCallback,View.OnClickListener{
 
     View view;
     private static final int MY_LOCATION_REQUEST_CODE = 1;
@@ -92,7 +94,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
     private RateCardAdapter adapter;
     ArrayList<RateCard> listRateCard = new ArrayList<>();
     ArrayList<RateCard> orderlist = new ArrayList<>();
-    public AddAddressFragment() {
+    public CheckoutDonationFragment() {
         // Required empty public constructor
     }
 
@@ -102,51 +104,22 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         if (view == null) view = inflater.inflate(R.layout.fragment_add_address, container, false);
         else return view;
         addressContainer = view.findViewById(R.id.address_container);
-
+        CardView cardservice = view.findViewById(R.id.servicecard);
+        cardservice.setVisibility(View.INVISIBLE);
         btnDatePicker=(Button)view.findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
         mService = view.findViewById(R.id.check_selectedService);
-        mTotal = view.findViewById(R.id.totalCost);
+        mService.setText("Donation");
+        checkoutButton = view.findViewById(R.id.checkoutbutton);
+
 
         assert getArguments() != null;
         order = getArguments().getString("order");
         total = getArguments().getString("total");
-        service = getArguments().getString("service");
-        mService.setText(service);
-
-
-        mTotal.setText(total);
-//        numuppper= view.findViewById(R.id.check_upper);
-//        numbottom = view.findViewById(R.id.check_bottom_num);
-//        numwoollen = view.findViewById(R.id.check_woollen);
-//        numjacket = view.findViewById(R.id.check_jacket);
-//        numblancketsingle = view.findViewById(R.id.check_blanket_single);
-//        numblanketdouble = view.findViewById(R.id.check_blanket_double);
-//        numbedsheetsingle = view.findViewById(R.id.check_bedsheet_single);
-//        numbedsheetdouble  = view.findViewById(R.id.check_bedsheet_double);
-        checkoutButton = view.findViewById(R.id.checkoutbutton);
-//
-//        numuppper.setText(String.valueOf(CreateOrderFragment.upper));
-//        numbottom.setText(String.valueOf(CreateOrderFragment.bottom));
-//        numwoollen.setText(String.valueOf(CreateOrderFragment.woollen));
-//        numjacket.setText(String.valueOf(CreateOrderFragment.jacket));
-//        numblancketsingle.setText(String.valueOf(CreateOrderFragment.blancket_single));
-//        numblanketdouble.setText(String.valueOf(CreateOrderFragment.blancket_double));
-//        numbedsheetdouble.setText(String.valueOf(CreateOrderFragment.bedsheet_double));
-//        numbedsheetsingle.setText(String.valueOf(CreateOrderFragment.bedsheet_single));
         String address =SharedPreferenceSingleton.getInstance(getContext()).getString("address","User Not Registered");
         addressContainer.setText(address);
 
         requestPermission();
-
-        rateCardView = view.findViewById(R.id.rateCard);
-
-        rateCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRateCard();
-            }
-        });
 
         orderPickupDate = view.findViewById(R.id.in_date);
 
@@ -296,27 +269,6 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void showRateCard() {
-
-        listRateCard.clear();
-        LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.rate_card, null);
-        recyclerView =  alertLayout.findViewById(R.id.rate_card_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new RateCardAdapter(getContext(), listRateCard,service);
-        recyclerView.setAdapter(adapter);
-        getRateDetails();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setView(alertLayout);
-        builder.setTitle("Our Rate Card");
-        builder.setPositiveButton("OK", null);
-        builder.setNegativeButton("CANCEL", null);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
-
-
     @SuppressLint("StaticFieldLeak")
     class AddOrder extends AsyncTask<String, String, String> {
         boolean success = false;
@@ -327,7 +279,6 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         protected void onPreExecute() {
             super.onPreExecute();
             params.put("order",order);
-            params.put("total",total);
             params.put("city",SharedPreferenceSingleton.getInstance(getContext()).getString("city","Jaipur"));
             params.put("latitude",String.valueOf(latitude));
             params.put("longitude",String.valueOf(longitude));
@@ -335,9 +286,11 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
             params.put("address",addressContainer.getText().toString());
             params.put("pickup_date",pickup_date);
-            params.put("service",service);
+            params.put("service","Donation");
+            params.put("total",total);
+
             progress=new ProgressDialog(getContext());
-            progress.setMessage("Registering..");
+            progress.setMessage("Getting your Order..");
             progress.setIndeterminate(true);
             progress.setProgress(0);
             progress.show();
@@ -349,7 +302,7 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             progress.dismiss();
             if (success) {
                 Toast.makeText(getContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getContext(), YourOrders.class);
+                Intent intent = new Intent(getContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
 
@@ -377,47 +330,5 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             return result;
         }
     }
-    public void getRateDetails(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("clothes");
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-                RateCard rateCard = new RateCard();
-                rateCard.setCloth(dataSnapshot.getKey());
-                if(dataSnapshot.hasChild("Wash and Iron")){
-                    rateCard.setWashandiron(dataSnapshot.child("Wash and Iron").getValue().toString());
 
-                }
-                if(dataSnapshot.hasChild("Wash")){
-                    rateCard.setWash(dataSnapshot.child("Wash").getValue().toString());
-                }
-
-                if(dataSnapshot.hasChild("Iron")){
-                    rateCard.setIron(dataSnapshot.child("Iron").getValue().toString());
-                }
-                listRateCard.add(rateCard);
-                adapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
-    }
 }

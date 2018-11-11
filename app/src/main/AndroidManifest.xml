@@ -3,6 +3,7 @@
     package="sahil.clickclean">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -113,7 +114,10 @@
         <!-- </service> -->
         <activity
             android:name=".Views.UploadImage"
-            android:label="@string/title_activity_upload_image"></activity>
+            android:label="@string/title_activity_upload_image" />
+        <activity
+            android:name=".Views.DonateActivity"
+            android:label="@string/title_activity_donate"></activity>
     </application>
 
 </manifest>

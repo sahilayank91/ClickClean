@@ -1,5 +1,7 @@
 package sahil.clickclean.model;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,18 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
-    public Order(JSONObject order) throws JSONException {
-        if(order.has("_id"))this._id = order.getString("_id");
-        if(order.has("pickup_date"))this.pickup_date = order.getString("pickup_date");
-        if(order.has("userid"))this.userid = order.getString("userid");
-        if(order.has("address"))this.address = order.getString("address");
-        if(order.has("latitude"))this.latitude = order.getString("latitude");
-        if(order.has("longitude"))this.longitude = order.getString("longitude");
-        if(order.has("created_at"))this.create_time = order.getString("created_at");
-        if(order.has("status"))this.status = order.getString("status");
-        if(order.has("service"))this.orderservice = order.getString("service");
-        if(order.has("userid"))this.user = new User(new JSONObject(order.getString("userid")));
-    }
 
     private String _id;
     private String orderdate;
@@ -29,7 +19,31 @@ public class Order {
     private String longitude;
     private String latitude;
     private String create_time;
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    private String total;
     private User user;
+    public Order(JSONObject order) throws JSONException {
+        if(order.has("_id"))this._id = order.getString("_id");
+        if(order.has("pickup_date"))this.pickup_date = order.getString("pickup_date");
+        if(order.has("userid"))this.userid = order.getString("userid");
+        if(order.has("address"))this.address = order.getString("address");
+        if(order.has("latitude"))this.latitude = order.getString("latitude");
+        if(order.has("longitude"))this.longitude = order.getString("longitude");
+        if(order.has("created_at"))this.create_time = order.getString("created_at");
+        if(order.has("status"))this.status = order.getString("status");
+        if(order.has("service"))this.orderservice = order.getString("service");
+        if(order.has("total"))this.total = order.getString("total");
+        if(order.has("userid"))this.user = new User(new JSONObject(order.getString("userid")));
+    }
+
     private ArrayList<RateCard> clothList;
 
     public ArrayList<RateCard> getRateCardList() {

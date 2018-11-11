@@ -75,6 +75,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
             super(itemView);
 
             imageView = itemView.findViewById(R.id.offerview);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }
 

@@ -53,6 +53,7 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_card);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Rate Card");
         recyclerView = (RecyclerView) findViewById(R.id.rate_card_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RateCardAdapter(this, listRateCard);
