@@ -27,6 +27,7 @@ import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.Views.MainActivity;
 import sahil.clickclean.adapter.OrderAdapter;
+import sahil.clickclean.adapter.WashermanOrderAdapter;
 import sahil.clickclean.model.Order;
 import sahil.clickclean.utilities.Server;
 
@@ -35,7 +36,7 @@ import sahil.clickclean.utilities.Server;
  */
 public class UpcomingFragment extends Fragment {
     public static ArrayList<Order> listUpcomingOrders = new ArrayList<>();
-    private OrderAdapter adapter;
+    private WashermanOrderAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -43,7 +44,7 @@ public class UpcomingFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
 
-        adapter = new OrderAdapter(getContext(), listUpcomingOrders);
+        adapter = new WashermanOrderAdapter(getContext(), listUpcomingOrders);
 //        ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);

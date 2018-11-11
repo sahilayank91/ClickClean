@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -27,34 +28,26 @@ import java.util.ArrayList;
 import sahil.clickclean.R;
 import sahil.clickclean.adapter.OfferAdapter;
 import sahil.clickclean.adapter.OrderAdapter;
+import sahil.clickclean.adapter.WashermanOrderAdapter;
 import sahil.clickclean.interfaces.RCVItemClickListener;
 
 public class OfferFragment extends Fragment implements RCVItemClickListener{
-    View view;
     private ArrayList<String> images = new ArrayList<>();
-    private RecyclerView recyclerView;
     private OfferAdapter offerAdapter;
-
     public OfferFragment(){
 
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view == null) view = inflater.inflate(R.layout.fragment_offer, container, false);
-        else return view;
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
+                R.layout.recycler_view, container, false);
         offerAdapter = new OfferAdapter(getActivity(), images);
         recyclerView.setAdapter(offerAdapter);
-
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         getOffers();
-
-
-
-
-        return view;
+        return recyclerView;
     }
 
     public void getOffers(){
@@ -63,12 +56,8 @@ public class OfferFragment extends Fragment implements RCVItemClickListener{
         refs.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-//                Post newPost = dataSnapshot.getValue(Post.class);
-                Log.e("sasa",dataSnapshot.toString());
                 images.add(dataSnapshot.getValue().toString());
                 offerAdapter.notifyDataSetChanged();
-
-
             }
 
             @Override
@@ -80,7 +69,6 @@ public class OfferFragment extends Fragment implements RCVItemClickListener{
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 images.remove(dataSnapshot.getValue().toString());
                 offerAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -89,7 +77,9 @@ public class OfferFragment extends Fragment implements RCVItemClickListener{
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getContext(),"There was some error in getting the offers.Please try again later!!",Toast.LENGTH_LONG).show();
+            }
         });
     }
 

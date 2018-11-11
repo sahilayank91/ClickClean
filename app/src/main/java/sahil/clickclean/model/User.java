@@ -22,8 +22,6 @@ public class User {
     private Date created_at;
     private String city;
     private String pincode;
-
-
     private String flataddress;
 
     private String latitude;
@@ -43,7 +41,6 @@ public class User {
         if(data.has("latitude"))this.latitude = data.getString("latitude");
         if(data.has("longitude"))this.longitude = data.getString("longitude");
         if(data.has("flataddress"))this.flataddress = data.getString("flataddress");
-
     }
 
     public User() {

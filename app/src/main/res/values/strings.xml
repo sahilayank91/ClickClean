@@ -39,7 +39,7 @@
 
 
     <!--Navigation Drawer items-->
-    <string name="profile">Profile</string>
+    <string name="profile">Edit Profile</string>
     <string name="orders">Your Orders</string>
     <string name="logout">Logout</string>
     <string name="schedule_pickup">Schedule Pickup</string>
@@ -94,7 +94,7 @@
     <string name="changePasswordUsingPhone">&server;service/authenticate/changePasswordUsingPhone</string>
     <string name="newOrder">&server;service/order/newOrder/</string>
     <string name="cancelOrder">&server;service/order/cancelOrder/</string>
-
+    <string name="updateUser">&server;service/authenticate/updateUser</string>
 
 
 
@@ -282,19 +282,7 @@
     <string name="wash_and_iron">Wash and Iron</string>
     <string name="express_services_24_hours">Express Services (24 Hours)</string>
     <string name="dry_cleaning">Dry Cleaning</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="flat_address">Flat Address</string>
 
 
     <string-array name="city">

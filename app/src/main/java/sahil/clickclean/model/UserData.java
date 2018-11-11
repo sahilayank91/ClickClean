@@ -20,11 +20,12 @@ public class UserData {
     private String address;
     private String _id;
     private Context context;
-
-
     private String pincode;
     private String latitude;
     private String longitude;
+
+
+    private String flataddress;
 
     private UserData() {
     }
@@ -68,7 +69,7 @@ public class UserData {
         setAddress(user.getAddress());
         setLatitude(user.getLatitude());
         setLongitude(user.getLongitude());
-
+        setFlataddress(user.getFlataddress());
     }
 
     public boolean getUserData(Context context) {
@@ -140,6 +141,15 @@ public class UserData {
 
     }
 
+    public String getFlataddress() {
+        return flataddress;
+    }
+
+    public void setFlataddress(String flataddress) {
+        this.flataddress = flataddress;
+        SharedPreferenceSingleton.getInstance(context).put("flataddress", flataddress);
+
+    }
     public String getAddress() {
         return address;
     }
