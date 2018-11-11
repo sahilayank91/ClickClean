@@ -1,4 +1,5 @@
-<!DOCTYPE resources [<!ENTITY server "192.168.43.117:3000/">]>
+<!--<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>-->
+<!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>
 
 <resources>
     <string name="app_name">Yours Dhobi</string>
@@ -83,16 +84,16 @@
 
     <!--   #################### URL ####################-->
 
-    <string name="login">http://&server;service/authenticate/login</string>
-    <string name="register">http://&server;service/authenticate/register</string>
-    <string name="getOrder">http://&server;service/order/getOrder/</string>
-    <string name="getOrderByUserId">http://&server;service/order/getOrderByUserId/</string>
-    <string name="getTodayOrders">http://&server;service/order/getTodayOrders/</string>
-    <string name="getUpcomingOrders">http://&server;service/order/getUpcomingOrders/</string>
-    <string name="getCompletedOrders">http://&server;service/order/getCompletedOrders/</string>
-    <string name="changePasswordUsingPhone">http://&server;service/authenticate/changePasswordUsingPhone</string>
-    <string name="newOrder">http://&server;service/order/newOrder/</string>
-    <string name="cancelOrder">http://&server;service/order/cancelOrder/</string>
+    <string name="login">&server;service/authenticate/login</string>
+    <string name="register">&server;service/authenticate/register</string>
+    <string name="getOrder">&server;service/order/getOrder/</string>
+    <string name="getOrderByUserId">&server;service/order/getOrderByUserId/</string>
+    <string name="getTodayOrders">&server;service/order/getTodayOrders/</string>
+    <string name="getUpcomingOrders">&server;service/order/getUpcomingOrders/</string>
+    <string name="getCompletedOrders">&server;service/order/getCompletedOrders/</string>
+    <string name="changePasswordUsingPhone">&server;service/authenticate/changePasswordUsingPhone</string>
+    <string name="newOrder">&server;service/order/newOrder/</string>
+    <string name="cancelOrder">&server;service/order/cancelOrder/</string>
 
 
 

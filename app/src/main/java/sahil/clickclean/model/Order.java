@@ -17,6 +17,7 @@ public class Order {
         if(order.has("created_at"))this.create_time = order.getString("created_at");
         if(order.has("status"))this.status = order.getString("status");
         if(order.has("service"))this.orderservice = order.getString("service");
+        if(order.has("userid"))this.user = new User(new JSONObject(order.getString("userid")));
     }
 
     private String _id;
@@ -28,6 +29,7 @@ public class Order {
     private String longitude;
     private String latitude;
     private String create_time;
+    private User user;
     private ArrayList<RateCard> clothList;
 
     public ArrayList<RateCard> getRateCardList() {
@@ -38,6 +40,21 @@ public class Order {
         this.clothList = clothList;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ArrayList<RateCard> getClothList() {
+        return clothList;
+    }
+
+    public void setClothList(ArrayList<RateCard> clothList) {
+        this.clothList = clothList;
+    }
 
     public String getPickup_date() {
         return pickup_date;

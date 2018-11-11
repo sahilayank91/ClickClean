@@ -64,6 +64,7 @@ public class YourOrders extends AppCompatActivity implements RCVItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_orders);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Your Orders");
         mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
@@ -106,9 +107,6 @@ public class YourOrders extends AppCompatActivity implements RCVItemClickListene
             String userid = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("_id","User Not Registered");
             params.put("userid",userid);
             mSwipeRefreshLayout.setRefreshing(true);
-
-
-
         }
 
         @Override
@@ -117,9 +115,7 @@ public class YourOrders extends AppCompatActivity implements RCVItemClickListene
             try {
                 Gson gson = new Gson();
                 String json = gson.toJson(params);
-
-              result = Server.post(getResources().getString(R.string.getOrderByUserId),json);
-
+                result = Server.post(getResources().getString(R.string.getOrderByUserId),json);
             } catch (IOException e) {
                 e.printStackTrace();
             }

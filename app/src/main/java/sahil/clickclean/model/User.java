@@ -24,6 +24,8 @@ public class User {
     private String pincode;
 
 
+    private String flataddress;
+
     private String latitude;
     private String longitude;
 
@@ -40,11 +42,19 @@ public class User {
         if(data.has("pincode"))this.pincode = data.getString("pincode");
         if(data.has("latitude"))this.latitude = data.getString("latitude");
         if(data.has("longitude"))this.longitude = data.getString("longitude");
+        if(data.has("flataddress"))this.flataddress = data.getString("flataddress");
 
     }
 
     public User() {
 
+    }
+    public String getFlataddress() {
+        return flataddress;
+    }
+
+    public void setFlataddress(String flataddress) {
+        this.flataddress = flataddress;
     }
 
     public String getLatitude() {

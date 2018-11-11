@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -70,7 +71,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_orders, parent, false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_pickup, parent, false);
         return new OrderViewHolder(rootView);
     }
 
@@ -81,7 +82,12 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         final Order current = listOrders.get(position);
         holder.orderid.setText(current.get_id());
         holder.orderstatus.setText(current.getOrderstatus());
-
+        holder.name.setText(current.getUser().getFirstname() + " " + current.getUser().getLastname());
+        holder.city.setText(current.getUser().getCity());
+        holder.locality.setText(current.getUser().getAddress());
+        if(current.getUser().getFlataddress()!=null){
+            holder.flat.setText(current.getUser().getFlataddress());
+        }
 
         String jsDate = current.getOrderpickupdate();
 
@@ -95,7 +101,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             e.printStackTrace();
         }
 
-        holder.orderpickupdate.setText(pickupdate.toLocaleString());
+        holder.orderpickupdate.setText(pickupdate.toLocaleString().substring(0,12));
 
 
 
@@ -112,35 +118,58 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         holder.orderdate.setText(order.toLocaleString().substring(0,12));
         holder.orderservice.setText(current.getOrderservice());
         Calendar calendar = Calendar.getInstance();
-        if(calendar.get(Calendar.HOUR_OF_DAY)>=17){
-            holder.cancel.setEnabled(false);
-            holder.cancel.setBackgroundColor(context1.getResources().getColor(R.color.black));
-            holder.cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context1,"You can't cancel Order after 5:00 PM",Toast.LENGTH_LONG).show();
-                }
-            });
-        }else{
-            holder.cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openCancelDialog(v,holder.getAdapterPosition());
-                }
-            });
+//        if(calendar.get(Calendar.HOUR_OF_DAY)>=17){
+//            holder.cancel.setEnabled(false);
+//            holder.cancel.setBackgroundColor(context1.getResources().getColor(R.color.black));
+//            holder.cancel.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(context1,"You can't cancel Order after 5:00 PM",Toast.LENGTH_LONG).show();
+//                }
+//            });
+//        }else{
+//            holder.cancel.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    openCancelDialog(v,holder.getAdapterPosition());
+//                }
+//            });
+//
+//
+//        }
 
-
-        }
-
+        holder.phone.setText(current.getUser().getPhone());
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!current.getOrderstatus().equals("Recieved")){
                     Toast.makeText(context1,"You cannot change the Order after it is picked up",Toast.LENGTH_SHORT).show();
                 }else{
-                    
+
                 }
 
+            }
+        });
+
+        holder.navigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String lat = SharedPreferenceSingleton.getInstance(context1).getString("latitude", "0.0");
+                String lng = SharedPreferenceSingleton.getInstance(context1).getString("longitude", "0.0");
+
+                String uri = "https://www.google.com/maps/dir/?api=1&origin=" +lat + ", "+ lng + "&destination=" + current.getLatitude()+","+current.getLongitude() + "&travelmode=driving&dir_action=navigate";
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                context1.startActivity(intent);
+
+            }
+        });
+        holder.refuseorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCancelDialog(v,position);
             }
         });
 
@@ -154,9 +183,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         Toast.makeText(context1,"You clicked yes button",Toast.LENGTH_LONG).show();
-
-                        new CancelOrder().execute(listOrders.get(position).get_id());
-
+                            new CancelOrder().execute(listOrders.get(position).get_id());
                     }
                 });
 
@@ -164,8 +191,6 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
-
             }
         });
 
@@ -181,19 +206,29 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice;
-        Button cancel,edit;
+        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name;
+        Button navigate,edit,orderwork,refuseorder;
 
         private OrderViewHolder(View itemView) {
             super(itemView);
 
-            orderid= itemView.findViewById(R.id.order_id);
-            orderdate = itemView.findViewById(R.id.order_date);
+            orderid= itemView.findViewById(R.id.orderid);
+            orderdate = itemView.findViewById(R.id.orderdate);
             orderpickupdate = itemView.findViewById(R.id.order_pickup_date);
-            orderstatus = itemView.findViewById(R.id.order_status);
-            orderservice = itemView.findViewById(R.id.order_service);
-            cancel = itemView.findViewById(R.id.cancelbutton);
-            edit = itemView.findViewById(R.id.editButton);
+            orderstatus = itemView.findViewById(R.id.orderstatus);
+            orderservice = itemView.findViewById(R.id.orderservice);
+            orderwork = itemView.findViewById(R.id.orderwork);
+            city = itemView.findViewById(R.id.ordercity);
+            flat = itemView.findViewById(R.id.flataddress);
+            locality = itemView.findViewById(R.id.locality);
+            phone = itemView.findViewById(R.id.phone);
+            navigate = itemView.findViewById(R.id.navigate);
+            name = itemView.findViewById(R.id.cutomer_name);
+            refuseorder = itemView.findViewById(R.id.refuse_order);
+            refuseorder.setOnClickListener(this);
+            navigate.setOnClickListener(this);
+            orderwork.setOnClickListener(this);
+            edit = itemView.findViewById(R.id.editOrder);
             itemView.setOnClickListener(this);
             orderstatus.setOnClickListener(this);
 

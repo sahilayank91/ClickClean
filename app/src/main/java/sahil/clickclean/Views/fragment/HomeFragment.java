@@ -245,34 +245,38 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
 
     private void addBottomDots(int currentPage) {
-        dots = new TextView[images.size()];
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < images.size(); i++) {
-            dots[i] = new TextView(getContext());
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.white));
-            dotsLayout.addView(dots[i]);
-        }
+        if(!images.isEmpty()) {
+            dots = new TextView[images.size()];
+            dotsLayout.removeAllViews();
+            for (int i = 0; i < images.size(); i++) {
+                dots[i] = new TextView(getContext());
+                dots[i].setText(Html.fromHtml("&#8226;"));
+                dots[i].setTextSize(35);
+                dots[i].setTextColor(getResources().getColor(R.color.white));
+                dotsLayout.addView(dots[i]);
+            }
 
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
+            if (dots.length > 0)
+                dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 
 
     private void addBottomDotstoOfferPager(int currentPage) {
-        donation_dots = new TextView[donation_images.size()];
-        donationDotsLayout.removeAllViews();
-        for (int i = 0; i < donation_images.size(); i++) {
-            donation_dots[i] = new TextView(getContext());
-            donation_dots[i].setText(Html.fromHtml("&#8226;"));
-            donation_dots[i].setTextSize(35);
-            donation_dots[i].setTextColor(getResources().getColor(R.color.white));
-            donationDotsLayout.addView(donation_dots[i]);
-        }
+        if(!donation_images.isEmpty()) {
+            donation_dots = new TextView[donation_images.size()];
+            donationDotsLayout.removeAllViews();
+            for (int i = 0; i < donation_images.size(); i++) {
+                donation_dots[i] = new TextView(getContext());
+                donation_dots[i].setText(Html.fromHtml("&#8226;"));
+                donation_dots[i].setTextSize(35);
+                donation_dots[i].setTextColor(getResources().getColor(R.color.white));
+                donationDotsLayout.addView(donation_dots[i]);
+            }
 
-        if (donation_dots.length > 0)
-            donation_dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
+            if (donation_dots.length > 0)
+                donation_dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 
     private int getItem(int i) {
