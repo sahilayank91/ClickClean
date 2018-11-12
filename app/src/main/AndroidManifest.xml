@@ -118,6 +118,9 @@
         <activity
             android:name=".Views.DonateActivity"
             android:label="@string/title_activity_donate"></activity>
+        <activity
+            android:name=".Views.FeedbackActivity"
+            android:label="Submit Feedback" />
     </application>
 
 </manifest>

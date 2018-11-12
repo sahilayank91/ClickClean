@@ -44,7 +44,8 @@ public class PickupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pickup);
         // Adding Toolbar to Main screen
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Orders");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -55,90 +56,91 @@ public class PickupActivity extends AppCompatActivity {
         // Set Tabs inside Toolbar
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        // Create Navigation drawer and inlfate layout
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-
-
-        View header = navigationView.getHeaderView(0);
-        TextView navEmailView = (TextView) header.findViewById(R.id.nav_header_email);
-        TextView navNameView = (TextView) header.findViewById(R.id.nav_header_name);
-        TextView navPhoneView = (TextView) header.findViewById(R.id.nav_header_phone);
-        String name;
-        String role= SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("role", "Customer");
-        String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
-        String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname", "User Not Registered");
-        name = firstname + " " + lastname;
-        navEmailView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("email", "User Not Registered"));
-        navNameView.setText(name);
-        navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
-
-
-
-        if(role.equals("Customer")){
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
-            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
-        }
-
-
-        // Adding menu icon to Toolbar
-        ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
-            VectorDrawableCompat indicator
-                    = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu_black_24dp, getTheme());
-            indicator.setTint(ResourcesCompat.getColor(getResources(), R.color.bg_screen1,getTheme()));
-            supportActionBar.setHomeAsUpIndicator(indicator);
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        // Set behavior of Navigation drawer
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    // This method will trigger on item Click of navigation menu
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // Set item in checked state
-
-                        int id = menuItem.getItemId();
-                        if (id == R.id.nav_profile) {
-                            // Handle the camera action
-                            Intent intent = new Intent(PickupActivity.this,ProfileActivity.class);
-                            startActivity(intent);
-                        } else if (id == R.id.nav_order) {
-//            Intent intent  = new Intent(PickupActivity.this,PickupActivity.class);
-//            startActivity(intent);
-                        } else if (id == R.id.nav_schedule_pickup) {
-                            Intent intent = new Intent(PickupActivity.this,SchedulePickup.class);
-                            startActivity(intent);
-                        } else if (id == R.id.nav_logout) {
-                            getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
-                            startActivity(new Intent(PickupActivity.this, LoginActivity.class));
-                            finish();
-
-                        } else if (id == R.id.nav_share) {
-                            Intent i = new Intent(Intent.ACTION_SEND);
-                            i.setType("text/plain");
-                            i.putExtra(Intent.EXTRA_SUBJECT, "ClickClean");
-                            String message = "\nDownload ClickClean *Your app link* \n\n";
-                            i.putExtra(Intent.EXTRA_TEXT, message);
-                            startActivity(Intent.createChooser(i, "Choose Sharing Method"));
-
-
-                        } else if (id == R.id.nav_feedback) {
-
-                            Intent intent = new Intent(PickupActivity.this,RegisterWasherMan.class);
-                            startActivity(intent);
-                        }
-                        menuItem.setChecked(true);
-
-                        // TODO: handle navigation
-
-                        // Closing drawer on item click
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
+//         Create Navigation drawer and inlfate layout
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+//
+//
+//
+//    View header = navigationView.getHeaderView(0);
+//        TextView navEmailView = (TextView) header.findViewById(R.id.nav_header_email);
+//        TextView navNameView = (TextView) header.findViewById(R.id.nav_header_name);
+//        TextView navPhoneView = (TextView) header.findViewById(R.id.nav_header_phone);
+//        String name;
+//        String role= SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("role", "Customer");
+//        String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
+//        String lastname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("lastname", "User Not Registered");
+//        name = firstname + " " + lastname;
+//        navEmailView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("email", "User Not Registered"));
+//        navNameView.setText(name);
+//        navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
+//
+//
+//
+//        if(role.equals("Customer")){
+//            Menu nav_Menu = navigationView.getMenu();
+//            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
+//            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+//        }
+//
+//
+//        // Adding menu icon to Toolbar
+//        ActionBar supportActionBar = getSupportActionBar();
+//        if (supportActionBar != null) {
+//            VectorDrawableCompat indicator
+//                    = VectorDrawableCompat.create(getResources(), R.drawable.ic_menu_black_24dp, getTheme());
+//            indicator.setTint(ResourcesCompat.getColor(getResources(), R.color.bg_screen1,getTheme()));
+//            supportActionBar.setHomeAsUpIndicator(indicator);
+//            supportActionBar.setDisplayHomeAsUpEnabled(true);
+//        }
+//        // Set behavior of Navigation drawer
+//        navigationView.setNavigationItemSelectedListener(
+//                new NavigationView.OnNavigationItemSelectedListener() {
+//                    // This method will trigger on item Click of navigation menu
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        // Set item in checked state
+//
+//                        int id = menuItem.getItemId();
+//                        if (id == R.id.nav_profile) {
+//                            // Handle the camera action
+//                            Intent intent = new Intent(PickupActivity.this,ProfileActivity.class);
+//                            startActivity(intent);
+//                        } else if (id == R.id.nav_order) {
+////            Intent intent  = new Intent(PickupActivity.this,PickupActivity.class);
+////            startActivity(intent);
+//                        } else if (id == R.id.nav_schedule_pickup) {
+//                            Intent intent = new Intent(PickupActivity.this,SchedulePickup.class);
+//                            startActivity(intent);
+//                        } else if (id == R.id.nav_logout) {
+//                            getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
+//                            startActivity(new Intent(PickupActivity.this, LoginActivity.class));
+//                            finish();
+//
+//                        } else if (id == R.id.nav_share) {
+//                            Intent i = new Intent(Intent.ACTION_SEND);
+//                            i.setType("text/plain");
+//                            i.putExtra(Intent.EXTRA_SUBJECT, "ClickClean");
+//                            String message = "\nDownload ClickClean *Your app link* \n\n";
+//                            i.putExtra(Intent.EXTRA_TEXT, message);
+//                            startActivity(Intent.createChooser(i, "Choose Sharing Method"));
+//
+//
+//                        } else if (id == R.id.nav_feedback) {
+//
+//                            Intent intent = new Intent(PickupActivity.this,RegisterWasherMan.class);
+//                            startActivity(intent);
+//                        }
+//                        menuItem.setChecked(true);
+//
+//                        // TODO: handle navigation
+//
+//                        // Closing drawer on item click
+//                        mDrawerLayout.closeDrawers();
+//                        return true;
+//                    }
+//                });
         // Adding Floating Action Button to bottom right of main view
 
     }
@@ -193,17 +195,12 @@ public class PickupActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent internetIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://www.zine.co.in"));
-            internetIntent.setComponent(new ComponentName("com.android.browser","com.android.browser.BrowserActivity"));
-            internetIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(internetIntent);
-
-        } else if (id == android.R.id.home) {
-            mDrawerLayout.openDrawer(GravityCompat.START);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(PickupActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

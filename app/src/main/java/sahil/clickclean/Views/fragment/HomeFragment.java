@@ -124,9 +124,9 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             }
         },100);
         viewPager = view.findViewById(R.id.view_pager);
-        donationViewPager = view.findViewById(R.id.donation_view_pager);
+//        donationViewPager = view.findViewById(R.id.donation_view_pager);
         dotsLayout = view.findViewById(R.id.layoutDots);
-        donationDotsLayout = view.findViewById(R.id.donationlayoutDots);
+//        donationDotsLayout = view.findViewById(R.id.donationlayoutDots);
 
         normal_steam = view.findViewById(R.id.normal_steam);
         normal_wash_and_fold = view.findViewById(R.id.normal_wash_and_fold);
@@ -225,18 +225,19 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        donationOfferViewPagerAdapter = new MyDonationViewPagerAdapter();
-        donationViewPager.setAdapter(donationOfferViewPagerAdapter);
-        donationViewPager.addOnPageChangeListener(donationViewPagerChangeListener);
-        donationViewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DonateActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
+//        donationOfferViewPagerAdapter = new MyDonationViewPagerAdapter();
+//        donationViewPager.setAdapter(donationOfferViewPagerAdapter);
+//        donationViewPager.addOnPageChangeListener(donationViewPagerChangeListener);
+//        donationViewPager.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), DonateActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        });
+//
+//        donationViewPager.setVisibility(View.GONE);
         viewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,24 +265,24 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
                 dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
         }
     }
-
-
-    private void addBottomDotstoOfferPager(int currentPage) {
-        if(!donation_images.isEmpty()) {
-            donation_dots = new TextView[donation_images.size()];
-            donationDotsLayout.removeAllViews();
-            for (int i = 0; i < donation_images.size(); i++) {
-                donation_dots[i] = new TextView(getContext());
-                donation_dots[i].setText(Html.fromHtml("&#8226;"));
-                donation_dots[i].setTextSize(35);
-                donation_dots[i].setTextColor(getResources().getColor(R.color.white));
-                donationDotsLayout.addView(donation_dots[i]);
-            }
-
-            if (donation_dots.length > 0)
-                donation_dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
-        }
-    }
+//
+//
+//    private void addBottomDotstoOfferPager(int currentPage) {
+//        if(!donation_images.isEmpty()) {
+//            donation_dots = new TextView[donation_images.size()];
+//            donationDotsLayout.removeAllViews();
+//            for (int i = 0; i < donation_images.size(); i++) {
+//                donation_dots[i] = new TextView(getContext());
+//                donation_dots[i].setText(Html.fromHtml("&#8226;"));
+//                donation_dots[i].setTextSize(35);
+//                donation_dots[i].setTextColor(getResources().getColor(R.color.white));
+//                donationDotsLayout.addView(donation_dots[i]);
+//            }
+//
+//            if (donation_dots.length > 0)
+//                donation_dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
+//        }
+//    }
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
@@ -307,25 +308,25 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
         }
     };
-
-    //  viewpager change listener
-    ViewPager.OnPageChangeListener donationViewPagerChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageSelected(int position) {
-            addBottomDotstoOfferPager(position);
-        }
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-    };
+//
+//    //  viewpager change listener
+//    ViewPager.OnPageChangeListener donationViewPagerChangeListener = new ViewPager.OnPageChangeListener() {
+//
+//        @Override
+//        public void onPageSelected(int position) {
+//            addBottomDotstoOfferPager(position);
+//        }
+//
+//        @Override
+//        public void onPageScrolled(int arg0, float arg1, int arg2) {
+//
+//        }
+//
+//        @Override
+//        public void onPageScrollStateChanged(int arg0) {
+//
+//        }
+//    };
 
     /**
      * Making notification bar transparent
@@ -523,14 +524,14 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
                             }
                         }
 
-                        if(donation_images.size()>0){
-                            if (donationViewPager.getCurrentItem() < donation_dots.length - 1) {
-                                donationViewPager.setCurrentItem(donationViewPager.getCurrentItem() + 1);
-                            } else {
-                                donationViewPager.setCurrentItem(0);
-                            }
-                        }
-
+//                        if(donation_images.size()>0){
+//                            if (donationViewPager.getCurrentItem() < donation_dots.length - 1) {
+//                                donationViewPager.setCurrentItem(donationViewPager.getCurrentItem() + 1);
+//                            } else {
+//                                donationViewPager.setCurrentItem(0);
+//                            }
+//                        }
+//
 
 
 
@@ -544,42 +545,42 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
     }
 
     public void getAllImages(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("donation_image");
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-//                Post newPost = dataSnapshot.getValue(Post.class);
-                Log.e("fasfdsfsfsa",dataSnapshot.toString());
-                donation_images.add(dataSnapshot.getValue().toString());
-                donationOfferViewPagerAdapter.notifyDataSetChanged();
-                addBottomDotstoOfferPager(0);
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-               addBottomDotstoOfferPager(0);
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-              donation_images.remove(dataSnapshot.getValue().toString());
-                donationOfferViewPagerAdapter.notifyDataSetChanged();
-
-                addBottomDotstoOfferPager(0);
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-                addBottomDotstoOfferPager(0);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("donation_image");
+//        ref.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+////                Post newPost = dataSnapshot.getValue(Post.class);
+//                Log.e("fasfdsfsfsa",dataSnapshot.toString());
+//                donation_images.add(dataSnapshot.getValue().toString());
+//                donationOfferViewPagerAdapter.notifyDataSetChanged();
+//                addBottomDotstoOfferPager(0);
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+//               addBottomDotstoOfferPager(0);
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//              donation_images.remove(dataSnapshot.getValue().toString());
+//                donationOfferViewPagerAdapter.notifyDataSetChanged();
+//
+//                addBottomDotstoOfferPager(0);
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+//                addBottomDotstoOfferPager(0);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {}
+//        });
 
 
 

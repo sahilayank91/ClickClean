@@ -246,7 +246,7 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
                                 public void onSuccess(Uri uri) {
                                     Log.e("Tuts+", "uri: " + uri.toString());
                                     String download_url = uri.toString();
-                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("donation_image");
+                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("image");
                                     String key = myRef.push().getKey();
                                     myRef.child(key).setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

@@ -3,7 +3,9 @@ package sahil.clickclean.Views;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.FileUriExposedException;
 import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -29,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import sahil.clickclean.R;
@@ -39,6 +43,7 @@ import sahil.clickclean.Views.fragment.CreateOrderFragment;
 import sahil.clickclean.Views.fragment.HomeFragment;
 import sahil.clickclean.Views.fragment.OfferFragment;
 import sahil.clickclean.Views.fragment.SelectServiceFragment;
+import sahil.clickclean.model.Feedback;
 import sahil.clickclean.utilities.BottomNavigationBehaviour;
 
 
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity
     private OfferFragment offerFragment;
     FragmentManager fragmentManager;
     private SelectServiceFragment selectServiceFragment;
-
+    AHBottomNavigation bottomNavigation;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         nestedScrollView = findViewById(R.id.scrollView);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
+        bottomNavigation = (AHBottomNavigation) findViewById(R.id.main_navigation);
 
 
         // attaching bottom sheet behaviour - hide / show on scroll
@@ -118,33 +123,79 @@ public class MainActivity extends AppCompatActivity
 
 
     private void setUpBottomBar(){
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.main_navigation);
+        bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#0336FF"));
+        // Change colors
+
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.home, R.drawable.ic_home_black_24dp, R.color.colorPrimary);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.categories, R.drawable.ic_map_black_24dp, R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.offers, R.drawable.ic_card_giftcard_black_24dp, R.color.colorPrimary);
 
 
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+// Add items
+        bottomNavigation.addItem(item1);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
+
+
+        bottomNavigation.setColored(true);
+
+//
+        bottomNavigation.setBehaviorTranslationEnabled(true);
+        bottomNavigation.setAccentColor(Color.parseColor("#FF0000"));
+        bottomNavigation.setInactiveColor(Color.parseColor("#ffffff"));
+        bottomNavigation.setForceTint(true);
+        bottomNavigation.setCurrentItem(0);
+        bottomNavigation.setNotification("1", 2);
+
+
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                            homeFragment = new HomeFragment();
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                // Do something cool here...
+                switch (position){
+                    case 0:
+                        homeFragment = new HomeFragment();
                         getSupportActionBar().setTitle("Home");
                         replaceFragment(homeFragment);
                         break;
-                    case R.id.navigation_categories:
-                            selectServiceFragment = new SelectServiceFragment();
-                            getSupportActionBar().setTitle("Categories")    ;
-                            replaceFragment(selectServiceFragment);
+                    case 1:  selectServiceFragment = new SelectServiceFragment();
+                        getSupportActionBar().setTitle("Categories")    ;
+                        replaceFragment(selectServiceFragment);
                         break;
-                    case R.id.navigation_offers:
-                            offerFragment = new OfferFragment();
-                            getSupportActionBar().setTitle("Offers");
-                            replaceFragment(offerFragment);
+                    case 2: offerFragment = new OfferFragment();
+                        getSupportActionBar().setTitle("Offers");
+                        replaceFragment(offerFragment);
                         break;
                 }
+
                 return true;
             }
         });
+
+//        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                switch (item.getItemId()) {
+//                    case R.id.navigation_home:
+//                            homeFragment = new HomeFragment();
+//                        getSupportActionBar().setTitle("Home");
+//                        replaceFragment(homeFragment);
+//                        break;
+//                    case R.id.navigation_categories:
+//                            selectServiceFragment = new SelectServiceFragment();
+//                            getSupportActionBar().setTitle("Categories")    ;
+//                            replaceFragment(selectServiceFragment);
+//                        break;
+//                    case R.id.navigation_offers:
+//                            offerFragment = new OfferFragment();
+//                            getSupportActionBar().setTitle("Offers");
+//                            replaceFragment(offerFragment);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
     }
 
     @Override
@@ -205,7 +256,7 @@ public class MainActivity extends AppCompatActivity
             i.putExtra(Intent.EXTRA_TEXT, message);
             startActivity(Intent.createChooser(i, "Choose Sharing Method"));
         } else if (id == R.id.nav_feedback) {
-            Intent intent = new Intent(MainActivity.this, RegisterWasherMan.class);
+            Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_register_washerman) {
             Intent intent = new Intent(MainActivity.this, RegisterWasherMan.class);
