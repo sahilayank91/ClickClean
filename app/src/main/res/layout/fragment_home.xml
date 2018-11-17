@@ -43,8 +43,7 @@
         </RelativeLayout>
         </android.support.v7.widget.CardView>
 
-        <!--<android.support.v7.widget.CardView-->
-            <!--android:layout_width="wrap_content"-->
+
             <!--app:cardElevation="5dp"-->
             <!---->
             <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
@@ -81,21 +80,23 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="14sp"
+                android:textAlignment="center"
                 android:background="@color/colorPrimary"
-
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/white"
-                android:text=" > Place Order 24 x 7"
+                android:text="Place Order 24 x 7"
                 android:padding="@dimen/nav_header_vertical_spacing"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textAlignment="center"
                 android:layout_marginTop="34dp"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary"
-
+                android:layout_gravity="center_horizontal"
                 android:padding="@dimen/nav_header_vertical_spacing"
-                android:text=" > Pickup and Delivery Timing - 6 pm to 9 pm "
+                android:text="Pickup and Delivery Timing - 6 pm to 9 pm "
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </android.support.v7.widget.CardView>
@@ -202,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/laundry" />
+                    android:src="@drawable/laundry_express" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -220,15 +221,26 @@
             android:layout_marginBottom="@dimen/nav_header_vertical_spacing"
             android:layout_marginTop="@dimen/activity_vertical_margin">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:padding="@dimen/activity_vertical_margin"
-                android:text="@string/express_services_24_hours"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin"
+                    android:padding="@dimen/activity_vertical_margin"
+                    android:text="@string/express_services_24_hours"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:src="@drawable/van" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -251,7 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/steam" />
+                    android:src="@drawable/laundering" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,7 +285,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/washingmachine" />
+                    android:src="@drawable/washing_machine" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -299,7 +311,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/laundry" />
+                    android:src="@drawable/laundry_express" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,11 +338,10 @@
                 android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:padding="@dimen/activity_vertical_margin"
                 android:layout_marginStart="@dimen/activity_vertical_margin" />
-
         </android.support.v7.widget.CardView>
 
 
-            <android.support.v7.widget.CardView
+        <android.support.v7.widget.CardView
                 android:id="@+id/dryclean"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"

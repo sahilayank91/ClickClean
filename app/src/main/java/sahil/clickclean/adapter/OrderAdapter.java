@@ -151,6 +151,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             }
         });
 
+        holder.pickupotp.setText(current.getPickup_otp());
+        holder.deliveredotp.setText(current.getDelivered_otp());
+
 
     }
     private void openCancelDialog(View view, final int position){
@@ -189,7 +192,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice;
+        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,pickupotp,deliveredotp;
         Button cancel,edit;
 
         private OrderViewHolder(View itemView) {
@@ -202,6 +205,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             orderservice = itemView.findViewById(R.id.order_service);
             cancel = itemView.findViewById(R.id.cancelbutton);
             edit = itemView.findViewById(R.id.editButton);
+            pickupotp = itemView.findViewById(R.id.pickupotp);
+            deliveredotp = itemView.findViewById(R.id.deliveredotp);
             itemView.setOnClickListener(this);
             orderstatus.setOnClickListener(this);
 
@@ -264,8 +269,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                    Intent intent = new Intent(context1,YourOrders.class);
                    context1.startActivity(intent);
                 }
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }

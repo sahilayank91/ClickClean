@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/express_steam"
+        android:layout_width="105dp"
+
+        android:layout_height="119dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:src="@drawable/laundering" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/steam_ironing"
+            android:layout_marginTop="97dp"
+            android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+            android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/express_wash_and_fold"
+        android:layout_width="105dp"
+        android:layout_height="119dp"
+        android:layout_centerInParent="true">
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:src="@drawable/washing_machine" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wash_and_fold"
+            android:layout_marginTop="97dp"
+            android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+            android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/nav_header_vertical_spacing"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_margin"
+                android:text="@string/express_services_24_hours"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:src="@drawable/van" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/express_wash_and_iron"
+        android:layout_width="105dp"
+        android:layout_height="119dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp">
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:src="@drawable/laundry_express" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wash_and_iron"
+            android:layout_marginTop="97dp"
+            android:layout_marginStart="@dimen/nav_header_vertical_spacing"
+            android:layout_marginLeft="@dimen/nav_header_vertical_spacing" />
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

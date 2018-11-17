@@ -68,6 +68,7 @@
             android:textColor="#fff"
             android:textStyle="bold" />
 
+
         <TextView
             android:id="@+id/forgetpassword"
             android:layout_width="match_parent"

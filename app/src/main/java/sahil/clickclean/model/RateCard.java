@@ -43,6 +43,16 @@ public class RateCard {
     private String wash;
     private String iron;
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    private String icon;
+
 
     public RateCard(JSONObject rate){
 

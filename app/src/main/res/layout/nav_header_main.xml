@@ -14,12 +14,12 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/personView"
         android:layout_width="66dp"
-        android:layout_height="32dp"
-        android:backgroundTint="@color/black"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
         android:tint="@color/white"
-        app:srcCompat="@drawable/ic_person_black_24dp" />
+        app:srcCompat="@drawable/male" />
 
     <TextView
         android:id="@+id/nav_header_name"
@@ -28,7 +28,6 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:drawableLeft="@drawable/ic_keyboard_arrow_right_black_24dp"
         android:drawableTint="@color/white"
-
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white" />

@@ -24,6 +24,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -62,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
     private final static int MY_PERMISSION_FINE_LOCATION = 101;
     private final static int PLACE_PICKER_REQUEST = 1;
 
+    private RadioGroup radioGroup;
 
 
     private static final String TAG = "PhoneAuthActivity";
@@ -84,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private ProgressDialog progress;
     private Double latitude,longitude;
+    private String gender;
 
 
     @Override
@@ -151,6 +155,22 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }else{
                     Toast.makeText(RegisterActivity.this,"Please enter valid Email",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.clearCheck();
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    gender = rb.getText().toString();
+                    Toast.makeText(RegisterActivity.this, rb.getText(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -464,6 +484,7 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("role","Customer");
             params.put("latitude",String.valueOf(latitude));
             params.put("longitude",String.valueOf(longitude));
+            params.put("gender",gender);
 
         }
 

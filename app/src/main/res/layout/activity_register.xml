@@ -42,7 +42,6 @@
             android:layout_marginTop="@dimen/nav_header_vertical_spacing"
             android:ems="10"
             android:backgroundTint="@color/colorPrimary"
-
             android:hint=" Enter your Lastname"
             android:inputType="textPersonName"
             tools:layout_editor_absoluteX="54dp"
@@ -50,6 +49,36 @@
             android:drawableLeft="@drawable/ic_person_black_24dp"
              />
         </android.support.design.widget.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:tag="Select type"
+
+       >
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_gender"
+                />
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:textSize="18sp" />
+
+        </RadioGroup>
         <TextView
             android:layout_width="349dp"
             android:layout_height="wrap_content"

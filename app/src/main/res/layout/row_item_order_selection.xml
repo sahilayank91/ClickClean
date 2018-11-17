@@ -11,52 +11,62 @@
     tools:ignore="RtlCompat"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView
-            android:id="@+id/cloth_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="19dp"
-            android:layout_marginStart="19dp"
-            android:textStyle="bold"
-            android:layout_marginTop="24dp"
-            android:textColor="@color/background_gradient_start"
-            android:text="Uppers (Shirt and T-shirts )" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="-55dp"
+        android:layout_marginRight="@dimen/nav_header_vertical_spacing"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:layout_toStartOf="@+id/cloth_name"
+        android:src="@drawable/van" />
 
-        <ImageButton
+    <TextView
+        android:id="@+id/cloth_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="55dp"
+        android:text="@string/uppers_shirt_and_t_shirts"
+        android:textColor="@color/background_gradient_start"
+        android:textStyle="bold" />
+
+        <ImageView
             android:id="@+id/cloth_add"
             android:layout_width="38dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/cloth_num"
-            app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+            app:srcCompat="@drawable/add"
+            android:contentDescription="TODO" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/cloth_minus"
             android:layout_width="34dp"
             android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="101dp"
-            app:srcCompat="@drawable/ic_indeterminate_check_box_black_24dp" />
+            app:srcCompat="@drawable/minus"
+            android:contentDescription="TODO" />
 
-        <TextView
-            android:id="@+id/cloth_num"
-            android:layout_width="38dp"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-
-            android:clickable="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="-101dp"
-            android:layout_toEndOf="@+id/cloth_minus"
-            android:gravity="center_vertical"
-            android:text="0"
-            android:textAlignment="center" />
+    <TextView
+        android:id="@+id/cloth_num"
+        android:layout_width="38dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-101dp"
+        android:layout_toEndOf="@+id/cloth_minus"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="0"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 
     </RelativeLayout>
 

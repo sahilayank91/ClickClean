@@ -267,12 +267,6 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
                                     //Handle whatever you're going to do with the URL here
                                 }
                             });
-
-
-
-
-
-
                             //and displaying a success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
                         }

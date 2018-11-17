@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
@@ -57,6 +61,12 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
     @Override
     public void onBindViewHolder(final OrderViewHolder holder, int position) {
         final RateCard current = listRateCard.get(position);
+
+
+        Glide.with(context).load(current.getIcon()).transition(DrawableTransitionOptions.withCrossFade()).into(holder.iconView);
+        holder.iconView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
         holder.cloth.setText(current.getCloth());
         holder.cloth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,7 +195,7 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
 
 
         TextView cloth,num;
-        ImageButton add,minus;
+        ImageView add,minus,iconView;
 
 
         private OrderViewHolder(View itemView) {
@@ -195,7 +205,7 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
             add = itemView.findViewById(R.id.cloth_add);
             minus = itemView.findViewById(R.id.cloth_minus);
             num  = itemView.findViewById(R.id.cloth_num);
-
+            iconView = itemView.findViewById(R.id.imageView);
 
 
         }

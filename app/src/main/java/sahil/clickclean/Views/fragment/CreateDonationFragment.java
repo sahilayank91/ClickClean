@@ -110,10 +110,11 @@ public class CreateDonationFragment extends Fragment implements View.OnClickList
                 if(dataSnapshot.hasChild("Wash")){
                     cloth.setWash(dataSnapshot.child("Wash").getValue().toString());
                 }
-//
-//
                 if(dataSnapshot.hasChild("Iron")){
                     cloth.setIron(dataSnapshot.child("Iron").getValue().toString());
+                }
+                if(dataSnapshot.hasChild("icon")){
+                    cloth.setIcon(dataSnapshot.child("icon").getValue().toString());
                 }
 
                 listCloth.add(cloth);

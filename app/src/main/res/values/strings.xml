@@ -1,5 +1,5 @@
 <!--<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>-->
-<!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>
+<!DOCTYPE resources [<!ENTITY server "http://172.21.4.122:3000/">]>
 
 <resources>
     <string name="app_name">Yours Dhobi</string>
@@ -99,7 +99,7 @@
     <string name="updateUser">&server;service/authenticate/updateUser</string>
     <string name="get_feedback">&server;service/feedback/getFeedback/</string>
     <string name="update_feedback">&server;service/feedback/newFeedback/</string>
-
+    <string name = "verifyOTP">&server;service/order/verifyOTP/</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="login_success">Logged In Successfully</string>
     <string name="profilephoto">ProfilePhoto</string>
@@ -279,6 +279,8 @@
     <string name="title_activity_donate">DonateActivity</string>
     <string name="submit_feedback">Submit Feedback</string>
     <string name="enter_feedback_here">Enter Feedback Here</string>
+    <string name="uppers_shirt_and_t_shirts">Uppers (Shirt and T-shirts )</string>
+    <string name="select_gender">Select Gender:</string>
 
 
 </resources>

@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/laundry" />
+                    android:src="@drawable/laundry_express" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/laundry" />
+                    android:src="@drawable/laundry_express" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

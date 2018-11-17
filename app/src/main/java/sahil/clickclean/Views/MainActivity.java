@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     private TextView navEmailView;
     private TextView navNameView;
     private TextView navPhoneView;
+    private ImageView navImageView;
     NestedScrollView nestedScrollView;
     private HomeFragment homeFragment;
     private OfferFragment offerFragment;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         navEmailView = (TextView) header.findViewById(R.id.nav_header_email);
         navNameView = (TextView) header.findViewById(R.id.nav_header_name);
         navPhoneView = (TextView) header.findViewById(R.id.nav_header_phone);
+        navImageView = (ImageView) header.findViewById(R.id.personView);
         String name;
         String role = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("role", "Customer");
         String firstname = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("firstname", "User Not Registered");
@@ -94,12 +97,22 @@ public class MainActivity extends AppCompatActivity
         navNameView.setText(name);
         navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
 
+        String gender  = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("gender", "Male");
+
+//        if(gender.equals("Male")){
+//            navImageView.setImageDrawable(getResources().getDrawable(R.drawable.male));
+//        }else{
+//            navImageView.setImageDrawable(getResources().getDrawable(R.drawable.woman));
+//
+//        }
 
 //        if(role.equals("Customer")){
 //            Menu nav_Menu = navigationView.getMenu();
 //            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
 //            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
 //        }
+
+
         fragmentManager = getSupportFragmentManager();
         if (homeFragment == null)
             homeFragment = new HomeFragment();

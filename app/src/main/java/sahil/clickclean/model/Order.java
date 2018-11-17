@@ -19,17 +19,13 @@ public class Order {
     private String longitude;
     private String latitude;
     private String create_time;
-
-    public String getTotal() {
-        return total;
-    }
-
-    public void setTotal(String total) {
-        this.total = total;
-    }
-
     private String total;
     private User user;
+    private String pickup_otp;
+    private String delivered_otp;
+
+
+
     public Order(JSONObject order) throws JSONException {
         if(order.has("_id"))this._id = order.getString("_id");
         if(order.has("pickup_date"))this.pickup_date = order.getString("pickup_date");
@@ -42,7 +38,34 @@ public class Order {
         if(order.has("service"))this.orderservice = order.getString("service");
         if(order.has("total"))this.total = order.getString("total");
         if(order.has("userid"))this.user = new User(new JSONObject(order.getString("userid")));
+        if(order.has("pickup_otp"))this.pickup_otp = order.getString("pickup_otp");
+        if(order.has("delivered_otp"))this.delivered_otp= order.getString("delivered_otp");
     }
+
+    public String getPickup_otp() {
+        return pickup_otp;
+    }
+
+    public void setPickup_otp(String pickup_otp) {
+        this.pickup_otp = pickup_otp;
+    }
+
+    public String getDelivered_otp() {
+        return delivered_otp;
+    }
+
+    public void setDelivered_otp(String delivered_otp) {
+        this.delivered_otp = delivered_otp;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
 
     private ArrayList<RateCard> clothList;
 
