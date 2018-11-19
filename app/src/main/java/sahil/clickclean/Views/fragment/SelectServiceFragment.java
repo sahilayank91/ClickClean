@@ -73,8 +73,9 @@ public class SelectServiceFragment extends Fragment {
         normal_steam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("service","Steam Ironing");
-                intent.putExtra("type","normal");
+                intent.putExtra("service","Ironing");
+                intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
                 startActivity(intent);
             }
         });
@@ -83,7 +84,9 @@ public class SelectServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Fold");
-                intent.putExtra("type","normal");
+                intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
             }
         });
@@ -92,7 +95,9 @@ public class SelectServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Iron");
-                intent.putExtra("type","normal");
+                intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -102,8 +107,10 @@ public class SelectServiceFragment extends Fragment {
         express_steam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("service","Steam Ironing");
-                intent.putExtra("type","express");
+                intent.putExtra("service","Ironing");
+                intent.putExtra("type","Express");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -113,7 +120,9 @@ public class SelectServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Iron");
-                intent.putExtra("type","express");
+                intent.putExtra("type","Express");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -123,7 +132,9 @@ public class SelectServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Fold");
-                intent.putExtra("type","express");
+                intent.putExtra("type","Express");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -131,8 +142,10 @@ public class SelectServiceFragment extends Fragment {
         dryclean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("service","Dry Clean");
+                intent.putExtra("service","Dryclean");
                 intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
             }
 

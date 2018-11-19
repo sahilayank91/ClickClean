@@ -37,8 +37,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
     public void onBindViewHolder(@NonNull final OrderListViewHolder holder, final int position) {
         final OrderList current = listOrderLists.get(position);
 
-
-
     }
 
 

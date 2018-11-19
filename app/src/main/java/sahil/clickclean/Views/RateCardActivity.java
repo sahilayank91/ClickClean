@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,9 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
     private RecyclerView recyclerView;
     private RateCardAdapter adapter;
     ArrayList<RateCard> listRateCard = new ArrayList<>();
+    ArrayList<RateCard> listDryClean = new ArrayList<>();
+
+    Button washandiron, wash, iron,dryclean;
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(RateCardActivity.this,MainActivity.class);
@@ -53,13 +57,57 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_card);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Rate Card");
+
+        getRateDetails();
+        getDryClean();
         recyclerView = (RecyclerView) findViewById(R.id.rate_card_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RateCardAdapter(this, listRateCard);
+        adapter = new RateCardAdapter(this, listRateCard,"Wash and Iron");
         recyclerView.setAdapter(adapter);
         adapter.setRcvItemClickListener(this);
-        getRateDetails();
+
+        washandiron = findViewById(R.id.washandiron);
+        wash = findViewById(R.id.wash);
+        iron = findViewById(R.id.iron);
+        dryclean = findViewById(R.id.dryclean);
+
+        washandiron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter = new RateCardAdapter(RateCardActivity.this, listRateCard,"Wash and Iron");
+                recyclerView.setAdapter(adapter);
+                adapter.setRcvItemClickListener(RateCardActivity.this);
+            }
+        });
+        wash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter = new RateCardAdapter(RateCardActivity.this, listRateCard,"Wash");
+                recyclerView.setAdapter(adapter);
+                adapter.setRcvItemClickListener(RateCardActivity.this);
+            }
+        });
+        iron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter = new RateCardAdapter(RateCardActivity.this, listRateCard,"Iron");
+                recyclerView.setAdapter(adapter);
+                adapter.setRcvItemClickListener(RateCardActivity.this);
+            }
+        });
+        dryclean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter = new RateCardAdapter(RateCardActivity.this, listDryClean,"Dryclean");
+                recyclerView.setAdapter(adapter);
+                adapter.setRcvItemClickListener(RateCardActivity.this);
+            }
+        });
+
+
+        getSupportActionBar().setTitle("Rate Card");
+
+
     }
 
     public void getRateDetails(){
@@ -81,6 +129,41 @@ public class RateCardActivity extends AppCompatActivity implements RCVItemClickL
                     rateCard.setIron(dataSnapshot.child("Iron").getValue().toString());
                 }
                 listRateCard.add(rateCard);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+    }
+
+
+    public void getDryClean(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("drycleaning");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+                RateCard rateCard = new RateCard();
+                rateCard.setCloth(dataSnapshot.getKey());
+                rateCard.setDryclean(dataSnapshot.getValue().toString());
+                listDryClean.add(rateCard);
                 adapter.notifyDataSetChanged();
 
             }

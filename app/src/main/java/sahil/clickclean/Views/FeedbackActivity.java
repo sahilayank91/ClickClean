@@ -2,6 +2,7 @@ package sahil.clickclean.Views;
 
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +28,6 @@ import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.adapter.FeedbackAdapter;
 import sahil.clickclean.interfaces.RCVItemClickListener;
 import sahil.clickclean.model.Feedback;
-import sahil.clickclean.model.UserData;
 import sahil.clickclean.utilities.Server;
 
 import com.google.gson.Gson;
@@ -79,6 +80,7 @@ public class FeedbackActivity extends AppCompatActivity implements RCVItemClickL
 
         feedbackAuthorName = findViewById(R.id.feedback_user_name);
         etFeedbackText =findViewById(R.id.et_feedback); //hide this in user moder
+        etFeedbackText.setFocusedByDefault(false);
         btnSubmit = findViewById(R.id.btn_submit_feedback);
         btnHolder =  findViewById(R.id.btn_holder);
         feedbackDate =  findViewById(R.id.feedback_date);
@@ -174,10 +176,24 @@ public class FeedbackActivity extends AppCompatActivity implements RCVItemClickL
             return response;
         }
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(FeedbackActivity.this,LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @SuppressLint("StaticFieldLeak")
     class UpdateFeedback extends AsyncTask<String,String,String>{
         boolean success=false;
-
+        ProgressDialog progress = new ProgressDialog(FeedbackActivity.this);
         int position;
         HashMap<String,String>params=new HashMap<>();
 
@@ -191,6 +207,11 @@ public class FeedbackActivity extends AppCompatActivity implements RCVItemClickL
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progress.setMessage("Submitting Feedback..");
+//            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+            progress.setProgress(0);
+            progress.show();
 
 
 
@@ -200,15 +221,12 @@ public class FeedbackActivity extends AppCompatActivity implements RCVItemClickL
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(success){
+            etFeedbackText.setText("");
+            progress.dismiss();
 
                 Intent intent = new Intent(FeedbackActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
-//                feedbackList.remove(position);
-//                feedbackAdapter.notifyItemRemoved(position);
-
-            }
 
 
         }

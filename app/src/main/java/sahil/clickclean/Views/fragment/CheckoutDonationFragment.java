@@ -107,9 +107,6 @@ public class CheckoutDonationFragment extends Fragment implements OnMapReadyCall
         CardView cardservice = view.findViewById(R.id.servicecard);
         cardservice.setVisibility(View.GONE);
 
-        CardView ratecardview = view.findViewById(R.id.rateCardView);
-        ratecardview.setVisibility(View.GONE);
-
         btnDatePicker=(Button)view.findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
         mService = view.findViewById(R.id.check_selectedService);

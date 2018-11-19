@@ -8,57 +8,6 @@
 
 
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content">
-
-        <TableRow
-            android:fitsSystemWindows="true">
-        <TextView
-            android:text="Clothes"
-            android:textSize="15sp"
-            android:textColor="@color/background_gradient_start"
-            android:textStyle="bold"
-            android:layout_weight="5"/>
-        <TextView
-            android:text="Wash and Iron"
-            android:textSize="15sp"
-            android:textColor="@color/background_gradient_start"
-            android:textStyle="bold"
-            android:gravity="end"
-            android:layout_weight="1"/>
-        <TextView
-            android:text="Wash"
-            android:textSize="15sp"
-            android:gravity="end"
-
-            android:textColor="@color/background_gradient_start"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-        <TextView
-            android:text="Iron"
-            android:textSize="15sp"
-            android:textColor="@color/background_gradient_start"
-            android:textStyle="bold"
-            android:gravity="end"
-            android:layout_weight="1"/>
-        </TableRow>
-
-
-
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rate_card_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.v7.widget.RecyclerView>
-
-
-
-    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,196 +60,43 @@
             android:layout_weight="1"
             android:background="@drawable/buttonshape"/>
     </LinearLayout>
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Upper"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Bottoms"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Jackets"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Woollen"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Blancket (Single Bed)"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Blancket (Double Bed)"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Bedsheet (Single Bed)"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_margin="@dimen/nav_header_vertical_spacing"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:text="Bedsheet (Double Bed)"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:padding="3dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:text="43"-->
-            <!--android:layout_alignParentRight="true" />-->
-
-    <!--</RelativeLayout>-->
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:layout_height="wrap_content">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:fitsSystemWindows="true">
+            <TextView
+                android:text="Cloth"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+            <TextView
+                android:text="Cost"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:layout_weight="1"/>
+
+        </TableRow>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rate_card_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </TableLayout>
+    </LinearLayout>
 </LinearLayout>

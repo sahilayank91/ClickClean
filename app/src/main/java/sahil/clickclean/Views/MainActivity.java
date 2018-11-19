@@ -105,13 +105,25 @@ public class MainActivity extends AppCompatActivity
 //            navImageView.setImageDrawable(getResources().getDrawable(R.drawable.woman));
 //
 //        }
-
-//        if(role.equals("Customer")){
+        Menu nav_Menu = navigationView.getMenu();
+        if(role.equals("Customer")){
 //            Menu nav_Menu = navigationView.getMenu();
-//            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
-//            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
-//        }
+            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
+            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+            nav_Menu.findItem(R.id.nav_add_image).setVisible(false);
+        }
 
+        if(role.equals("Washerman")){
+            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(true);
+            nav_Menu.findItem(R.id.nav_orders).setVisible(true);
+            nav_Menu.findItem(R.id.nav_add_image).setVisible(false);
+
+        }
+        if(role.equals("Admin")){
+            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(true);
+            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+            nav_Menu.findItem(R.id.nav_add_image).setVisible(true);
+        }
 
         fragmentManager = getSupportFragmentManager();
         if (homeFragment == null)
@@ -144,21 +156,15 @@ public class MainActivity extends AppCompatActivity
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.offers, R.drawable.ic_card_giftcard_black_24dp, R.color.colorPrimary);
 
 
-// Add items
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
         bottomNavigation.addItem(item3);
-
-
         bottomNavigation.setColored(true);
-
-//
         bottomNavigation.setBehaviorTranslationEnabled(true);
         bottomNavigation.setAccentColor(Color.parseColor("#FF0000"));
         bottomNavigation.setInactiveColor(Color.parseColor("#ffffff"));
         bottomNavigation.setForceTint(true);
         bottomNavigation.setCurrentItem(0);
-        bottomNavigation.setNotification("1", 2);
 
 
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
@@ -227,6 +233,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            getApplicationContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
             return true;
         }
 
@@ -250,10 +259,6 @@ public class MainActivity extends AppCompatActivity
 
             selectServiceFragment = new SelectServiceFragment();
             replaceFragment(selectServiceFragment);
-
-        } else if(id==R.id.nav_coupons) {
-            offerFragment = new OfferFragment();
-            replaceFragment(offerFragment);
         }else if (id==R.id.nav_donate_clothes){
             Intent intent = new Intent(MainActivity.this,DonateActivity.class);
             startActivity(intent);
@@ -285,6 +290,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if(id==R.id.nav_add_image){
             Intent intent = new Intent(MainActivity.this,UploadImage.class);
+            startActivity(intent);
+        } else if(id == R.id.nav_contactus){
+            Intent intent = new Intent(MainActivity.this,ContactActivity.class);
             startActivity(intent);
         }
 

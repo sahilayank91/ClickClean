@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import sahil.clickclean.R;
@@ -72,14 +73,26 @@ public class SchedulePickup extends AppCompatActivity implements NavigationView.
 
         String type = getIntent().getStringExtra("type");
         String service = getIntent().getStringExtra("service");
+        String percentage = getIntent().getStringExtra("percentage");
+        String code = getIntent().getStringExtra("code");
+        String offerid = getIntent().getStringExtra("offerid");
+
         Bundle b = new Bundle();
         b.putString("type",type);
         b.putString("service",service);
+        b.putString("percentage",percentage);
+        if(code!=null){
+            b.putString("code",code);
+        }
+        if(offerid!=null){
+            b.putString("offerid",offerid);
+        }
         if (createOrderFragment == null)
             createOrderFragment = new CreateOrderFragment();
         createOrderFragment.setArguments(b);
-        replaceFragment(createOrderFragment);
         getSupportActionBar().setTitle("Create Order");
+        replaceFragment(createOrderFragment);
+
 
     }
 

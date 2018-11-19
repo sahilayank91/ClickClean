@@ -42,6 +42,7 @@ public class RateCard {
     private String washandiron;
     private String wash;
     private String iron;
+    private String dryclean;
 
     public String getIcon() {
         return icon;
@@ -60,4 +61,13 @@ public class RateCard {
     public RateCard(){
 
     }
+
+    public String getDryclean() {
+        return dryclean;
+    }
+
+    public void setDryclean(String dryclean) {
+        this.dryclean = dryclean;
+    }
+
 }

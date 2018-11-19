@@ -74,18 +74,17 @@ public class YourOrders extends AppCompatActivity implements RCVItemClickListene
                prepareOrderItems();
             }
         });
+        new GetOrders().execute();
 
-        recyclerView = (RecyclerView) findViewById(R.id.order_recycler_view);
+        recyclerView = findViewById(R.id.order_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new OrderAdapter(this, listOrders);
         recyclerView.setAdapter(adapter);
         adapter.setRcvItemClickListener(this);
 
-//        prepareOrderItems();
 
 
-            new GetOrders().execute();
 
     }
     private void prepareOrderItems() {

@@ -49,17 +49,32 @@ public class RateCardAdapter extends RecyclerView.Adapter<RateCardAdapter.OrderV
 
     @Override
     public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_ratecard, parent, false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_itemcost, parent, false);
         return new OrderViewHolder(rootView);
     }
 
     @Override
     public void onBindViewHolder(final OrderViewHolder holder, int position) {
         final RateCard current = listRateCard.get(position);
+        switch (service) {
+            case "Wash and Iron":
+                holder.cost.setText(current.getWashandiron());
+
+                break;
+            case "Wash":
+                holder.cost.setText(current.getWash());
+
+                break;
+            case "Iron":
+                holder.cost.setText(current.getIron());
+                break;
+            case "Dryclean":
+                holder.cost.setText(current.getDryclean());
+                break;
+        }
         holder.cloth.setText(current.getCloth());
-        holder.washandiron.setText(current.getWashandiron());
-        holder.wash.setText(current.getWash());
-        holder.iron.setText(current.getIron());
+//        holder.wash.setText(current.getWash());
+//        holder.iron.setText(current.getIron());
 
     }
 
@@ -71,16 +86,31 @@ public class RateCardAdapter extends RecyclerView.Adapter<RateCardAdapter.OrderV
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView cloth, washandiron, wash, iron;
+        TextView cloth, cost, wash, iron;
 
 
         private OrderViewHolder(View itemView) {
             super(itemView);
 
             cloth=itemView.findViewById(R.id.tag_clothes);
-            washandiron = itemView.findViewById(R.id.tag_washandiron);
-            wash = itemView.findViewById(R.id.tag_wash);
-            iron = itemView.findViewById(R.id.tag_iron);
+            cost = itemView.findViewById(R.id.tag_cost);
+//            switch (service) {
+//                case "Wash and Iron":
+//                    washandiron.setVisibility(View.VISIBLE);
+//                    wash.setVisibility(View.GONE);
+//                    iron.setVisibility(View.GONE);
+//                    break;
+//                case "Wash":
+//                    washandiron.setVisibility(View.GONE);
+//                    wash.setVisibility(View.VISIBLE);
+//                    iron.setVisibility(View.GONE);
+//                    break;
+//                case "Iron":
+//                    washandiron.setVisibility(View.GONE);
+//                    wash.setVisibility(View.GONE);
+//                    iron.setVisibility(View.VISIBLE);
+//                    break;
+//            }
 
         }
 

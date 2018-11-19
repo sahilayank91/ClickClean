@@ -63,6 +63,34 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
         final RateCard current = listRateCard.get(position);
 
 
+        switch (service){
+            case "Ironing":
+                if(current.getIron().equals("-")){
+                    holder.itemView.setVisibility(View.GONE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+                    holder.setIsRecyclable(false);
+                }
+                break;
+            case "Wash and Fold":
+                if(current.getWash().equals("-")){
+                    holder.itemView.setVisibility(View.GONE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+                    holder.setIsRecyclable(false);
+                }
+
+                break;
+            case "Wash and Iron":
+                if(current.getWashandiron().equals("-")){
+                    holder.itemView.setVisibility(View.GONE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+                    holder.setIsRecyclable(false);
+                }
+                break;
+            default:
+
+                break;
+        }
+
         Glide.with(context).load(current.getIcon()).transition(DrawableTransitionOptions.withCrossFade()).into(holder.iconView);
         holder.iconView.setScaleType(ImageView.ScaleType.FIT_XY);
 
@@ -80,9 +108,9 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
                 int n = Integer.parseInt(holder.num.getText().toString());
                 n++;
                 switch (service) {
-                    case "Steam Ironing":
-                        if (!current.getWashandiron().equals("-")) {
-                            CreateOrderFragment.total += Integer.parseInt(current.getWashandiron());
+                    case "Ironing":
+                        if (!current.getIron().equals("-")) {
+                            CreateOrderFragment.total += Integer.parseInt(current.getIron());
                             holder.num.setText(String.valueOf(n));
                             order.put(current.getCloth(),String.valueOf(n));
                             } else {
@@ -103,8 +131,19 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
 
                         break;
                     case "Wash and Iron":
-                        if (!current.getIron().equals("-")) {
-                            CreateOrderFragment.total += Integer.parseInt(current.getIron());
+                        if (!current.getWashandiron().equals("-")) {
+                            CreateOrderFragment.total += Integer.parseInt(current.getWashandiron());
+                            holder.num.setText(String.valueOf(n));
+                            order.put(current.getCloth(),String.valueOf(n));
+                        } else {
+                            Toast.makeText(context, "Iron facility not available for this type of cloth", Toast.LENGTH_SHORT).show();
+                        }
+
+                        break;
+
+                    case "Dryclean":
+                        if (!current.getDryclean().equals("-")) {
+                            CreateOrderFragment.total += Integer.parseInt(current.getDryclean());
                             holder.num.setText(String.valueOf(n));
                             order.put(current.getCloth(),String.valueOf(n));
                         } else {
@@ -116,10 +155,6 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
 
                         break;
                 }
-
-
-
-
 
             }
         });

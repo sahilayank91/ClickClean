@@ -44,14 +44,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
+import sahil.clickclean.Views.SchedulePickup;
+import sahil.clickclean.Views.UploadImage;
 import sahil.clickclean.Views.YourOrders;
 import sahil.clickclean.adapter.RateCardAdapter;
 import sahil.clickclean.helper.LocationAddress;
+import sahil.clickclean.model.Offer;
 import sahil.clickclean.model.RateCard;
 import sahil.clickclean.utilities.Server;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -86,10 +91,11 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
     Button btnDatePicker, btnTimePicker,checkoutButton;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private TextView mTotal,mService,numuppper, numbottom, numjacket, numwoollen, numblancketsingle, numblanketdouble, numbedsheetsingle, numbedsheetdouble;
-    String pickup_date;
-    private String order,total,service;
+    String pickup_date,type;
+    private String order,total,service,offer,code,offerid;
     private RecyclerView recyclerView;
     private RateCardAdapter adapter;
+    private TextView offerapply;
     ArrayList<RateCard> listRateCard = new ArrayList<>();
     ArrayList<RateCard> orderlist = new ArrayList<>();
     public AddAddressFragment() {
@@ -112,41 +118,32 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
         order = getArguments().getString("order");
         total = getArguments().getString("total");
         service = getArguments().getString("service");
+        type = getArguments().getString("type");
+        offer = getArguments().getString("offer");
+        code = getArguments().getString("code");
+        offerid = getArguments().getString("offerid");
+        offerapply = view.findViewById(R.id.offerapply);
+
+        if(offer.equals("Yes")){
+            offerapply.setVisibility(View.VISIBLE);
+        }else{
+            offerapply.setVisibility(View.GONE);
+        }
+
+
+
         mService.setText(service);
 
 
         mTotal.setText(total);
-//        numuppper= view.findViewById(R.id.check_upper);
-//        numbottom = view.findViewById(R.id.check_bottom_num);
-//        numwoollen = view.findViewById(R.id.check_woollen);
-//        numjacket = view.findViewById(R.id.check_jacket);
-//        numblancketsingle = view.findViewById(R.id.check_blanket_single);
-//        numblanketdouble = view.findViewById(R.id.check_blanket_double);
-//        numbedsheetsingle = view.findViewById(R.id.check_bedsheet_single);
-//        numbedsheetdouble  = view.findViewById(R.id.check_bedsheet_double);
+
         checkoutButton = view.findViewById(R.id.checkoutbutton);
-//
-//        numuppper.setText(String.valueOf(CreateOrderFragment.upper));
-//        numbottom.setText(String.valueOf(CreateOrderFragment.bottom));
-//        numwoollen.setText(String.valueOf(CreateOrderFragment.woollen));
-//        numjacket.setText(String.valueOf(CreateOrderFragment.jacket));
-//        numblancketsingle.setText(String.valueOf(CreateOrderFragment.blancket_single));
-//        numblanketdouble.setText(String.valueOf(CreateOrderFragment.blancket_double));
-//        numbedsheetdouble.setText(String.valueOf(CreateOrderFragment.bedsheet_double));
-//        numbedsheetsingle.setText(String.valueOf(CreateOrderFragment.bedsheet_single));
+
         String address =SharedPreferenceSingleton.getInstance(getContext()).getString("address","User Not Registered");
         addressContainer.setText(address);
 
         requestPermission();
 
-        rateCardView = view.findViewById(R.id.rateCard);
-
-        rateCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRateCard();
-            }
-        });
 
         orderPickupDate = view.findViewById(R.id.in_date);
 
@@ -264,7 +261,6 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
-
             DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
@@ -272,7 +268,12 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                                               int monthOfYear, int dayOfMonth) {
                             orderPickupDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             Calendar cal = Calendar.getInstance();
-                            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                            if(cal.get(Calendar.HOUR_OF_DAY)>=17) {
+                               if(cal.get(Calendar.DAY_OF_MONTH)==dayOfMonth)
+                                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth+1);
+                            }else{
+                                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                            }
                             cal.set(Calendar.MONTH, monthOfYear);
                             cal.set(Calendar.YEAR, year);
                             Long time = cal.getTimeInMillis();
@@ -333,9 +334,18 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("longitude",String.valueOf(longitude));
             params.put("status","Recieved");
             params.put("userid", SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered"));
+            params.put("email", SharedPreferenceSingleton.getInstance(getContext()).getString("email","User Not Registered"));
             params.put("address",addressContainer.getText().toString());
             params.put("pickup_date",pickup_date);
             params.put("service",service);
+            params.put("type",type);
+            params.put("offer",offer);
+            if(code!=null){
+                params.put("code",code);
+            }
+            if(offerid!=null){
+                params.put("offerid",offerid);
+            }
             progress=new ProgressDialog(getContext());
             progress.setMessage("Registering..");
             progress.setIndeterminate(true);
@@ -348,10 +358,18 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             super.onPostExecute(s);
             progress.dismiss();
             if (success) {
-                Toast.makeText(getContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getContext(), YourOrders.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+
+
+                if(offer.equals("Yes")){
+                    new createUserOfferRelation(offerid).execute();
+                }else{
+                    Toast.makeText(getContext(), R.string.reg_success, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getContext(), YourOrders.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+
 
             } else {
                 Toast.makeText(getContext(), R.string.error, Toast.LENGTH_LONG).show();
@@ -371,6 +389,66 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                 e.printStackTrace();
             }
 
+
+
+            System.out.println("Result:" + result);
+            return result;
+        }
+    }
+
+
+
+    @SuppressLint("StaticFieldLeak")
+    class createUserOfferRelation extends AsyncTask<String, String, String> {
+        boolean success = false;
+        HashMap<String, String> params = new HashMap<>();
+        private String offerid;
+
+        createUserOfferRelation(String id){
+            this.offerid = id;
+
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            params.put("offerid",offerid);
+            params.put("user", SharedPreferenceSingleton.getInstance(getContext().getApplicationContext()).getString("_id", "Customer"));
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(s);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (jsonObject.getString("success").equals("true")) {
+                    final Intent intent = new Intent(getContext(), YourOrders.class);
+                    getContext().startActivity(intent);
+
+                } else {
+                    Toast.makeText(getContext(),R.string.error, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = "";
+            try {
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
+                result = Server.post(getContext().getResources().getString(R.string.createUserOfferRelation), json);
+                success = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
             System.out.println("Result:" + result);

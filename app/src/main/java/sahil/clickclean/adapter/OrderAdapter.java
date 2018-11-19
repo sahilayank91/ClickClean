@@ -79,6 +79,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull final OrderViewHolder holder, final int position) {
         final Order current = listOrders.get(position);
+
         holder.orderid.setText(current.get_id());
         holder.orderstatus.setText(current.getOrderstatus());
 
@@ -112,7 +113,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.orderdate.setText(order.toLocaleString().substring(0,12));
         holder.orderservice.setText(current.getOrderservice());
         Calendar calendar = Calendar.getInstance();
-        if(calendar.get(Calendar.HOUR_OF_DAY)>=17){
+        if(pickupdate.getDay() == calendar.get(Calendar.DAY_OF_MONTH) && calendar.get(Calendar.HOUR_OF_DAY)>=17){
             holder.cancel.setEnabled(false);
             holder.cancel.setBackgroundColor(context1.getResources().getColor(R.color.black));
             holder.cancel.setOnClickListener(new View.OnClickListener() {
@@ -132,29 +133,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         }
 
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(current.getOrderstatus()!="Recieved"){
-                    Toast.makeText(context1,"You cannot change the Order after it is picked up",Toast.LENGTH_SHORT).show();
-                }else{
+        if(current.getOffer().equals("Yes")){
+            holder.code.setText(current.getCode());
+        }else{
+            holder.code.setText("Not Applied");
+        }
 
-
-
-
-
-                }
-
-
-
-
-            }
-        });
-
+        holder.type.setText(current.getType());
         holder.pickupotp.setText(current.getPickup_otp());
         holder.deliveredotp.setText(current.getDelivered_otp());
-
-
     }
     private void openCancelDialog(View view, final int position){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
@@ -192,7 +179,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,pickupotp,deliveredotp;
+        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,pickupotp,deliveredotp,type,code;
         Button cancel,edit;
 
         private OrderViewHolder(View itemView) {
@@ -204,9 +191,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             orderstatus = itemView.findViewById(R.id.order_status);
             orderservice = itemView.findViewById(R.id.order_service);
             cancel = itemView.findViewById(R.id.cancelbutton);
-            edit = itemView.findViewById(R.id.editButton);
             pickupotp = itemView.findViewById(R.id.pickupotp);
             deliveredotp = itemView.findViewById(R.id.deliveredotp);
+            type = itemView.findViewById(R.id.type);
+            code = itemView.findViewById(R.id.code);
             itemView.setOnClickListener(this);
             orderstatus.setOnClickListener(this);
 

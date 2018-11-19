@@ -1,6 +1,6 @@
 <!--<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>-->
-<!DOCTYPE resources [<!ENTITY server "http://172.21.4.122:3000/">]>
-
+<!--<!DOCTYPE resources [<!ENTITY server "http://172.21.4.122:3000/">]>-->
+<!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>
 <resources>
     <string name="app_name">Yours Dhobi</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -99,7 +99,13 @@
     <string name="updateUser">&server;service/authenticate/updateUser</string>
     <string name="get_feedback">&server;service/feedback/getFeedback/</string>
     <string name="update_feedback">&server;service/feedback/newFeedback/</string>
-    <string name = "verifyOTP">&server;service/order/verifyOTP/</string>
+    <string name="verifyOTP">&server;service/order/verifyOTP/</string>
+    <string name="createOffer">&server;service/order/createOffer/</string>
+    <string name="checkIfUserHasUsedCoupon">&server;service/order/checkIfUserHasUsedCoupon/</string>
+    <string name="getOffer">&server;service/order/getOffer/</string>
+    <string name="createUserOfferRelation">&server;service/order/createUserOfferRelation/</string>
+    <string name="refuseOrder">&server;service/order/refuseOrder/</string>
+
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="login_success">Logged In Successfully</string>
     <string name="profilephoto">ProfilePhoto</string>
@@ -281,6 +287,9 @@
     <string name="enter_feedback_here">Enter Feedback Here</string>
     <string name="uppers_shirt_and_t_shirts">Uppers (Shirt and T-shirts )</string>
     <string name="select_gender">Select Gender:</string>
+    <string name="ironing">Ironing</string>
+    <string name="refer_and_earn">Refer and Earn</string>
+    <string name="title_activity_contact">ContactActivity</string>
 
 
 </resources>

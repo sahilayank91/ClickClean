@@ -141,8 +141,10 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         normal_steam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("service","Steam Ironing");
-                intent.putExtra("type","normal");
+                intent.putExtra("service","Ironing");
+                intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
             }
         });
@@ -151,7 +153,9 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Fold");
-                intent.putExtra("type","normal");
+                intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
             }
         });
@@ -160,7 +164,8 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Iron");
-                intent.putExtra("type","normal");
+                intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
                 startActivity(intent);
 
             }
@@ -170,8 +175,10 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         express_steam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("service","Steam Ironing");
-                intent.putExtra("type","express");
+                intent.putExtra("service","Ironing");
+                intent.putExtra("type","Express");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -181,7 +188,9 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Iron");
-                intent.putExtra("type","express");
+                intent.putExtra("type","Express");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -191,7 +200,9 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onClick(View v) {
                 intent.putExtra("service","Wash and Fold");
-                intent.putExtra("type","express");
+                intent.putExtra("type","Express");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
 
             }
@@ -200,8 +211,10 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         dryclean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("service","Dry Clean");
+                intent.putExtra("service","Dryclean");
                 intent.putExtra("type","Normal");
+                intent.putExtra("percentage","0");
+
                 startActivity(intent);
             }
 
@@ -590,16 +603,15 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
 //                Post newPost = dataSnapshot.getValue(Post.class);
-                Log.e("fasfdsfsfsa",dataSnapshot.toString());
                 images.add(dataSnapshot.getValue().toString());
                 myViewPagerAdapter.notifyDataSetChanged();
-                addBottomDots(0);
+//                addBottomDots(0);
 
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                addBottomDots(0);
+//                addBottomDots(0);
 
             }
 
@@ -608,7 +620,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
                 images.remove(dataSnapshot.getValue().toString());
                 myViewPagerAdapter.notifyDataSetChanged();
 
-                addBottomDots(0);
+//                addBottomDots(0);
 
             }
 

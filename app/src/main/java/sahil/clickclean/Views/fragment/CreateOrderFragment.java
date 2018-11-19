@@ -38,14 +38,9 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
     private Button checkout;
     private ClothListAdapter adapter;
     public static int upper = 0, bottom = 0, woollen = 0, jacket = 0, blancket_single = 0, blancket_double = 0, bedsheet_single = 0, bedsheet_double = 0;
-    private ImageButton upper_min,upper_add,bottom_min,bottom_add,woollen_min,woollen_add,jacket_min, jacket_add,blancket_single_min,blancket_single_add,
-            blancket_double_min,blancket_double_add,bedsheet_single_min,bedsheet_single_add,bedsheet_double_min,bedsheet_double_add;
-    private Button setAddress;
-    private String service;
-    public TextView mupper, mbottom, mwoollen, mjacket, mblanketsingle, mblanketdouble, mbedsheetsingle, mbedsheetdouble;
-    private TextView totalCost;
+
     public static HashMap<String,String> order = new HashMap<>();
-    public static Integer total  = 0;
+    public static Double total  = 0.0;
     public CreateOrderFragment(){
 
     }
@@ -69,13 +64,25 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
 
         assert getArguments() != null;
         final String service = getArguments().getString("service");
-        String type = getArguments().getString("type");
+        final String type = getArguments().getString("type");
+        final String percentage = getArguments().getString("percentage");
+        final String offerid = getArguments().getString("offerid");
+        final String code = getArguments().getString("code");
+        Log.e("type",type);
+        Log.e("service",service);
+
+        Log.e("percentage",percentage);
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ClothListAdapter(getContext(), listCloth, service, type);
         recyclerView.setAdapter(adapter);
-        getRateDetails();
 
+        assert service != null;
+        if(service.equals("Dryclean")){
+            getDryClean();
+        }else{
+            getRateDetails();
+        }
 
         checkout = view.findViewById(R.id.checkoutbutton);
         checkout.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +96,44 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
                     String json = gson.toJson(order);
                     Log.e("order:",json);
 
+                    assert service != null;
+
+
+                    if(type.equals("Express")){
+                        total = total*2;
+                    }
+                    Log.e("total after pre",String.valueOf(total));
+
+                    Log.e("pear",String.valueOf(percentage));
+
+                    Double d = Double.parseDouble(percentage);
+
+                    total = total - (d/100)*total;
+
+
+
                     Bundle bundle = new Bundle();
-                    bundle.putString("total",String.valueOf(total));
+                    bundle.putString("total",String.valueOf(total.intValue()+ 10));
                     bundle.putString("order",json);
                     bundle.putString("service",service);
+                    bundle.putString("type",type);
+
+                    if(code!=null){
+                        bundle.putString("code",code);
+                    }
+
+                    if(offerid!=null){
+                        bundle.putString("offerid",offerid);
+                    }
+
+
+                    if(d>0){
+                        bundle.putString("offer","Yes");
+                    }else{
+                        bundle.putString("offer","No");
+                    }
+                    total = 0.0;
                     order.clear();
-                    total=0;
                     AddAddressFragment addAddressFragment = new AddAddressFragment();
                     addAddressFragment.setArguments(bundle);
                     getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.service_main_container,addAddressFragment).commit();
@@ -115,8 +154,6 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-//                Post newPost = dataSnapshot.getValue(Post.class);
-                Log.e("fasfdsfsfsa",dataSnapshot.toString());
                 RateCard cloth = new RateCard();
                 cloth.setCloth(dataSnapshot.getKey());
                 if(dataSnapshot.hasChild("Wash and Iron")){
@@ -158,5 +195,40 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
         });
 
     }
+
+    public void getDryClean(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("drycleaning");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+                RateCard rateCard = new RateCard();
+                rateCard.setCloth(dataSnapshot.getKey());
+                rateCard.setDryclean(dataSnapshot.getValue().toString());
+                listCloth.add(rateCard);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+    }
+
 
 }

@@ -14,25 +14,26 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="184dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginBottom="143dp"
         android:orientation="vertical">
 
 
         <TextView
+            android:id="@+id/servicetext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Select Type"
+            android:text="Select Service"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_alignParentLeft="true" />
+            android:textStyle="bold" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/servicegroup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -42,17 +43,24 @@
             android:tooltipText="Select Type">
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/rb1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Offer"
+                android:text="Iron"
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/rb2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Donation"
+                android:text="Wash and Fold"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Wash and Iron"
                 android:textSize="18sp" />
 
         </RadioGroup>
@@ -62,33 +70,84 @@
             android:id="@+id/buttonChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="23dp"
             android:layout_marginStart="37dp"
-            android:text="Choose"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="37dp" />
+            android:text="Choose" />
 
         <Button
             android:id="@+id/buttonUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/buttonChoose"
             android:layout_marginEnd="36dp"
-            android:text="Upload"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="36dp" />
+            android:layout_marginRight="36dp"
+            android:text="Upload" />
 
     </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/offer"
+        android:hint="Enter percentage of offer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp" />
+
+    <EditText
+        android:id="@+id/code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:hint="Enter Code" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        android:tag="Select type">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Select Type"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Offer"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Donation"
+            android:textSize="18sp" />
+
+    </RadioGroup>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="338dp"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginTop="-5dp" />
+        android:layout_height="141dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/buttonChoose"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:visibility="visible" />
 
 </RelativeLayout>

@@ -79,9 +79,6 @@ public class DonationAdapter extends RecyclerView.Adapter<DonationAdapter.OrderV
                 CreateDonationFragment.total-=1;
                 holder.num.setText(String.valueOf(n));
                 CreateDonationFragment.order.put(current.getCloth(),String.valueOf(n));
-
-
-
             }
         });
     }

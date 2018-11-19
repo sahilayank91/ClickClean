@@ -24,7 +24,43 @@ public class Order {
     private String pickup_otp;
     private String delivered_otp;
 
+    public String getOffer() {
+        return offer;
+    }
 
+    public void setOffer(String offer) {
+        this.offer = offer;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    private String offer,code;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
+
+    public String getOfferid() {
+        return offerid;
+    }
+
+    public void setOfferid(String offerid) {
+        this.offerid = offerid;
+    }
+
+    private String offerid;
 
     public Order(JSONObject order) throws JSONException {
         if(order.has("_id"))this._id = order.getString("_id");
@@ -40,6 +76,12 @@ public class Order {
         if(order.has("userid"))this.user = new User(new JSONObject(order.getString("userid")));
         if(order.has("pickup_otp"))this.pickup_otp = order.getString("pickup_otp");
         if(order.has("delivered_otp"))this.delivered_otp= order.getString("delivered_otp");
+        if(order.has("type"))this.type= order.getString("type");
+        if(order.has("offer"))this.offer= order.getString("offer");
+        if(order.has("code"))this.code= order.getString("code");
+        if(order.has("offerid"))this.offerid = order.getString("offerid");
+
+
     }
 
     public String getPickup_otp() {

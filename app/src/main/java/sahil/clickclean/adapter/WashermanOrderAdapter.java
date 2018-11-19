@@ -88,6 +88,12 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         holder.name.setText(current.getUser().getFirstname() + " " + current.getUser().getLastname());
         holder.city.setText(current.getUser().getCity());
         holder.locality.setText(current.getAddress());
+        if(current.getStatus()=="Recieved"){
+            holder.orderwork.setText("Enter Pickup OTP");
+        }else if(current.getStatus()=="Picked"){
+            holder.orderwork.setText("Enter Delivery OTP");
+        }
+
         if(current.getUser().getFlataddress()!=null){
             holder.flat.setText(current.getUser().getFlataddress());
         }
@@ -112,7 +118,6 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         Date order=null;
         try {
             order = new SimpleDateFormat("yyyy-MM-dd").parse(orderDate);
-            Log.e("fsfsfsaf",order.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -123,28 +128,6 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         if(current.getOrderservice().equals("Donation")){
             holder.totalText.setText("Total Clothes: ");
         }
-
-//        Calendar calendar = Calendar.getInstance();
-//        if(calendar.get(Calendar.HOUR_OF_DAY)>=17){
-//            holder.cancel.setEnabled(false);
-//            holder.cancel.setBackgroundColor(context1.getResources().getColor(R.color.black));
-//            holder.cancel.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(context1,"You can't cancel Order after 5:00 PM",Toast.LENGTH_LONG).show();
-//                }
-//            });
-//        }else{
-//            holder.cancel.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    openCancelDialog(v,holder.getAdapterPosition());
-//                }
-//            });
-//
-//
-//        }
-
         holder.total.setText(current.getTotal());
         holder.phone.setText(current.getUser().getPhone());
         holder.edit.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +179,21 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
         });
 
 
+        if(current.getOffer().equals("No")){
+            holder.offerapplied.setText("Not Applied");
+        }else{
+            holder.offerapplied.setText(current.getCode());
+        }
+
+
+        holder.type.setText(current.getType());
+
+        holder.refuseorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new refuseOrder(current.get_id()).execute();
+            }
+        });
     }
     private void openCancelDialog(View view, final int position){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
@@ -222,11 +220,6 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     }
     private void showEnterOTPDialog(final String id,final String status) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context1);
-//        LayoutInflater inflater =LayoutI
-//        final View dialogView = inflater.inflate(R.layout.otp_reciever, null);
-//        dialogBuilder.setView(dialogView);
-//
-
         final EditText input = new EditText(context1);
 
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -262,7 +255,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name,total,totalText;
+        TextView orderid, orderdate, type,orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name,total,totalText,offerapplied;
         Button navigate,edit,orderwork,refuseorder,call;
 
         private OrderViewHolder(View itemView) {
@@ -284,6 +277,8 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             refuseorder = itemView.findViewById(R.id.refuse_order);
             call = itemView.findViewById(R.id.call);
             totalText = itemView.findViewById(R.id.totaltextView);
+            offerapplied = itemView.findViewById(R.id.offerapplied);
+            type = itemView.findViewById(R.id.type);
             refuseorder.setOnClickListener(this);
             navigate.setOnClickListener(this);
             orderwork.setOnClickListener(this);
@@ -355,15 +350,66 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-
         }
 
 
     }
 
+    @SuppressLint("StaticFieldLeak")
+    class refuseOrder extends AsyncTask<String, String, String> {
+        boolean success = false;
+        HashMap<String, String> params = new HashMap<>();
+        private String orderid;
 
+        refuseOrder(String id){
+            this.orderid = id;
+
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            params.put("id",orderid);
+            params.put("user", SharedPreferenceSingleton.getInstance(context1).getString("_id", "Customer"));
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(s);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (jsonObject.getString("success").equals("true")) {
+                    Toast.makeText(context1,"Order has been refused", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context1,R.string.error, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = "";
+            try {
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
+                result = Server.post(context1.getResources().getString(R.string.refuseOrder), json);
+                success = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            System.out.println("Result:" + result);
+            return result;
+        }
+    }
     @SuppressLint("StaticFieldLeak")
     class verifyOTP extends AsyncTask<String, String, String> {
         private ProgressDialog progress;
