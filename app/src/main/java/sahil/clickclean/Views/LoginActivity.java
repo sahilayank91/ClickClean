@@ -121,7 +121,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+//        populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -180,45 +180,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
 
     }
-
-
-    private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
-            return;
-        }
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            // TODO: alert the user with a Snackbar/AlertDialog giving them the permission rationale
-            // To use the Snackbar from the design support library, ensure that the activity extends
-            // AppCompatActivity and uses the Theme.AppCompat theme.
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
-    }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -426,7 +387,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected void onPostExecute(String s) {
             progress.dismiss();
             mAuthTask = null;
-            showProgress(false);
             super.onPostExecute(s);
             if (success) {
                 Toast.makeText(getApplicationContext(), R.string.login_success, Toast.LENGTH_LONG).show();

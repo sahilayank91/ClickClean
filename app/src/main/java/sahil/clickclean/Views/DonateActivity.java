@@ -20,7 +20,7 @@ public class DonateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setTitle("Donate Clothes");
 
         fragmentManager = getSupportFragmentManager();
         if (createDonationFragment == null)

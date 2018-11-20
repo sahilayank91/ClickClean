@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
             i.putExtra(Intent.EXTRA_SUBJECT, "ClickClean");
-            String message = "\nDownload ClickClean *Your app link* \n\n";
+            String message = "\nDownload YoursDhobi \n https://play.google.com/store/apps/details?id=sahil.clickclean\n\n";
             i.putExtra(Intent.EXTRA_TEXT, message);
             startActivity(Intent.createChooser(i, "Choose Sharing Method"));
         } else if (id == R.id.nav_feedback) {

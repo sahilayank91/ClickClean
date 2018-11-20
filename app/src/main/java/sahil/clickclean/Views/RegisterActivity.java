@@ -57,7 +57,7 @@ import sahil.clickclean.utilities.Server;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mConfirmPassword;
+    AutoCompleteTextView mFirstname, mLastname, mEmail, mPhone,mAddress,mPassword,mUserFlat,mUserPincode,mConfirmPassword;
     String firstname,lastname, password,useremail, userphone, useraddress,userflataddress,usercity,userpincode,confirmpass;
     Button submit;
     AutoCompleteTextView mUserCity;
@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
         mUserPincode = findViewById(R.id.pincode);
         mConfirmPassword = findViewById(R.id.confirmpassword);
         submit = findViewById(R.id.register);
-
+        mPhone.setText("+91");
         // Calling the suggestions method
         setSuggestions();
 
@@ -145,13 +145,37 @@ public class RegisterActivity extends AppCompatActivity {
                 userpincode = mUserPincode.getText().toString();
                 confirmpass = mConfirmPassword.getText().toString();
 
+                // Check for a valid password, if the user entered one.
+                if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+                    mPassword.setError(getString(R.string.error_invalid_password));
+                    return;
+                }
+                // Check for a valid password, if the user entered one.
+                if (!TextUtils.isEmpty(useremail) && !isPasswordValid(useremail)) {
+                    mEmail.setError(getString(R.string.error_invalid_email));
+                    return;
+                }
+
+                if(firstname==null || lastname==null || useremail==null || userphone==null || useraddress == null || usercity==null || userpincode==null || gender==null){
+                    Toast.makeText(RegisterActivity.this,"Please fill all the details",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 
-                if(Patterns.EMAIL_ADDRESS.matcher(useremail).matches() && password.equals(confirmpass) && userphone.length()>=10 && userphone.length()<=12) {
+                if(userphone.length()!=13){
+                    Toast.makeText(RegisterActivity.this,"Please enter a valid phone Number",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!password.equals(confirmpass)){
+                    Toast.makeText(RegisterActivity.this,"Password doesn't match",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(Patterns.EMAIL_ADDRESS.matcher(useremail).matches()) {
                     if (!validatePhoneNumber()) {
                         return;
                     }
-                    startPhoneNumberVerification("+91" + mPhone.getText().toString());
+                    startPhoneNumberVerification(mPhone.getText().toString());
 
                 }else{
                     Toast.makeText(RegisterActivity.this,"Please enter valid Email",Toast.LENGTH_LONG).show();
@@ -177,24 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-        mAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                requestPermission();
-
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                try {
-                    Intent intent = builder.build(RegisterActivity.this);
-                    startActivityForResult(intent, PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-                mAddress.setOnClickListener(new View.OnClickListener() {
+        mAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -292,7 +299,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@");
+    }
 
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
+    }
     private void startPhoneNumberVerification(String phoneNumber) {
         // [START start_phone_auth]
 

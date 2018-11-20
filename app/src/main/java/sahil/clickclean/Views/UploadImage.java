@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,8 +81,8 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
         //getting views from layout
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
-servicetext = findViewById(R.id.servicetext);
-servicetext.setVisibility(View.GONE);
+        servicetext = findViewById(R.id.servicetext);
+        servicetext.setVisibility(View.GONE);
         imageView = (ImageView) findViewById(R.id.imageView);
 
         code = findViewById(R.id.code);
@@ -90,8 +91,9 @@ servicetext.setVisibility(View.GONE);
         buttonUpload.setOnClickListener(this);
         storageReference = FirebaseStorage.getInstance().getReference();
         offer = findViewById(R.id.offer);
+        offer.setInputType(InputType.TYPE_CLASS_NUMBER);
         offer.setVisibility(View.INVISIBLE);
-code.setVisibility(View.GONE);
+        code.setVisibility(View.GONE);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         serviceGroup = findViewById(R.id.servicegroup);
 

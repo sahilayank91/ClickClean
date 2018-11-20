@@ -80,7 +80,8 @@ public class FeedbackActivity extends AppCompatActivity implements RCVItemClickL
 
         feedbackAuthorName = findViewById(R.id.feedback_user_name);
         etFeedbackText =findViewById(R.id.et_feedback); //hide this in user moder
-        etFeedbackText.setFocusedByDefault(false);
+//        etFeedbackText.setFocusedByDefault(false);
+
         btnSubmit = findViewById(R.id.btn_submit_feedback);
         btnHolder =  findViewById(R.id.btn_holder);
         feedbackDate =  findViewById(R.id.feedback_date);
