@@ -194,7 +194,7 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            final StorageReference riversRef = storageReference.child("images/" + filePath.getLastPathSegment());
+            final StorageReference riversRef = storageReference.child("Offerimages/" + filePath.getLastPathSegment());
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -206,44 +206,11 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
                                 public void onSuccess(Uri uri) {
                                     Log.e("Tuts+", "uri: " + uri.toString());
                                     String download_url = uri.toString();
-//                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("offer");
-//                                    String key = myRef.push().getKey();
-//
-//                                    HashMap<String,String> map  = new HashMap<>();
-//                                    map.put("url",download_url);
-//                                    map.put("percentage",offer.getText().toString());
-//                                    map.put("service",service);
-//                                    map.put("code",code.getText().toString());
-//                                    myRef.child(key).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//
-//                                            if(task.isSuccessful()) {
-//                                                progressDialog.dismiss();
-//                                                Toast.makeText(UploadImage.this, "Successfully uploaded", Toast.LENGTH_LONG).show();
-//                                                Intent intent = new Intent(UploadImage.this,MainActivity.class);
-//                                                startActivity(intent);
-//                                                finish();
-//
-//                                            }else {
-//                                                progressDialog.dismiss();
-//                                                Toast.makeText(UploadImage.this, "Error happened during the upload process", Toast.LENGTH_LONG).show();
-//                                            }
-//                                        }
-//                                    });
-
-
                                     new createOffer(code.getText().toString(),offer.getText().toString(),download_url,service).execute();
 
                                     //Handle whatever you're going to do with the URL here
                                 }
                             });
-
-
-
-
-
 
                             //and displaying a success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
@@ -296,27 +263,13 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
                                 public void onSuccess(Uri uri) {
                                     Log.e("Tuts+", "uri: " + uri.toString());
                                     String download_url = uri.toString();
-                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("image");
-                                    String key = myRef.push().getKey();
-                                    myRef.child(key).setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
 
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            if(task.isSuccessful()) {
-                                                progressDialog.dismiss();
-                                                Toast.makeText(UploadImage.this, "Successfully uploaded", Toast.LENGTH_LONG).show();
-
-                                            }else {
-                                                progressDialog.dismiss();
-                                                Toast.makeText(UploadImage.this, "Error happened during the upload process", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
+                                    new createDonation(download_url).execute();
 
                                     //Handle whatever you're going to do with the URL here
                                 }
                             });
+
                             //and displaying a success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
                         }
@@ -356,6 +309,58 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
 
 
     @SuppressLint("StaticFieldLeak")
+    class createDonation extends AsyncTask<String, String, String> {
+        boolean success = false;
+        HashMap<String, String> params = new HashMap<>();
+
+        createDonation(String url){
+            params.put("service","Donation");
+            params.put("type","Donation");
+            params.put("url",url);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (success) {
+                Toast.makeText(getApplicationContext(), "Donation Created Successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UploadImage.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = "";
+            try {
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
+                result = Server.post(getResources().getString(R.string.createDonation),json);
+                success = true;
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+
+            System.out.println("Result:" + result);
+            return result;
+        }
+    }
+
+
+
+    @SuppressLint("StaticFieldLeak")
     class createOffer extends AsyncTask<String, String, String> {
         boolean success = false;
         HashMap<String, String> params = new HashMap<>();
@@ -367,6 +372,7 @@ public class UploadImage extends AppCompatActivity implements View.OnClickListen
             params.put("percentage", percentage);
             params.put("url", url);
             params.put("service",service);
+            params.put("type","Offer");
         }
 
         @Override

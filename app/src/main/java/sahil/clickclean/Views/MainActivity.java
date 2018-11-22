@@ -97,32 +97,28 @@ public class MainActivity extends AppCompatActivity
         navNameView.setText(name);
         navPhoneView.setText(SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("phone", "Phone not registered"));
 
-        String gender  = SharedPreferenceSingleton.getInstance(getApplicationContext()).getString("gender", "Male");
 
-//        if(gender.equals("Male")){
-//            navImageView.setImageDrawable(getResources().getDrawable(R.drawable.male));
-//        }else{
-//            navImageView.setImageDrawable(getResources().getDrawable(R.drawable.woman));
-//
-//        }
         Menu nav_Menu = navigationView.getMenu();
-        if(role.equals("Customer")){
-//            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
-            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
-            nav_Menu.findItem(R.id.nav_add_image).setVisible(false);
-        }
-
-        if(role.equals("Washerman")){
-            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(true);
-            nav_Menu.findItem(R.id.nav_orders).setVisible(true);
-            nav_Menu.findItem(R.id.nav_add_image).setVisible(false);
-
-        }
-        if(role.equals("Admin")){
-            nav_Menu.findItem(R.id.nav_register_washerman).setVisible(true);
-            nav_Menu.findItem(R.id.nav_orders).setVisible(false);
-            nav_Menu.findItem(R.id.nav_add_image).setVisible(true);
+        switch (role) {
+            case "Customer":
+                nav_Menu.findItem(R.id.nav_register_washerman).setVisible(false);
+                nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+                nav_Menu.findItem(R.id.nav_add_image).setVisible(false);
+                break;
+            case "Washerman":
+                nav_Menu.findItem(R.id.nav_register_washerman).setVisible(true);
+                nav_Menu.findItem(R.id.nav_order).setVisible(false);
+                nav_Menu.findItem(R.id.nav_orders).setVisible(true);
+                nav_Menu.findItem(R.id.nav_add_image).setVisible(false);
+                nav_Menu.findItem(R.id.nav_donate_clothes).setVisible(false);
+                nav_Menu.findItem(R.id.nav_schedule_pickup).setVisible(false);
+                nav_Menu.findItem(R.id.nav_feedback).setVisible(false);
+                break;
+            case "Admin":
+                nav_Menu.findItem(R.id.nav_register_washerman).setVisible(true);
+                nav_Menu.findItem(R.id.nav_orders).setVisible(false);
+                nav_Menu.findItem(R.id.nav_add_image).setVisible(true);
+                break;
         }
 
         fragmentManager = getSupportFragmentManager();

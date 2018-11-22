@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,19 +38,33 @@ import sahil.clickclean.utilities.Server;
 public class CompletedFragment extends Fragment {
     public static ArrayList<Order> listCompletedOrders = new ArrayList<>();
     private WashermanOrderAdapter adapter;
-
+    RecyclerView recyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    View view;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
+        if (view == null) view = inflater.inflate(R.layout.fragment_today, container, false);
+        else return view;
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
-        adapter = new WashermanOrderAdapter(getContext(), listCompletedOrders);
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                new GetOrders().execute();
+
+            }
+        });
+
+        recyclerView = view.findViewById(R.id.order_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new WashermanOrderAdapter(getContext(), listCompletedOrders,"Completed");
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         new GetOrders().execute();
-        return recyclerView;
+        return view;
     }
 
     @SuppressLint("StaticFieldLeak")

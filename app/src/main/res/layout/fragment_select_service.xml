@@ -147,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/steam" />
+                    android:src="@drawable/laundering" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/washingmachine" />
+                    android:src="@drawable/washing_machine" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

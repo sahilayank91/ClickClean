@@ -51,7 +51,8 @@
                 android:layout_marginEnd="109dp"
                 android:text="Status: "
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginRight="109dp" />
 
             <TextView
                 android:id="@+id/orderstatus"
@@ -60,16 +61,18 @@
                 android:layout_alignTop="@+id/textView"
                 android:layout_marginStart="-109dp"
                 android:layout_toEndOf="@+id/textView6"
-                android:text="TextView" />
+                android:text="TextView"
+                android:layout_marginLeft="-109dp"
+                android:layout_toRightOf="@+id/textView6" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/orderdatetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/textView"
                 android:layout_alignStart="@+id/textView"
                 android:layout_below="@+id/textView"
-                android:text="Order Date: "
+                android:text="Pickup Date:"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
@@ -80,49 +83,53 @@
                 android:layout_below="@+id/textView"
 
                 android:layout_marginLeft="@dimen/nav_header_vertical_spacing"
-                android:layout_toEndOf="@+id/textView8"
-                android:layout_toRightOf="@+id/textView8"
+                android:layout_toEndOf="@+id/orderdatetext"
+                android:layout_toRightOf="@+id/orderdatetext"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="wrap_content"
+                android:layout_width="98dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/textView6"
-                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="170dp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:visibility="gone"
-                tools:text="@string/pickup_date" />
+                tools:text="@string/pickup_date"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/order_pickup_date"
-                android:layout_width="111dp"
+                android:layout_width="202dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView"
-                android:layout_toEndOf="@+id/textView10"
-                android:layout_toRightOf="@+id/textView10"
+                android:layout_alignEnd="@+id/flataddress"
+                android:layout_alignTop="@+id/textView10"
                 android:text="TextView"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_alignRight="@+id/flataddress" />
 
             <TextView
                 android:id="@+id/orderaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/textView"
-                android:layout_below="@+id/textView8"
+                android:layout_below="@+id/orderdatetext"
                 android:text="Address:"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/textView" />
 
             <TextView
                 android:id="@+id/flataddress"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/orderid"
-                android:layout_below="@+id/textView8"
+                android:layout_below="@+id/orderdatetext"
                 android:paddingLeft="@dimen/nav_header_vertical_spacing"
-                android:text="Flat Address" />
+                android:text="Flat Address"
+                android:layout_alignLeft="@+id/orderid" />
 
             <TextView
                 android:id="@+id/locality"
@@ -132,18 +139,19 @@
                 android:layout_below="@+id/orderaddress"
                 android:maxLines="4"
                 android:paddingLeft="@dimen/nav_header_vertical_spacing"
-                android:text="Locality" />
+                android:text="Locality"
+                android:layout_alignLeft="@+id/orderid" />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="148dp"
+                android:layout_centerVertical="true"
                 android:text="Phone:"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/phone"
@@ -173,15 +181,15 @@
                 android:layout_width="150dp"
                 android:layout_height="32dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/textView6"
-                android:layout_marginBottom="117dp"
-                android:background="@drawable/rounded_corner"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="85dp"
 
+                android:background="@drawable/rounded_corner"
                 android:drawableLeft="@drawable/ic_map_black_24dp"
                 android:drawableTint="@color/white"
                 android:text="Navigate"
                 android:textColor="@color/white"
-                android:layout_alignLeft="@+id/textView6" />
+                android:layout_alignParentRight="true" />
 
             <Button
                 android:id="@+id/editOrder"
@@ -202,9 +210,9 @@
                 android:layout_height="31dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="75dp"
+                android:layout_marginBottom="46dp"
                 android:background="@drawable/rounded_corner"
-                android:text="Recieve Order"
+                android:text="OTP"
                 android:textColor="@color/white" />
 
             <TextView
@@ -257,35 +265,36 @@
                 android:layout_height="36dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="29dp"
                 android:background="@drawable/rounded_corner"
                 android:text="Refuse Order"
+
                 android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/call"
                 android:layout_width="163dp"
                 android:layout_height="32dp"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/navigate"
+                android:layout_below="@+id/navigate"
+                android:layout_marginTop="-117dp"
                 android:background="@drawable/rounded_corner"
                 android:drawableLeft="@drawable/ic_local_phone_black_24dp"
                 android:drawableTint="@color/white"
                 android:text="Call Customer"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/totaltextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="158dp"
+                android:layout_below="@+id/textView14"
                 android:text="Total Cost: "
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/total"
@@ -305,7 +314,8 @@
                 android:layout_below="@+id/fsdf"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:text="Offer Applied:" />
+                android:text="Offer Applied:"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/offerapplied"
@@ -313,7 +323,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fsdf"
                 android:layout_toEndOf="@+id/dfasfd"
-                android:text="TextView" />
+                android:text="TextView"
+                android:layout_toRightOf="@+id/dfasfd" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -323,7 +334,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView12"
-                android:text="Type of Service:" />
+                android:text="Type of Service:"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/type"
@@ -331,7 +343,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView12"
                 android:layout_toEndOf="@+id/dfasfd"
-                android:text="TextView" />
+                android:text="TextView"
+                android:layout_toRightOf="@+id/dfasfd" />
         </RelativeLayout>
 
 

@@ -39,6 +39,7 @@ import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.Views.LoginActivity;
 import sahil.clickclean.Views.MainActivity;
 import sahil.clickclean.Views.YourOrders;
+import sahil.clickclean.Views.fragment.UpcomingFragment;
 import sahil.clickclean.interfaces.RCVItemClickListener;
 import sahil.clickclean.model.Order;
 import sahil.clickclean.utilities.Server;
@@ -62,7 +63,9 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     private ArrayList<Order> listOrders;
     private RCVItemClickListener rcvItemClickListener;
     Context context1;
-    public WashermanOrderAdapter(Context context, ArrayList<Order> listOrders) {
+    private String type;
+    public WashermanOrderAdapter(Context context, ArrayList<Order> listOrders,String type) {
+        this.type= type;
         context1 = context;
         this.listOrders = listOrders;
     }
@@ -110,11 +113,12 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             e.printStackTrace();
         }
 
+
         holder.orderpickupdate.setText(pickupdate.toLocaleString().substring(0,12));
 
 
 
-        String orderDate = current.getCreate_time();
+        String orderDate = current.getPickup_date();
         Date order=null;
         try {
             order = new SimpleDateFormat("yyyy-MM-dd").parse(orderDate);
@@ -141,13 +145,15 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
 
             }
         });
+
         holder.call.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+current.getUser().getPhone()));//change the number.
-                context1.startActivity(callIntent);
+
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+current.getUser().getPhone()));
+                context1.startActivity(intent);
             }
         });
 
@@ -185,15 +191,9 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             holder.offerapplied.setText(current.getCode());
         }
 
-
         holder.type.setText(current.getType());
 
-        holder.refuseorder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new refuseOrder(current.get_id()).execute();
-            }
-        });
+
     }
     private void openCancelDialog(View view, final int position){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
@@ -255,7 +255,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, type,orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name,total,totalText,offerapplied;
+        TextView orderid, orderdate, orderdatetext,type,orderpickupdate, orderstatus,orderservice,city,flat,locality,phone,name,total,totalText,offerapplied;
         Button navigate,edit,orderwork,refuseorder,call;
 
         private OrderViewHolder(View itemView) {
@@ -276,6 +276,7 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
             total = itemView.findViewById(R.id.total);
             refuseorder = itemView.findViewById(R.id.refuse_order);
             call = itemView.findViewById(R.id.call);
+            orderdatetext = itemView.findViewById(R.id.orderdatetext);
             totalText = itemView.findViewById(R.id.totaltextView);
             offerapplied = itemView.findViewById(R.id.offerapplied);
             type = itemView.findViewById(R.id.type);
@@ -342,8 +343,8 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
                     Toast.makeText(context1,"Some error occured in cancelling Order..Please check your internet connection",Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(context1,"Order has been cancelled",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context1,YourOrders.class);
-                    context1.startActivity(intent);
+
+
                 }
 
 
@@ -414,10 +415,12 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
     class verifyOTP extends AsyncTask<String, String, String> {
         private ProgressDialog progress;
 
+        private String stat;
         HashMap<String,String> map = new HashMap<>();
         verifyOTP(String id, String status,String otp){
             map.put("status",status);
             map.put("_id",id);
+            this.stat = status;
             if(status.equals("Recieved")){
                 map.put("pickup_otp",otp);
             }else{
@@ -441,7 +444,13 @@ public class WashermanOrderAdapter extends RecyclerView.Adapter<WashermanOrderAd
 
                 Gson gson = new Gson();
                 String json = gson.toJson(map);
-                result = Server.post(context1.getResources().getString(R.string.verifyOTP),json);
+                if(stat.equals("Recieved")){
+                    result = Server.post(context1.getResources().getString(R.string.verifyPickup),json);
+
+                }else{
+                    result = Server.post(context1.getResources().getString(R.string.verifyDelivery),json);
+
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();

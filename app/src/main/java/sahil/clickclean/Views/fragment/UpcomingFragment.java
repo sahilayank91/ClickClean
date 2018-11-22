@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,24 +38,38 @@ import sahil.clickclean.utilities.Server;
 public class UpcomingFragment extends Fragment {
     public static ArrayList<Order> listUpcomingOrders = new ArrayList<>();
     private WashermanOrderAdapter adapter;
-
+    RecyclerView recyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    View view;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
 
-        adapter = new WashermanOrderAdapter(getContext(), listUpcomingOrders);
-//        ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
+        if (view == null) view = inflater.inflate(R.layout.fragment_today, container, false);
+        else return view;
+        mSwipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                new GetOrders().execute();
+
+            }
+        });
+
+        recyclerView = view.findViewById(R.id.order_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new WashermanOrderAdapter(getContext(), listUpcomingOrders,"Upcoming");
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         new GetOrders().execute();
-        return recyclerView;
+        return view;
     }
 
     @SuppressLint("StaticFieldLeak")
-    class GetOrders extends AsyncTask<String, String, String> {
+   public  class GetOrders extends AsyncTask<String, String, String> {
         HashMap<String, String> params = new HashMap<>();
         @Override
         protected void onPreExecute() {
@@ -69,7 +84,6 @@ public class UpcomingFragment extends Fragment {
             try {
                 Gson gson = new Gson();
                 String json = gson.toJson(params);
-
                 result = Server.post(getResources().getString(R.string.getUpcomingOrders),json);
 
             } catch (IOException e) {

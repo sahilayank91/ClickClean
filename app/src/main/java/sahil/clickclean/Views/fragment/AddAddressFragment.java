@@ -70,6 +70,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -271,9 +272,12 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                             if(cal.get(Calendar.HOUR_OF_DAY)>=17) {
                                if(cal.get(Calendar.DAY_OF_MONTH)==dayOfMonth)
                                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth+1);
+                               mMonth = dayOfMonth+1;
                             }else{
                                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                mDay = dayOfMonth;
                             }
+                            mYear= year;
                             cal.set(Calendar.MONTH, monthOfYear);
                             cal.set(Calendar.YEAR, year);
                             Long time = cal.getTimeInMillis();
@@ -281,7 +285,15 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
 
                         }
                     }, mYear, mMonth, mDay);
-            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            if(calendar.get(Calendar.HOUR_OF_DAY)>=17  && calendar.get(Calendar.HOUR_OF_DAY)<=23) {
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()+86400000-1000);
+           }else{
+               datePickerDialog.getDatePicker().setMinDate((System.currentTimeMillis() - 1000));
+
+            }
             datePickerDialog.show();
         }
     }
@@ -340,6 +352,9 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
             params.put("service",service);
             params.put("type",type);
             params.put("offer",offer);
+            params.put("day",String.valueOf(mDay));
+            params.put("year",String.valueOf(mYear));
+            params.put("month",String.valueOf(mMonth+1));
             if(code!=null){
                 params.put("code",code);
             }
@@ -369,8 +384,6 @@ public class AddAddressFragment extends Fragment implements OnMapReadyCallback,V
                     startActivity(intent);
                     getActivity().finish();
                 }
-
-
             } else {
                 Toast.makeText(getContext(), R.string.error, Toast.LENGTH_LONG).show();
             }

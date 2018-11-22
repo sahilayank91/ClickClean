@@ -133,15 +133,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         }
 
+        if(current.getOffer()!=null){
         if(current.getOffer().equals("Yes")){
             holder.code.setText(current.getCode());
         }else{
             holder.code.setText("Not Applied");
         }
-
+        }
         holder.type.setText(current.getType());
         holder.pickupotp.setText(current.getPickup_otp());
         holder.deliveredotp.setText(current.getDelivered_otp());
+        holder.total.setText(current.getTotal());
     }
     private void openCancelDialog(View view, final int position){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context1);
@@ -179,7 +181,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,pickupotp,deliveredotp,type,code;
+        TextView orderid, orderdate, orderpickupdate, orderstatus,orderservice,pickupotp,deliveredotp,type,code,total;
         Button cancel,edit;
 
         private OrderViewHolder(View itemView) {
@@ -195,6 +197,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             deliveredotp = itemView.findViewById(R.id.deliveredotp);
             type = itemView.findViewById(R.id.type);
             code = itemView.findViewById(R.id.code);
+            total = itemView.findViewById(R.id.total);
             itemView.setOnClickListener(this);
             orderstatus.setOnClickListener(this);
 

@@ -1,6 +1,6 @@
-<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>
-<!--<!DOCTYPE resources [<!ENTITY server "http://172.21.4.122:3000/">]>-->
-<!--<!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>-->
+<!--<!DOCTYPE resources [<!ENTITY server "https://yoursdhobi.herokuapp.com/">]>-->
+<!--<!DOCTYPE resources [<!ENTITY server "http://172.21.4.25:3000/">]>-->
+<!DOCTYPE resources [<!ENTITY server "http://192.168.43.117:3000/">]>
 <resources>
     <string name="app_name">Yours Dhobi</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -51,7 +51,7 @@
     <string name="contact_us">Contact Us</string>
     <string name="communicate">Communicate</string>
     <!-- Strings related to login -->
-    <string name="prompt_email"> Email or Mobile No</string>
+    <string name="prompt_email"> Email</string>
     <string name="prompt_password"> Password</string>
     <string name="action_sign_in">Login</string>
     <string name="action_sign_up">Register</string>
@@ -99,10 +99,15 @@
     <string name="updateUser">&server;service/authenticate/updateUser</string>
     <string name="get_feedback">&server;service/feedback/getFeedback/</string>
     <string name="update_feedback">&server;service/feedback/newFeedback/</string>
-    <string name="verifyOTP">&server;service/order/verifyOTP/</string>
+    <string name="verifyPickup">&server;service/order/verifyPickup/</string>
+    <string name="verifyDelivery">&server;service/order/verifyDelivery/</string>
     <string name="createOffer">&server;service/order/createOffer/</string>
+    <string name="createDonation">&server;service/order/createDonation/</string>
+
     <string name="checkIfUserHasUsedCoupon">&server;service/order/checkIfUserHasUsedCoupon/</string>
     <string name="getOffer">&server;service/order/getOffer/</string>
+    <string name="getImages">&server;service/order/getImages/</string>
+
     <string name="createUserOfferRelation">&server;service/order/createUserOfferRelation/</string>
     <string name="refuseOrder">&server;service/order/refuseOrder/</string>
 

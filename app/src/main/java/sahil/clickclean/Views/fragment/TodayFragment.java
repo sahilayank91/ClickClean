@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,11 +22,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import sahil.clickclean.R;
 import sahil.clickclean.SharedPreferenceSingleton;
 import sahil.clickclean.Views.MainActivity;
+import sahil.clickclean.adapter.OrderAdapter;
 import sahil.clickclean.adapter.WashermanOrderAdapter;
 import sahil.clickclean.model.Order;
 import sahil.clickclean.utilities.Server;
@@ -36,19 +41,33 @@ import sahil.clickclean.utilities.Server;
 public class TodayFragment extends Fragment {
     public static ArrayList<Order> listOrders = new ArrayList<>();
     private WashermanOrderAdapter adapter;
+    RecyclerView recyclerView;
+    View view;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
 
-        adapter = new WashermanOrderAdapter(getContext(), listOrders);
+        if (view == null) view = inflater.inflate(R.layout.fragment_today, container, false);
+        else return view;
+        mSwipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                new GetOrders().execute();
+            }
+        });
+        recyclerView = view.findViewById(R.id.order_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new WashermanOrderAdapter(getContext(), listOrders,"Today");
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         new GetOrders().execute();
-        return recyclerView;
+        return view;
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -59,6 +78,15 @@ public class TodayFragment extends Fragment {
             super.onPreExecute();
             String userid = SharedPreferenceSingleton.getInstance(getContext()).getString("_id","User Not Registered");
             params.put("washerman_id",userid);
+
+            Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+            Date date = calendar.getTime();
+            int day = calendar.get(Calendar.DATE);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            params.put("day",String.valueOf(day));
+            params.put("month",String.valueOf(month));
+            params.put("year",String.valueOf(year));
         }
 
         @Override

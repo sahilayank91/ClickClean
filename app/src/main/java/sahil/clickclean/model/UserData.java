@@ -25,6 +25,10 @@ public class UserData {
     private String longitude;
 
 
+
+    private String role;
+
+
     private String flataddress;
 
     private UserData() {
@@ -70,6 +74,7 @@ public class UserData {
         setLatitude(user.getLatitude());
         setLongitude(user.getLongitude());
         setFlataddress(user.getFlataddress());
+        setRole(user.getRole());
     }
 
     public boolean getUserData(Context context) {
@@ -103,6 +108,7 @@ public class UserData {
         user.setLongitude(this.longitude);
         user.setCity(this.city);
         user.setPincode(this.pincode);
+        user.setRole(this.role);
         return user;
     }
 
@@ -215,7 +221,15 @@ public class UserData {
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
-        SharedPreferenceSingleton.getInstance(context).put("pincode", pincode);
+
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+        SharedPreferenceSingleton.getInstance(context).put("role", role);
 
     }
 }

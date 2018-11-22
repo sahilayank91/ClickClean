@@ -165,10 +165,10 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
                 int n = Integer.parseInt(holder.num.getText().toString());
                 n--;
                 switch (service) {
-                    case "Steam Ironing":
+                    case "Ironing":
                         if(Integer.parseInt(holder.num.getText().toString())>0){
-                            if (!current.getWashandiron().equals("-")) {
-                                CreateOrderFragment.total -= Integer.parseInt(current.getWashandiron());
+                            if (!current.getIron().equals("-")) {
+                                CreateOrderFragment.total -= Integer.parseInt(current.getIron());
                                 holder.num.setText(String.valueOf(n));
                                 order.put(current.getCloth(),String.valueOf(n));
                             } else {
@@ -200,8 +200,8 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
                         break;
                     case "Wash and Iron":
                         if(Integer.parseInt(holder.num.getText().toString())>0) {
-                            if (!current.getIron().equals("-")) {
-                                CreateOrderFragment.total -= Integer.parseInt(current.getIron());
+                            if (!current.getWashandiron().equals("-")) {
+                                CreateOrderFragment.total -= Integer.parseInt(current.getWashandiron());
                                 holder.num.setText(String.valueOf(n));
                                 order.put(current.getCloth(), String.valueOf(n));
                             } else {
@@ -212,6 +212,24 @@ public class ClothListAdapter extends RecyclerView.Adapter<ClothListAdapter.Orde
                         }
 
                         break;
+
+                    case "Dryclean":
+                        if(Integer.parseInt(holder.num.getText().toString())>0) {
+
+                            if (!current.getDryclean().equals("-")) {
+                                CreateOrderFragment.total -= Integer.parseInt(current.getDryclean());
+                                holder.num.setText(String.valueOf(n));
+                                order.put(current.getCloth(), String.valueOf(n));
+                            } else {
+                                Toast.makeText(context, "Iron facility not available for this type of cloth", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(context, "Can't Decrease value", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        break;
+
                     default:
 
                         break;

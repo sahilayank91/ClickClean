@@ -47,7 +47,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 
@@ -127,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
         mUserPincode = findViewById(R.id.pincode);
         mConfirmPassword = findViewById(R.id.confirmpassword);
         submit = findViewById(R.id.register);
-        mPhone.setText("+91");
+//        mPhone.setText("+91");
         // Calling the suggestions method
         setSuggestions();
 
@@ -162,10 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
 
-                if(userphone.length()!=13){
-                    Toast.makeText(RegisterActivity.this,"Please enter a valid phone Number",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
                 if(!password.equals(confirmpass)){
                     Toast.makeText(RegisterActivity.this,"Password doesn't match",Toast.LENGTH_LONG).show();
                     return;
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (!validatePhoneNumber()) {
                         return;
                     }
-                    startPhoneNumberVerification(mPhone.getText().toString());
+                    startPhoneNumberVerification("+91" + mPhone.getText().toString());
 
                 }else{
                     Toast.makeText(RegisterActivity.this,"Please enter valid Email",Toast.LENGTH_LONG).show();
@@ -500,6 +500,20 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("latitude",String.valueOf(latitude));
             params.put("longitude",String.valueOf(longitude));
             params.put("gender",gender);
+
+            Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+            //getTime() returns the current date in default time zone
+            Date date = calendar.getTime();
+            int day = calendar.get(Calendar.DATE);
+            //Note: +1 the month for current month
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+            int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+            params.put("day",String.valueOf(day));
+            params.put("month",String.valueOf(month));
+            params.put("year",String.valueOf(year));
 
         }
 

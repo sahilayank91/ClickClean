@@ -6,14 +6,14 @@ android {
         applicationId "sahil.clickclean"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         resConfigs "en", "es"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
+//        ndk {
+//            abiFilters "armeabi-v7a", "x86"
+//        }
     }
     buildTypes {
         release {

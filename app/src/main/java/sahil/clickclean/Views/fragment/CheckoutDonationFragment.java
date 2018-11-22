@@ -67,7 +67,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -292,7 +294,21 @@ public class CheckoutDonationFragment extends Fragment implements OnMapReadyCall
             params.put("pickup_date",pickup_date);
             params.put("service","Donation");
             params.put("total",total);
+            params.put("offer","No");
 
+            Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+            //getTime() returns the current date in default time zone
+            Date date = calendar.getTime();
+            int day = calendar.get(Calendar.DATE);
+            //Note: +1 the month for current month
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+            int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+            params.put("day",String.valueOf(day));
+            params.put("month",String.valueOf(month));
+            params.put("year",String.valueOf(year));
             progress=new ProgressDialog(getContext());
             progress.setMessage("Getting your Order..");
             progress.setIndeterminate(true);

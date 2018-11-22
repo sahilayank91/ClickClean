@@ -26,6 +26,20 @@
             android:icon="@drawable/ic_child_care_black_24dp"
             android:title="@string/donateclothes"/>
     </group>
+    <item android:title="@string/agent_corner">
+        <menu>
+            <item
+                android:id="@+id/nav_register_washerman"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="@string/add_washerman"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/nav_orders"
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Today's Orders"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
 
     <item android:title="@string/communicate">
         <menu>
@@ -54,20 +68,7 @@
         </menu>
     </item>
 
-    <item android:title="@string/agent_corner">
-        <menu>
-            <item
-                android:id="@+id/nav_register_washerman"
-                android:icon="@drawable/ic_person_black_24dp"
-                android:title="@string/add_washerman"
-                app:showAsAction="ifRoom"/>
-            <item
-                android:id="@+id/nav_orders"
-                android:icon="@drawable/ic_person_black_24dp"
-                android:title="Today's Orders"
-                app:showAsAction="ifRoom"/>
-        </menu>
-    </item>
+
 
 
     <item android:title="Admin">

@@ -104,7 +104,6 @@ public class CreateOrderFragment extends Fragment implements View.OnClickListene
                     }
                     Log.e("total after pre",String.valueOf(total));
 
-                    Log.e("pear",String.valueOf(percentage));
 
                     Double d = Double.parseDouble(percentage);
 

@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +34,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
@@ -43,8 +45,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -65,23 +73,24 @@ import sahil.clickclean.Views.TermsAndCondition;
 import sahil.clickclean.Views.UploadImage;
 import sahil.clickclean.Views.YourOrders;
 import sahil.clickclean.WelcomeActivity;
+import sahil.clickclean.model.Image;
+import sahil.clickclean.model.Offer;
+import sahil.clickclean.utilities.Server;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class HomeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
+public class HomeFragment extends Fragment {
 
     Timer timer = new Timer();
     View view;
     private ViewPager viewPager;
     private ViewPager donationViewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private MyDonationViewPagerAdapter donationOfferViewPagerAdapter;
     private LinearLayout dotsLayout,donationDotsLayout;
     private TextView[] dots,donation_dots;
     private int[] layouts;
     SliderTimer sliderTimer =  new SliderTimer();
-    private ArrayList<String> images = new ArrayList<>();
-    private ArrayList<String> donation_images = new ArrayList<>();
+    private ArrayList<Image> images = new ArrayList<>();
     NestedScrollView nestedScrollView;
     CardView normal_steam,normal_wash_and_fold,normal_wash_and_iron;
     CardView express_steam,express_wash_and_fold,express_wash_and_iron,dryclean;
@@ -91,7 +100,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        getAllImages();
+
 //        timer.scheduleAtFixedRate(sliderTimer, 2000, 3000);
     }
 
@@ -127,6 +136,9 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 //        donationViewPager = view.findViewById(R.id.donation_view_pager);
         dotsLayout = view.findViewById(R.id.layoutDots);
 //        donationDotsLayout = view.findViewById(R.id.donationlayoutDots);
+
+
+        new getImages().execute();
 
         normal_steam = view.findViewById(R.id.normal_steam);
         normal_wash_and_fold = view.findViewById(R.id.normal_wash_and_fold);
@@ -238,19 +250,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-//        donationOfferViewPagerAdapter = new MyDonationViewPagerAdapter();
-//        donationViewPager.setAdapter(donationOfferViewPagerAdapter);
-//        donationViewPager.addOnPageChangeListener(donationViewPagerChangeListener);
-//        donationViewPager.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), DonateActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//
-//        donationViewPager.setVisibility(View.GONE);
+
         viewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,24 +278,6 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
                 dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
         }
     }
-//
-//
-//    private void addBottomDotstoOfferPager(int currentPage) {
-//        if(!donation_images.isEmpty()) {
-//            donation_dots = new TextView[donation_images.size()];
-//            donationDotsLayout.removeAllViews();
-//            for (int i = 0; i < donation_images.size(); i++) {
-//                donation_dots[i] = new TextView(getContext());
-//                donation_dots[i].setText(Html.fromHtml("&#8226;"));
-//                donation_dots[i].setTextSize(35);
-//                donation_dots[i].setTextColor(getResources().getColor(R.color.white));
-//                donationDotsLayout.addView(donation_dots[i]);
-//            }
-//
-//            if (donation_dots.length > 0)
-//                donation_dots[currentPage].setTextColor(getResources().getColor(R.color.colorPrimary));
-//        }
-//    }
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
@@ -321,25 +303,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
         }
     };
-//
-//    //  viewpager change listener
-//    ViewPager.OnPageChangeListener donationViewPagerChangeListener = new ViewPager.OnPageChangeListener() {
-//
-//        @Override
-//        public void onPageSelected(int position) {
-//            addBottomDotstoOfferPager(position);
-//        }
-//
-//        @Override
-//        public void onPageScrolled(int arg0, float arg1, int arg2) {
-//
-//        }
-//
-//        @Override
-//        public void onPageScrollStateChanged(int arg0) {
-//
-//        }
-//    };
+
 
     /**
      * Making notification bar transparent
@@ -352,60 +316,7 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
         }
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int id = menuItem.getItemId();
 
-        if (id == R.id.nav_profile) {
-            // Handle the camera action
-            Intent intent = new Intent(getContext(), ProfileActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_order) {
-            Intent intent = new Intent(getContext(), YourOrders.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_schedule_pickup) {
-//            Intent intent = new Intent(getContext(), SchedulePickup.class);
-//            startActivity(intent);
-            nestedScrollView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    nestedScrollView.scrollTo(0,(int)view.findViewById(R.id.normal_wash_and_iron).getY());
-                }
-            },100);
-        } else if (id == R.id.nav_logout) {
-            getContext().getSharedPreferences(SharedPreferenceSingleton.SETTINGS_NAME, MODE_PRIVATE).edit().clear().apply();
-            startActivity(new Intent(getContext(), LoginActivity.class));
-
-        } else if (id == R.id.nav_share) {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_SUBJECT, "ClickClean");
-            String message = "\nDownload ClickClean *Your app link* \n\n";
-            i.putExtra(Intent.EXTRA_TEXT, message);
-            startActivity(Intent.createChooser(i, "Choose Sharing Method"));
-        } else if (id == R.id.nav_feedback) {
-            Intent intent = new Intent(getContext(), RegisterWasherMan.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_register_washerman) {
-            Intent intent = new Intent(getContext(), RegisterWasherMan.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_orders) {
-            Intent intent = new Intent(getContext(), PickupActivity.class);
-            startActivity(intent);
-        } else if (id==R.id.nav_rate_card){
-            Intent intent = new Intent(getContext(),RateCardActivity.class);
-            startActivity(intent);
-        } else if(id==R.id.nav_terms){
-            Intent intent = new Intent(getContext(),TermsAndCondition.class);
-            startActivity(intent);
-        } else if(id==R.id.nav_add_image){
-            Intent intent = new Intent(getContext(),UploadImage.class);
-            startActivity(intent);
-        }
-        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     /**
      * View pager adapter
@@ -418,13 +329,13 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
         @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(ViewGroup container, final int position) {
             layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(R.layout.viewpager_image, container, false);
             ImageView imageView= view.findViewById(R.id.imageOffer);
 //            Glide.with(getContext()).load(images.get(position)).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
-            Glide.with(getContext()).load(images.get(position)).apply(new RequestOptions().placeholder(R.drawable.placeholder_image).fitCenter()).into(imageView);
+            Glide.with(getContext()).load(images.get(position).getUrl()).apply(new RequestOptions().placeholder(R.drawable.placeholder_image).fitCenter()).into(imageView);
 
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
@@ -433,8 +344,15 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    OfferFragment offerFragment = new OfferFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,offerFragment).commit();
+                    if(images.get(position).getType().equals("Offer")){
+                        OfferFragment offerFragment = new OfferFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right).replace(R.id.main_container,offerFragment).commit();
+
+                    }else{
+                        Intent intent = new Intent(getContext(),DonateActivity.class);
+                        startActivity(intent);
+
+                    }
 
                 }
             });
@@ -465,55 +383,6 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
 
 
-    /**
-     * View pager adapter
-     */
-    public class MyDonationViewPagerAdapter extends PagerAdapter {
-        private LayoutInflater layoutInflater;
-
-        MyDonationViewPagerAdapter() {
-        }
-
-        @NonNull
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View view = layoutInflater.inflate(R.layout.viewpager_image, container, false);
-            ImageView imageView= view.findViewById(R.id.imageOffer);
-            Glide.with(getContext()).load(donation_images.get(position)).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getContext(),DonateActivity.class);
-                    startActivity(intent);
-
-                }
-            });
-            container.addView(view);
-
-            return view;
-        }
-
-        @Override
-        public int getCount() {
-            return donation_images.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(@NonNull View view, Object obj) {
-            return view == obj;
-        }
-
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            View view = (View) object;
-            container.removeView(view);
-        }
-    }
 
     private class SliderTimer extends TimerTask {
 
@@ -537,19 +406,6 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
                             }
                         }
 
-//                        if(donation_images.size()>0){
-//                            if (donationViewPager.getCurrentItem() < donation_dots.length - 1) {
-//                                donationViewPager.setCurrentItem(donationViewPager.getCurrentItem() + 1);
-//                            } else {
-//                                donationViewPager.setCurrentItem(0);
-//                            }
-//                        }
-//
-
-
-
-
-
                     }
                 });
             }
@@ -557,82 +413,78 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
     }
 
-    public void getAllImages(){
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("donation_image");
-//        ref.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-////                Post newPost = dataSnapshot.getValue(Post.class);
-//                Log.e("fasfdsfsfsa",dataSnapshot.toString());
-//                donation_images.add(dataSnapshot.getValue().toString());
-//                donationOfferViewPagerAdapter.notifyDataSetChanged();
-//                addBottomDotstoOfferPager(0);
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-//               addBottomDotstoOfferPager(0);
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//              donation_images.remove(dataSnapshot.getValue().toString());
-//                donationOfferViewPagerAdapter.notifyDataSetChanged();
-//
-//                addBottomDotstoOfferPager(0);
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-//                addBottomDotstoOfferPager(0);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {}
-//        });
+
+
+    @SuppressLint("StaticFieldLeak")
+    class getImages extends AsyncTask<String, String, String> {
+        boolean success = false;
+        HashMap<String, String> params = new HashMap<>();
 
 
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
-        DatabaseReference refs = FirebaseDatabase.getInstance().getReference("image");
-        refs.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-//                Post newPost = dataSnapshot.getValue(Post.class);
-                images.add(dataSnapshot.getValue().toString());
-                myViewPagerAdapter.notifyDataSetChanged();
-//                addBottomDots(0);
+        }
 
-            }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (success) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(s);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-//                addBottomDots(0);
+                JSONArray jsonArray = null;
+                try {
+                    jsonArray = jsonObject.getJSONArray("data");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                images.clear();
 
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                images.remove(dataSnapshot.getValue().toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject post = null;
+                    try {
+                        post = jsonArray.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Image current = null;
+                    try {
+                        current = new Image(post);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    images.add(current);
+                }
                 myViewPagerAdapter.notifyDataSetChanged();
 
-//                addBottomDots(0);
 
+            } else {
+                Toast.makeText(getContext(), R.string.error, Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = "";
+            try {
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
+                result = Server.post(getResources().getString(R.string.getImages),json);
+                success = true;
+            } catch (Exception e){
+                e.printStackTrace();
             }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
-                addBottomDots(0);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
+            System.out.println("Result:" + result);
+            return result;
+        }
     }
 
 }

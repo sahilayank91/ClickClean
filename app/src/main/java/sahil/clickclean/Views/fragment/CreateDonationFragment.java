@@ -78,6 +78,7 @@ public class CreateDonationFragment extends Fragment implements View.OnClickList
                     Bundle bundle = new Bundle();
                     bundle.putString("order",json);
                     bundle.putString("total",String.valueOf(total));
+                    bundle.putString("offer","No");
                     order.clear();
                     CheckoutDonationFragment checkoutDonationFragment = new CheckoutDonationFragment();
                     checkoutDonationFragment.setArguments(bundle);
